@@ -6,9 +6,13 @@
 }
 
 html,
-#root,
+#root {
+  height: 100%;
+}
+
 body {
   height: 100%;
+  padding-left: 90px;
 }
 
 button {

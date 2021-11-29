@@ -1,9 +1,11 @@
 import React from 'react';
+import Nav from '../../components/Nav/Nav';
 
 export default function Main() {
   return (
     <div>
-      <i class="fab fa-react" />
+      <Nav />
+      <div>asdasd</div>
     </div>
   );
 }
