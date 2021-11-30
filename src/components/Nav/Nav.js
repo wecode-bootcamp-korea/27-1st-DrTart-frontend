@@ -31,7 +31,7 @@ const Nav = () => {
             <i className="fas fa-search" />
           </button>
           <Link to="/login">
-            <button className="navButton">
+            <button className="navButton signInOut">
               <i className="fas fa-sign-out-alt" />
             </button>
           </Link>

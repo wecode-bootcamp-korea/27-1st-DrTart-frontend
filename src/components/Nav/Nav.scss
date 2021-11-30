@@ -29,6 +29,10 @@
       font-size: 32px;
       color: $black;
       cursor: pointer;
+
+      &.signInOut {
+        color: $pointMint;
+      }
     }
 
     .blockElement {
