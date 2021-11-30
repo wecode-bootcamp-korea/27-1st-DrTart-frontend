@@ -1,8 +1,6 @@
 @import '../../styles/variables.scss';
 
-.sideHeader {
-  height: 100%;
-
+Nav {
   .sideNav {
     @include flexCenter(column, space-between);
     position: fixed;
@@ -35,7 +33,7 @@
       }
     }
 
-    .blockElement {
+    .dummyElement {
       width: 48px;
       height: 48px;
     }
