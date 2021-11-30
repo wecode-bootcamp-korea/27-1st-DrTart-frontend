@@ -30,9 +30,11 @@ const Nav = () => {
           <button className="navButton">
             <i className="fas fa-search" />
           </button>
-          <button className="navButton">
-            <i className="fas fa-sign-out-alt" />
-          </button>
+          <Link to="/login">
+            <button className="navButton">
+              <i className="fas fa-sign-out-alt" />
+            </button>
+          </Link>
         </div>
       </nav>
       <nav className={`extentionNav ${isToggled ? 'toggledNav' : ''}`}>
