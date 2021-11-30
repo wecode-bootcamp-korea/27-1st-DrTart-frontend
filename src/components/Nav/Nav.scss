@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
-Nav {
-  .sideNav {
+.sideNav {
+  .basicNav {
     @include flexCenter(column, space-between);
     position: fixed;
     left: 0;

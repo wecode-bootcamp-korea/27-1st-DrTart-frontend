@@ -10,8 +10,8 @@ const Nav = () => {
   };
 
   return (
-    <nav className="Nav">
-      <div className={`sideNav ${isExtended ? 'toggledNav' : ''}`}>
+    <nav className="sideNav">
+      <div className={`basicNav ${isExtended ? 'toggledNav' : ''}`}>
         <button className="navButton home">
           <i className="fas fa-plus" />
         </button>
