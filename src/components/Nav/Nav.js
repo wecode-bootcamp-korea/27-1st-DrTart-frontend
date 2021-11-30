@@ -11,8 +11,8 @@ const Nav = () => {
 
   return (
     <header className="sideHeader">
-      <nav className={`sideNav ${isToggled ? '' : 'toggledNav'}`}>
-        <button className="navButton">
+      <nav className={`sideNav ${isToggled ? 'toggledNav' : ''}`}>
+        <button className="navButton home">
           <i className="fas fa-plus" />
         </button>
         <button
@@ -37,7 +37,7 @@ const Nav = () => {
           </Link>
         </div>
       </nav>
-      <nav className={`extentionNav ${isToggled ? 'toggledNav' : ''}`}>
+      <nav className={`extentionNav ${isToggled ? '' : 'toggledNav'}`}>
         <div className="extentionNavContainer">
           <h1 className="tartLogo">Dr.Tart+</h1>
           <ul className="extentionNavButtonWrapper">

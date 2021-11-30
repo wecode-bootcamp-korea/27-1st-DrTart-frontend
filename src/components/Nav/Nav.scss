@@ -14,9 +14,10 @@
     background-color: #fff;
     border-right: 1px solid $veryLightGrey;
     z-index: 999;
+    transition: 0.7s;
 
     &.toggledNav {
-      border-right: none;
+      border-color: transparent;
     }
 
     .navButton {
@@ -51,10 +52,13 @@
     padding: 30px 0;
     background-color: #fff;
     border-right: 1px solid $veryLightGrey;
+    opacity: 1;
     z-index: 998;
+    transition: 1.6s;
 
     &.toggledNav {
-      display: none;
+      left: -270px;
+      opacity: 0;
     }
 
     .extentionNavContainer {
