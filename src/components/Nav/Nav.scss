@@ -9,11 +9,15 @@
     left: 0;
     top: 0;
     bottom: 0;
-    width: 90px;
-    padding: 30px 0;
+    width: 89px;
+    padding: 18px 0;
     background-color: #fff;
-    border-right: 1px solid $lightGrey;
-    z-index: 998;
+    border-right: 1px solid $veryLightGrey;
+    z-index: 999;
+
+    &.toggledNav {
+      border-right: none;
+    }
 
     .navButton {
       @include flexCenter;
@@ -34,6 +38,49 @@
     .navButtonContainer {
       position: absolute;
       bottom: 16px;
+    }
+  }
+
+  .extentionNav {
+    @include flexCenter(column, space-between);
+    position: fixed;
+    left: 88px;
+    top: 0;
+    bottom: 0;
+    width: 270px;
+    padding: 30px 0;
+    background-color: #fff;
+    border-right: 1px solid $veryLightGrey;
+    z-index: 998;
+
+    &.toggledNav {
+      display: none;
+    }
+
+    .extentionNavContainer {
+      margin-left: -56px;
+
+      .tartLogo {
+        margin-bottom: 80px;
+        color: $black;
+        font-size: 38px;
+        font-weight: 900;
+      }
+
+      .extentionNavButtonWrapper {
+        padding-inline-start: 4px;
+
+        .extentionNavButton {
+          margin: 22px 0;
+          color: grey;
+          font-size: 22px;
+          font-weight: 600;
+
+          &:hover {
+            color: black;
+          }
+        }
+      }
     }
   }
 }
