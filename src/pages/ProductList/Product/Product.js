@@ -1,5 +1,31 @@
 import React from 'react';
+import './Product.scss';
 
-export default function Product() {
-  return <div>hi</div>;
-}
+const Product = () => {
+  return (
+    <div className="product">
+      <div className="productContainer">
+        <div className="productImageWrapper">
+          <img
+            className="productImage"
+            alt="example"
+            src="/images/tartexam.jpg"
+          />
+        </div>
+        <div className="productName">예제 타르트</div>
+        <div className="productPrice">50원</div>
+        <div className="productButtonContainer">
+          <button className="productBuyButton">구매하기</button>
+          <button className="productCartButton">
+            <i class="fas fa-shopping-cart" />
+          </button>
+          <button className="productLikeButton">
+            <i class="far fa-heart" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Product;

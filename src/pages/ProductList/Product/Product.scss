@@ -1,0 +1,72 @@
+@import '../../../styles/variables.scss';
+
+.product {
+  position: relative;
+  width: 33.3%;
+  padding: 20px 20px 30px 20px;
+
+  .productContainer {
+    @include flexCenter(column, center);
+    width: 100%;
+
+    .productImageWrapper {
+      width: 240px;
+      height: 215px;
+
+      .productImage {
+        width: 240px;
+        height: 215px;
+      }
+    }
+
+    .productName {
+      max-height: 40 px;
+      padding: 0 10 px;
+      margin-top: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 20px;
+      color: $black;
+    }
+
+    .productPrice {
+      max-height: 40 px;
+      padding: 0 10 px;
+      margin-top: 5 px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 20px;
+      color: $black;
+    }
+
+    .productButtonContainer {
+      @include flexCenter(row, center);
+      width: 60%;
+      margin-top: 20px;
+
+      .productBuyButton,
+      .productLikeButton,
+      .productCartButton {
+        padding: 10px;
+        border: 1px solid $black;
+        border-radius: 0%;
+      }
+
+      .productBuyButton {
+        min-width: 114px;
+        height: 40px;
+        margin-right: 5px;
+      }
+
+      .productLikeButton,
+      .productCartButton {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: $veryLightGrey;
+  }
+}
