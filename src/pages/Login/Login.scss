@@ -1,15 +1,16 @@
 @import '../../styles/variables.scss';
 
 .Login {
-  @include flexCenter($flex-direction: column, $justify-content: center);
+  @include flexCenter(column, center);
   height: 100%;
 
   .loginTitle {
     font-size: 48px;
     margin-bottom: 40px;
   }
+
   .loginBox {
-    @include flexCenter($flex-direction: column, $justify-content: center);
+    @include flexCenter(column, center);
     width: 420px;
     padding-top: 70px;
     border-top: 1px solid $veryDarkGrey;

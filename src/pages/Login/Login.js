@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import '../Login/Login.scss';
@@ -8,48 +6,36 @@ import Input from './Input/Input';
 function Login() {
   const idInputRef = useRef();
   const pwInputRef = useRef();
-  const loginData = {};
   const [isAlertPopId, setIsAlertPopId] = useState(false);
   const [isAlertPopPw, setIsAlertPopPw] = useState(false);
 
-  const validateIdBtn = () => {
-    loginData['id'] = idInputRef.current.value;
-    const idValue = loginData['id'];
-    const isIdValid =
-      idValue.includes('@') && idValue.length > 2 ? true : false;
+  const validateId = () => {
+    const idValue = idInputRef.current.value;
+    const isIdValid = idValue.includes('@') && idValue.length > 2;
 
     return isIdValid;
   };
-  const validatePwBtn = () => {
-    loginData['pw'] = pwInputRef.current.value;
-    const pwValue = loginData['pw'];
-    const isPwValid = pwValue.length > 4 ? true : false;
+  const validatePw = () => {
+    const pwValue = pwInputRef.current.value;
+    const isPwValid = pwValue.length > 4;
 
     return isPwValid;
   };
 
   const alertEachValid = () => {
-    if (!validateIdBtn() && validatePwBtn()) {
-      setIsAlertPopId(true);
-      setIsAlertPopPw(false);
-    } else if (validateIdBtn() && !validatePwBtn()) {
-      setIsAlertPopId(false);
-      setIsAlertPopPw(true);
-    } else if (!validateIdBtn() && !validatePwBtn()) {
-      setIsAlertPopId(true);
-      setIsAlertPopPw(true);
-    }
+    setIsAlertPopId(!validateId());
+    setIsAlertPopPw(!validatePw());
   };
 
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const goToMain = () => {
     validateIdBtn() && validatePwBtn()
-      ? Navigate('/product_list')
+      ? navigate('/product_list')
       : alertEachValid();
   };
   const goToJoin = () => {
-    Navigate('/signup');
+    navigate('/signup');
   };
   return (
     <div className="Login">

@@ -1,23 +1,19 @@
-/* eslint-disable */
-
 import React from 'react';
 import '../Input/Input.scss';
 
-const Input = props => {
+const Input = ({ isAlertPop, placeholder, inputRef, alertWord }) => {
   return (
-    <>
+    <div className="Input">
       <input
-        className={
-          props.isAlertPop ? 'loginInput' && 'alertInput' : 'loginInput'
-        }
+        className={isAlertPop ? 'alertInput' : 'loginInput'}
         type="email"
-        placeholder={props.placeholder}
-        ref={props.inputRef}
+        placeholder={placeholder}
+        ref={inputRef}
       />
-      {props.isAlertPop && (
-        <span className="alertWord">{props.alertWord}를 입력하세요.</span>
+      {isAlertPop && (
+        <span className="alertWord">{alertWord}를 입력하세요.</span>
       )}
-    </>
+    </div>
   );
 };
 
