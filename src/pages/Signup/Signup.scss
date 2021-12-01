@@ -114,13 +114,23 @@
     }
 
     .password,
-    .passwordRe {
+    .passwordRe,
+    .address {
       width: 100%;
     }
 
     .signTip {
       color: $grey;
       font-size: 10px;
+    }
+
+    .validText {
+      color: red;
+      font-size: 8px;
+    }
+
+    .validBorder {
+      border: 1px solid red;
     }
 
     .submitBtn {
