@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import '../Login/Login.scss';
-import Input from './Input/Input';
+import InputInterface from './InputInterface/InputInterface';
 
 function Login() {
   const idInputRef = useRef();
@@ -36,18 +36,18 @@ function Login() {
     navigate('/signup');
   };
   return (
-    <div className="Login">
+    <div className="login">
       <h1 className="loginTitle">로그인</h1>
       <div className="loginBox">
         <form className="loginForm">
-          <Input
+          <InputInterface
             name="id"
             inputRef={idInputRef}
             placeholder="아이디 또는 이메일"
             isAlertPop={isAlertPopId}
             alertWord="아이디"
           />
-          <Input
+          <InputInterface
             name="pw"
             inputRef={pwInputRef}
             placeholder="비밀번호"

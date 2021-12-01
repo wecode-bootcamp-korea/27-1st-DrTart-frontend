@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.Login {
+.login {
   @include flexCenter(column, center);
   height: 100%;
 
@@ -16,10 +16,7 @@
     border-top: 1px solid $veryDarkGrey;
 
     .loginForm {
-      @include flexCenter(
-        $flex-direction: column,
-        $justify-content: space-between
-      );
+      @include flexCenter(column, space-between);
       width: 320px;
     }
 
@@ -38,10 +35,7 @@
     .btnWrap {
       width: 320px;
       height: 104px;
-      @include flexCenter(
-        $flex-direction: column,
-        $justify-content: space-between
-      );
+      @include flexCenter(column, space-between);
 
       .loginBtn {
         width: 320px;
