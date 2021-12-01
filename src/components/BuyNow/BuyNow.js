@@ -4,7 +4,7 @@ import '../BuyNow/BuyNow.scss';
 function BuyNow() {
   return (
     <div className="BuyNow">
-      <button className="closeBtn">X</button>
+      <button className="closeBtn">닫기</button>
       <p>신상품샘플링</p>
     </div>
   );
