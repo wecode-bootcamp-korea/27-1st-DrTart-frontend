@@ -2,7 +2,7 @@
 
 .product {
   position: relative;
-  width: 33.3%;
+  width: 280px;
   padding: 20px 20px 30px 20px;
 
   .productContainer {
@@ -23,50 +23,70 @@
       max-height: 40 px;
       padding: 0 10 px;
       margin-top: 20px;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
       line-height: 20px;
       color: $black;
     }
 
     .productPrice {
-      max-height: 40 px;
-      padding: 0 10 px;
-      margin-top: 5 px;
+      max-height: 40px;
+      padding: 0 10px;
+      margin: 5px 0 70px;
       font-size: 14px;
       font-weight: 700;
       line-height: 20px;
       color: $black;
     }
 
-    .productButtonContainer {
-      @include flexCenter(row, center);
-      width: 60%;
-      margin-top: 20px;
-
-      .productBuyButton,
-      .productLikeButton,
-      .productCartButton {
-        padding: 10px;
-        border: 1px solid $black;
-        border-radius: 0%;
-      }
-
-      .productBuyButton {
-        min-width: 114px;
-        height: 40px;
-        margin-right: 5px;
-      }
-
-      .productLikeButton,
-      .productCartButton {
-        width: 40px;
-        height: 40px;
-      }
+    &:hover ~ .productEffectContainer {
+      display: block;
     }
   }
 
-  &:hover {
-    background-color: $veryLightGrey;
+  .productEffectContainer {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f8f8;
+    z-index: -1;
+    transition: 0.4s;
+    transition-timing-function: ease;
+    transition-delay: 0.3s;
+
+    .effectContents {
+      display: flex;
+      height: 100%;
+
+      .productButtonContainer {
+        @include flexCenter(row, center);
+        align-items: flex-end;
+        width: 100%;
+        margin-bottom: 30px;
+
+        .productBuyButton,
+        .productLikeButton,
+        .productCartButton {
+          padding: 10px;
+          border: 1px solid $black;
+          border-radius: 0%;
+        }
+
+        .productBuyButton {
+          min-width: 114px;
+          height: 40px;
+          margin-right: 5px;
+        }
+
+        .productLikeButton,
+        .productCartButton {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
   }
 }
