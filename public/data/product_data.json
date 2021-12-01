@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "korean_name": "dummy1",
+    "price": "1000원"
+  },
+  {
+    "id": 1,
+    "korean_name": "dummy2",
+    "price": "1000원"
+  },
+  {
+    "id": 2,
+    "korean_name": "dummy3",
+    "price": "1000원"
+  },
+  {
+    "id": 3,
+    "korean_name": "dummy4",
+    "price": "1000원"
+  },
+  {
+    "id": 4,
+    "korean_name": "dummy5",
+    "price": "1000원"
+  },
+  {
+    "id": 5,
+    "korean_name": "dummy6",
+    "price": "1000원"
+  }
+]

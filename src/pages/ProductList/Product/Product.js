@@ -18,8 +18,8 @@ const Product = ({ productName, productPrice }) => {
             src="/images/tartexam.jpg"
           />
         </div>
-        <div className="productName">예제 타르트</div>
-        <div className="productPrice">50원</div>
+        <div className="productName">{productName}</div>
+        <div className="productPrice">{productPrice}</div>
       </div>
       {isProductHover && (
         <div
@@ -31,10 +31,10 @@ const Product = ({ productName, productPrice }) => {
             <div className="productButtonContainer">
               <button className="productBuyButton">구매하기</button>
               <button className="productCartButton">
-                <i class="fas fa-shopping-cart" />
+                <i className="fas fa-shopping-cart" />
               </button>
               <button className="productLikeButton">
-                <i class="far fa-heart" />
+                <i className="far fa-heart" />
               </button>
             </div>
           </div>
