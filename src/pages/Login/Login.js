@@ -30,9 +30,7 @@ function Login() {
   const navigate = useNavigate();
 
   const goToMain = () => {
-    validateIdBtn() && validatePwBtn()
-      ? navigate('/product_list')
-      : alertEachValid();
+    validateId() && validatePw() ? navigate('/product_list') : alertEachValid();
   };
   const goToJoin = () => {
     navigate('/signup');
