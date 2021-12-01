@@ -4,8 +4,6 @@ import './Product.scss';
 const Product = ({ productName, productPrice }) => {
   const [isProductHover, setIsProductHover] = useState(false);
 
-  const controllAnimation = () => {};
-
   return (
     <div
       className="product"
