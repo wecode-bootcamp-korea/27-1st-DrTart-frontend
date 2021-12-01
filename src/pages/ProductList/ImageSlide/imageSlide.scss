@@ -1,14 +1,14 @@
 @import '../../../styles/variables.scss';
 
 .imageSlide {
+  position: relative;
   width: 100%;
 
-  .slideContainer {
-    .slideList {
-    }
-
-    .slickDotWrapper {
-      @include flexCenter;
-    }
+  .slickDotWrapper {
+    @include flexCenter;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    margin-bottom: 30px;
   }
 }

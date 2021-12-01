@@ -10,9 +10,10 @@
     background-color: $grey;
     border-color: transparent;
     border-radius: 8px;
+    transition: 0.4s;
     cursor: pointer;
 
-    &.dotClicked {
+    &.clickedDot {
       background-color: $white;
     }
   }

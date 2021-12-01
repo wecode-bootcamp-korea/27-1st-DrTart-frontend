@@ -1,22 +1,22 @@
 export const SLIDE_DATA = [
   {
     id: 0,
-    imageUrl: '',
+    imageUrl: '/images/slide-image0.jpg',
   },
   {
     id: 1,
-    imageUrl: '',
+    imageUrl: '/images/slide-image1.jpg',
   },
   {
     id: 2,
-    imageUrl: '',
+    imageUrl: '/images/slide-image2.jpg',
   },
   {
     id: 3,
-    imageUrl: '',
+    imageUrl: '/images/slide-image3.jpg',
   },
   {
     id: 4,
-    imageUrl: '',
+    imageUrl: '/images/slide-image4.jpg',
   },
 ];
