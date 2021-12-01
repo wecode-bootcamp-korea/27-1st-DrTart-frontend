@@ -8,7 +8,7 @@ function SlickDot({ currentSlideId, slideId, changeSlide }) {
         className={`dotButton ${
           currentSlideId === slideId ? 'clickedDot' : ''
         }`}
-        onClick={() => changeSlide(slideId)}
+        onClick={changeSlide}
       />
     </li>
   );

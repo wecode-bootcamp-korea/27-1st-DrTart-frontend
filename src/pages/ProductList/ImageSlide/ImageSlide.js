@@ -5,26 +5,26 @@ import { SLIDE_DATA } from './SlideData';
 import './imageSlide.scss';
 
 const ImageSlide = () => {
-  const [countSlide, setCountSlide] = useState(0);
+  const [currentSlideId, setCurrentSlideId] = useState(0);
 
   const changeSlide = slideId => {
-    setCountSlide(slideId);
+    setCurrentSlideId(slideId);
   };
 
   return (
     <div className="imageSlide">
       <div className="slideList">
-        {SLIDE_DATA.filter(el => el.id === countSlide).map(el => (
-          <Slide key={el.id} slideId={el.id} imgUrl={el.imageUrl} />
+        {SLIDE_DATA.filter(({ id }) => id === currentSlideId).map(slide => (
+          <Slide key={slide.id} slideId={slide.id} imgUrl={slide.imageUrl} />
         ))}
       </div>
       <ul className="slickDotWrapper">
-        {SLIDE_DATA.map(el => (
+        {SLIDE_DATA.map(({ id }) => (
           <SlickDot
-            key={el.id}
-            currentSlideId={countSlide}
-            slideId={el.id}
-            changeSlide={changeSlide}
+            key={id}
+            currentSlideId={currentSlideId}
+            slideId={id}
+            changeSlide={() => changeSlide(id)}
           />
         ))}
       </ul>
