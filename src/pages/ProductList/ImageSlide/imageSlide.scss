@@ -1,0 +1,14 @@
+@import '../../../styles/variables.scss';
+
+.imageSlide {
+  width: 100%;
+
+  .slideContainer {
+    .slideList {
+    }
+
+    .slickDotWrapper {
+      @include flexCenter;
+    }
+  }
+}

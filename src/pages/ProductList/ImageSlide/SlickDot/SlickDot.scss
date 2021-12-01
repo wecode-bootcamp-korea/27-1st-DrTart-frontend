@@ -1,0 +1,19 @@
+@import '../../../../styles/variables.scss';
+
+.slickDot {
+  float: left;
+  margin: 4px;
+
+  .dotButton {
+    width: 16px;
+    height: 16px;
+    background-color: $grey;
+    border-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+
+    &.dotClicked {
+      background-color: $white;
+    }
+  }
+}
