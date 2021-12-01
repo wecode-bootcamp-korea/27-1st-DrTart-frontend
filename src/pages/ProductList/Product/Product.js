@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Product.scss';
 
-const Product = () => {
+const Product = ({ productName, productPrice }) => {
+  const [isProductHover, setIsProductHover] = useState(false);
+
+  const controllAnimation = () => {};
+
   return (
-    <div className="product">
+    <div
+      className="product"
+      onMouseOver={() => setIsProductHover(true)}
+      onMouseOut={() => setIsProductHover(false)}
+    >
       <div className="productContainer">
         <div className="productImageWrapper">
           <img
@@ -15,19 +23,25 @@ const Product = () => {
         <div className="productName">예제 타르트</div>
         <div className="productPrice">50원</div>
       </div>
-      <div className="productEffectContainer">
-        <div className="effectContents">
-          <div className="productButtonContainer">
-            <button className="productBuyButton">구매하기</button>
-            <button className="productCartButton">
-              <i class="fas fa-shopping-cart" />
-            </button>
-            <button className="productLikeButton">
-              <i class="far fa-heart" />
-            </button>
+      {isProductHover && (
+        <div
+          className={`productEffectContainer ${
+            isProductHover ? 'mountAnimation' : ''
+          }`}
+        >
+          <div className="effectContents">
+            <div className="productButtonContainer">
+              <button className="productBuyButton">구매하기</button>
+              <button className="productCartButton">
+                <i class="fas fa-shopping-cart" />
+              </button>
+              <button className="productLikeButton">
+                <i class="far fa-heart" />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
