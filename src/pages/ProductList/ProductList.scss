@@ -1,37 +1,4 @@
 @import '../../styles/variables.scss';
 
 .productList {
-  .productListNav {
-    @include flexCenter(row, flex-start);
-    align-items: flex-end;
-    padding: 55px 60px 20px;
-    border-bottom: 1px solid $lightGrey;
-
-    .productListNavHead {
-      margin-right: 45px;
-      color: $black;
-      font-size: 32px;
-      font-weight: 700;
-    }
-
-    .productListMenuContainer {
-      list-style-type: none;
-
-      .productListMenu {
-        float: left;
-        margin-right: 25px;
-
-        .menuButton {
-          border: none;
-          font-size: 16px;
-          font-weight: 500;
-          color: $grey;
-
-          &:hover {
-            color: black;
-          }
-        }
-      }
-    }
-  }
 }
