@@ -1,57 +1,68 @@
-import React, { useState } from 'react';
+import { check } from 'prettier';
+import React, { useState, useCallback } from 'react';
 import './Signup.scss';
-import SignupTerms from './SignupTerms';
 import TERMS_DATA from './SignupData';
 
 export default function Signup() {
   const [memberInput, setMemberInput] = useState({
-    id: '',
-    domain: '',
+    email: '',
     password: '',
     passwordRe: '',
     address: '',
+    isVegan: false,
   });
-  const [idValidOnce, setIdValidOnce] = useState(false);
-  const [domainValid, setDomainValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
   const [passwordReValid, setPasswordReValid] = useState(false);
   const [addressValid, setAddressValid] = useState(false);
+  const [checkedList, setCheckedList] = useState([]);
 
-  const [checkedItems, setCheckedItems] = useState(new Set());
+  //전체 체크
+  const onCheckedAll = useCallback(
+    checked => {
+      if (checked) {
+        const checkedListArray = [];
 
-  const checkedItemHandler = (id, isChecked) => {
-    if (isChecked) {
-      checkedItems.add(id);
-      setCheckedItems(checkedItems);
-    } else if (!isChecked && checkedItems.has(id)) {
-      checkedItems.delete(id);
-      setCheckedItems(checkedItems);
-    }
-  };
+        TERMS_DATA.forEach(term => checkedListArray.push(term.id));
+        setCheckedList(checkedListArray);
+      } else {
+        setCheckedList([]);
+      }
+    },
+    [TERMS_DATA]
+  );
 
-  const { id, domain, password, passwordRe, address } = memberInput;
-  const email = `${id}@${domain}`;
+  //개별 체크
+  const onCheckedElement = useCallback(
+    (checked, term) => {
+      if (checked) {
+        setCheckedList({ ...checkedList, term });
+      } else {
+        setCheckedList(checkedList.filter(el => el !== term));
+      }
+    },
+    [checkedList]
+  );
+
+  const { email, password, passwordRe, address, isVegan } = memberInput;
 
   function handleMemberInput(e) {
     const { name, value } = e.target;
-    setMemberInput({ ...memberInput, [name]: value });
-  }
-
-  function idValidBlurOnce(e) {
-    const value = e.target.value;
-    if (!value) {
-      setIdValidOnce(true);
+    if (name === 'isVegan') {
+      setMemberInput({ ...memberInput, isVegan: e.target.checked });
     } else {
-      setIdValidOnce(false);
+      setMemberInput({ ...memberInput, [name]: value });
     }
   }
 
-  function domainValidBlur(e) {
+  function emailValidBlur(e) {
     const value = e.target.value;
-    if (!value || !value.includes('.')) {
-      setDomainValid(true);
+    if (!value) {
+      setEmailValid(true);
+    } else if (!value.includes('@')) {
+      setEmailValid(true);
     } else {
-      setDomainValid(false);
+      setEmailValid(false);
     }
   }
 
@@ -75,26 +86,14 @@ export default function Signup() {
 
   function addressValidBlur(e) {
     const value = e.target.value;
-    if (!value) {
-      setAddressValid(true);
-    } else {
-      setAddressValid(false);
-    }
+    return !value ? setAddressValid(true) : setAddressValid(false);
   }
 
   function submit() {
-    if (idValidBlurOnce && domainValid && passwordValid && passwordReValid) {
-      // fetch('API주소', {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //     email: email,
-      //     password: password,
-      //     address: address,
-      //   }),
-      // }).then(response => response.json());
-      // .then(message => console.log('결과: ', message));
+    if (!emailValid && !passwordValid && !passwordReValid && isVegan !== null) {
+      console.log('완료');
     } else {
-      return;
+      console.log('다시');
     }
   }
 
@@ -125,13 +124,32 @@ export default function Signup() {
           </p>
           <div className="termsCheckWrap">
             <ul>
-              {TERMS_DATA.map((el, index) => {
+              <li>
+                <input
+                  type="checkbox"
+                  onChange={e => onCheckedAll(e.target.checked)}
+                  checked={
+                    checkedList.length === 0
+                      ? false
+                      : checkedList.length === TERMS_DATA.length
+                      ? true
+                      : false
+                  }
+                />
+              </li>
+              {TERMS_DATA.map(term => {
                 return (
-                  <SignupTerms
-                    key={index}
-                    type={el.type}
-                    content={el.content}
-                  />
+                  <li>
+                    <input
+                      key={term.id}
+                      type="checkbox"
+                      onChange={e =>
+                        onCheckedElement(e.target.checked, term.id)
+                      }
+                      checked={checkedList.includes(term.id) ? true : false}
+                    />
+                    {term.content}
+                  </li>
                 );
               })}
             </ul>
@@ -148,37 +166,21 @@ export default function Signup() {
             <li>
               <div className="email">
                 <input
-                  type="text"
-                  className={`id ${idValidOnce ? 'validBorder' : null}`}
-                  name="id"
+                  type="email"
+                  className={`email ${emailValid ? 'validBorder' : null}`}
+                  name="email"
                   placeholder="이메일"
-                  value={id}
-                  onBlur={idValidBlurOnce}
-                />
-                &nbsp;&nbsp;&nbsp;@&nbsp;&nbsp;&nbsp;
-                <input
-                  type="text"
-                  name="domain"
-                  className={`domain ${domainValid ? 'validBorder' : null}`}
-                  placeholder="도메인"
-                  value={domain}
-                  onBlur={domainValidBlur}
+                  value={email}
+                  onBlur={emailValidBlur}
                 />
               </div>
               <button type="button" className="emailValidBtn">
                 중복확인
               </button>
             </li>
-            {idValidOnce && (
+            {emailValid && (
               <li>
-                <span className="validText">이메일을 입력해주세요.</span>
-              </li>
-            )}
-            {domainValid && (
-              <li>
-                <span className="validText">
-                  이메일 주소 형식에 맞지 않습니다. 다시 확인해주세요
-                </span>
+                <span className="validText">이메일 형식을 확인 해주세요.</span>
               </li>
             )}
             <li>
@@ -232,6 +234,10 @@ export default function Signup() {
                 <span className="validText">배송주소를 입력해주세요.</span>
               </li>
             )}
+            <li>
+              <input type="checkbox" name="isVegan" />
+              <label>비건이시라면 체크해주세요!</label>
+            </li>
             <li>
               <span className="signTip">
                 * 만 14세 미만은 회원 가입 및 서비스 이용이 불가합니다.

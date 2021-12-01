@@ -98,14 +98,7 @@
 
     .email {
       flex-basis: 70%;
-
-      .id {
-        width: 45%;
-      }
-
-      .domain {
-        width: 49%;
-      }
+      margin-right: 10px;
     }
 
     .emailValidBtn {
@@ -113,6 +106,7 @@
       border: 1px solid $black;
     }
 
+    .email,
     .password,
     .passwordRe,
     .address {
@@ -127,6 +121,9 @@
     .validText {
       color: red;
       font-size: 8px;
+    }
+    .redText {
+      color: red;
     }
 
     .validBorder {
