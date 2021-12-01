@@ -4,7 +4,7 @@ const ModalBuyNow = () => {
   return (
     <div className="ModalBuyNow">
       <button className="closeBtn" type="button">
-        <i class="fas fa-times"></i>
+        <i class="fas fa-times" />
       </button>
       <img src="" alt="" />
       <div>
@@ -29,11 +29,11 @@ const ModalBuyNow = () => {
             <dd>
               <div>
                 <button>
-                  <i class="fas fa-minus"></i>
+                  <i class="fas fa-minus" />
                 </button>
                 <input type="text" value="1" readOnly />
                 <button>
-                  <i class="fas fa-plus"></i>
+                  <i class="fas fa-plus" />
                 </button>
               </div>
             </dd>
