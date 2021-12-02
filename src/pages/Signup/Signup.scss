@@ -42,12 +42,19 @@
         line-height: 20px;
       }
     }
-
+    .allCheck {
+      display: none;
+    }
     .termsAllCheck {
+      display: block;
       border: 1px solid $lightGrey;
       padding: 8px 0px;
       text-align: center;
       color: $grey;
+    }
+    .allCheck:checked + .termsAllCheck {
+      border: 1px solid $black;
+      color: $black;
     }
 
     .termsCheckWrap {
@@ -128,6 +135,23 @@
 
     .validBorder {
       border: 1px solid red;
+    }
+
+    .veganCheckBox {
+      display: none;
+    }
+
+    .veganBtn {
+      display: block;
+      border: 1px solid $grey;
+      text-align: center;
+      color: $grey;
+      padding: 8px 0px;
+    }
+
+    .veganCheckBox:checked + .veganBtn {
+      border: 1px solid $black;
+      color: $black;
     }
 
     .submitBtn {

@@ -1,4 +1,3 @@
-import { check } from 'prettier';
 import React, { useState, useCallback } from 'react';
 import './Signup.scss';
 import TERMS_DATA from './SignupData';
@@ -18,33 +17,30 @@ export default function Signup() {
   const [checkedList, setCheckedList] = useState([]);
 
   //전체 체크
-  const onCheckedAll = useCallback(
-    checked => {
-      if (checked) {
-        const checkedListArray = [];
+  const onCheckedAll = useCallback(checked => {
+    if (checked) {
+      const checkedListArray = [];
 
-        TERMS_DATA.forEach(term => checkedListArray.push(term.id));
-        setCheckedList(checkedListArray);
-      } else {
-        setCheckedList([]);
-      }
-    },
-    [TERMS_DATA]
-  );
+      TERMS_DATA.forEach(term => checkedListArray.push(term.id));
+      setCheckedList(checkedListArray);
+    } else {
+      setCheckedList([]);
+    }
+  }, []);
 
   //개별 체크
   const onCheckedElement = useCallback(
-    (checked, term) => {
+    (checked, termId) => {
       if (checked) {
-        setCheckedList({ ...checkedList, term });
+        setCheckedList([...checkedList, termId]);
       } else {
-        setCheckedList(checkedList.filter(el => el !== term));
+        setCheckedList(checkedList.filter(el => el !== termId));
       }
     },
     [checkedList]
   );
 
-  const { email, password, passwordRe, address, isVegan } = memberInput;
+  const { email, password, passwordRe, address } = memberInput;
 
   function handleMemberInput(e) {
     const { name, value } = e.target;
@@ -89,14 +85,14 @@ export default function Signup() {
     return !value ? setAddressValid(true) : setAddressValid(false);
   }
 
-  function submit() {
-    if (!emailValid && !passwordValid && !passwordReValid && isVegan !== null) {
-      console.log('완료');
-    } else {
-      console.log('다시');
-    }
-  }
-
+  // function submit() {
+  //   if (!emailValid && !passwordValid && !passwordReValid && isVegan !== null) {
+  //     console.log('완료');
+  //   } else {
+  //     console.log('다시');
+  //   }
+  // }
+  const isSameLength = checkedList.length === TERMS_DATA.length ? true : false;
   return (
     <div className="signupWrap">
       <div className="registerStep">
@@ -118,28 +114,22 @@ export default function Signup() {
               필수 약관에 동의하셔야 회원가입이 가능합니다.
             </p>
           </div>
-          <p className="termsAllCheck">
+          <input
+            type="checkbox"
+            id="allChk"
+            className="allCheck"
+            onChange={e => onCheckedAll(e.target.checked)}
+            checked={checkedList.length === 0 ? false : isSameLength}
+          />
+          <label for="allChk" className="termsAllCheck">
             <i class="fas fa-check" /> &nbsp;필수 항목 및 선택 항목 모두
             동의합니다.
-          </p>
+          </label>
           <div className="termsCheckWrap">
             <ul>
-              <li>
-                <input
-                  type="checkbox"
-                  onChange={e => onCheckedAll(e.target.checked)}
-                  checked={
-                    checkedList.length === 0
-                      ? false
-                      : checkedList.length === TERMS_DATA.length
-                      ? true
-                      : false
-                  }
-                />
-              </li>
               {TERMS_DATA.map(term => {
                 return (
-                  <li>
+                  <li key={term.id}>
                     <input
                       key={term.id}
                       type="checkbox"
@@ -235,8 +225,15 @@ export default function Signup() {
               </li>
             )}
             <li>
-              <input type="checkbox" name="isVegan" />
-              <label>비건이시라면 체크해주세요!</label>
+              <input
+                type="checkbox"
+                name="isVegan"
+                id="veganCheck"
+                className="veganCheckBox"
+              />
+              <label className="veganBtn" for="veganCheck">
+                <i class="fas fa-check" /> &nbsp;비건이시라면 체크해주세요!
+              </label>
             </li>
             <li>
               <span className="signTip">
@@ -244,7 +241,7 @@ export default function Signup() {
               </span>
             </li>
             <li>
-              <button type="button" className="submitBtn" onClick={submit}>
+              <button type="button" className="submitBtn">
                 가입하기
               </button>
             </li>
