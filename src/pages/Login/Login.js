@@ -15,6 +15,7 @@ function Login() {
 
     return isIdValid;
   };
+
   const validatePw = () => {
     const pwValue = pwInputRef.current.value;
     const isPwValid = pwValue.length > 4;
@@ -32,9 +33,11 @@ function Login() {
   const goToMain = () => {
     validateId() && validatePw() ? navigate('/product_list') : alertEachValid();
   };
+
   const goToJoin = () => {
     navigate('/signup');
   };
+
   return (
     <div className="login">
       <h1 className="loginTitle">로그인</h1>

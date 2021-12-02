@@ -26,9 +26,11 @@
       color: $grey;
       cursor: pointer;
 
-      .findPw::before {
-        content: '|';
-        padding: 0 12px;
+      .findPw {
+        &::before {
+          content: '|';
+          padding: 0 12px;
+        }
       }
     }
 
@@ -45,13 +47,16 @@
         background-color: $black;
         color: $white;
       }
-      .loginBtn:hover {
-        font-size: 14px;
-        transition: scale cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        background-color: $white;
-        color: $black;
-        cursor: pointer;
+      .loginBtn {
+        &:hover {
+          font-size: 14px;
+          transition: scale cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          background-color: $white;
+          color: $black;
+          cursor: pointer;
+        }
       }
+
       .joinBtn {
         width: 320px;
         height: 48px;
@@ -59,12 +64,14 @@
         border: 1px solid $grey;
         color: $veryDarkGrey;
       }
-      .joinBtn:hover {
-        font-size: 14px;
-        transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        background-color: $grey;
-        color: $white;
-        cursor: pointer;
+      .joinBtn {
+        &:hover {
+          font-size: 14px;
+          transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          background-color: $grey;
+          color: $white;
+          cursor: pointer;
+        }
       }
     }
   }
