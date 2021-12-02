@@ -1,7 +1,7 @@
 import React from 'react';
 import Product from '../Product/Product';
 import './ProductsMain.scss';
-import ImageSlide from '../ImageSlide/ImageSlide';
+import ImageSlide from './ImageSlide/ImageSlide';
 
 function ProductsMain({ productsList }) {
   return (
