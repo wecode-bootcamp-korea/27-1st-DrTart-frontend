@@ -1,0 +1,248 @@
+@import '../../../styles/variables.scss';
+.modalBuyNow {
+  .displayNone {
+    display: none;
+  }
+  .popUp {
+    width: 980px;
+    height: 660px;
+    padding: 40px;
+    background-color: $white;
+    position: fixed;
+    z-index: 1001;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    .closeBtn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      border: none;
+      cursor: pointer;
+      .fa-times {
+        font-size: 26px;
+        color: $grey;
+      }
+      .fa-times:hover {
+        transition: 0.3s ease-in-out;
+        color: $black;
+      }
+    }
+    .inner {
+      @include flexCenter(row, space-between);
+      .imageBox {
+        @include flexCenter(column, space-between);
+        width: 540px;
+        height: 574px;
+        .imageMain {
+          width: 540px;
+          height: 485px;
+        }
+        .smallImagesLine {
+          width: 64px;
+          height: 64px;
+          border: 1px solid $black;
+          cursor: pointer;
+          .smallImageBox {
+            height: 64px;
+            .smallImage {
+              width: 62px;
+              height: 62px;
+            }
+          }
+        }
+      }
+      .infoBox {
+        width: 320px;
+        height: 574px;
+
+        .stickerWrap {
+          @include flexCenter(row, flex-start);
+          .stickerNew {
+            @include flexCenter;
+            width: 44px;
+            height: 20px;
+            border: 1px solid $black;
+            color: $black;
+            font-size: 10px;
+            margin-right: 5px;
+          }
+          .stickerGift {
+            @include flexCenter;
+            width: 44px;
+            height: 20px;
+            border: 1px solid $grey;
+            color: $grey;
+            font-size: 10px;
+            margin-right: 5px;
+          }
+          .stickerSale {
+            @include flexCenter;
+            width: 44px;
+            height: 20px;
+            border: 1px solid #ea4545;
+            color: #ea4545;
+            font-size: 10px;
+            margin-right: 5px;
+          }
+        }
+      }
+      .productName {
+        font-size: 32px;
+        padding: 18px 0 8px 0;
+      }
+      .infoTag {
+        color: $grey;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      .price {
+        @include flexCenter(row, flex-start);
+        margin: 16px 0 24px;
+        .originPrice {
+          color: $veryDarkGrey;
+          font-size: 16px;
+        }
+        .originPrice::after {
+          content: '원';
+          padding: 0 1px;
+        }
+        .strikeThrough {
+          width: 75px;
+          border-top: 1px solid $veryDarkGrey;
+          position: absolute;
+        }
+        .discountPrice {
+          font-size: 18px;
+          font-weight: bold;
+          margin-left: 10px;
+        }
+        .discountPrice::after {
+          content: '원';
+          padding: 0 1px;
+        }
+      }
+      .tabBar {
+        @include flexCenter(row, flex-start);
+        border-bottom: 1px solid $grey;
+        // z-index: 1;
+        .infoToBuy {
+          padding: 8px 18px 4px;
+          font-size: 14px;
+          background-color: $white;
+          color: $veryDarkGrey;
+          border: 1px solid $grey;
+          border-bottom: 0;
+          cursor: pointer;
+          // z-index: 9;
+        }
+        .infoToBuy:hover {
+          padding: 8px 18px 4px;
+          font-size: 14px;
+          color: $veryDarkGrey;
+          border: 1px solid $grey;
+          margin-bottom: 0;
+          border-bottom: 0;
+        }
+        .infoGift {
+          padding: 8px 18px 4px;
+          font-size: 14px;
+          background-color: rgb(245, 245, 245);
+          color: $darkGrey;
+          border: 1px solid $grey;
+          border-left: 0;
+          border-bottom: 0;
+          cursor: pointer;
+        }
+        .infoGift:hover {
+          padding: 8px 18px 4px;
+          font-size: 14px;
+          background-color: rgb(255, 255, 255);
+          color: $veryDarkGrey;
+          border: 1px solid $grey;
+          border-left: 0;
+          border-bottom: 0;
+        }
+      }
+      .tabContents {
+        width: 320px;
+        height: 180px;
+        border-bottom: 1px solid $grey;
+        font-size: 14px;
+        line-height: 20px;
+        // z-index: 9;
+        .list {
+          @include flexCenter(row, flex-start);
+          height: 54px;
+          padding: 0 10px;
+          color: $veryDarkGrey;
+
+          .title {
+            width: 84px;
+          }
+          .defines {
+            .numBtn {
+              @include flexCenter(row, space-between);
+              width: 125px;
+              height: 40px;
+              border: 1px solid $grey;
+              .numBtnMinus,
+              .numBtnPlus {
+                width: 38px;
+                height: 38px;
+                border: none;
+              }
+              .numBtnMinus:hover,
+              .numBtnPlus:hover {
+                background-color: $veryLightGrey;
+                border: none;
+              }
+              .numValue {
+                width: 45px;
+                height: 38px;
+                border: none;
+                text-align: center;
+              }
+              .numValue:focus {
+                outline: none;
+              }
+            }
+          }
+          .definesSpecial {
+            color: $pointMint;
+            font-weight: bold;
+            padding-right: 50px;
+          }
+        }
+      }
+      .totalPriceInfo {
+        @include flexCenter(row, space-between);
+        width: 320px;
+        margin: 30px 0 15px;
+        padding: 0 10px;
+        font-size: 14px;
+        .totalPrice {
+          font-size: 22px;
+          font-weight: bold;
+        }
+        .totalPrice::after {
+          content: '원';
+          padding: 0 1px;
+        }
+      }
+      .buyNowBtn {
+        width: 318px;
+        height: 46px;
+        margin-top: 70px;
+        border: 1px solid $black;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .buyNowBtn:hover {
+        transition: 0.3s ease-in-out;
+        background-color: $pointMint;
+        border: none;
+      }
+    }
+  }
+}
