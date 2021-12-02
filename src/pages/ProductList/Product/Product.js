@@ -18,8 +18,8 @@ const Product = ({ productName, productPrice }) => {
             src="/images/tartexam.jpg"
           />
         </div>
-        <div className="productName">{productName}</div>
-        <div className="productPrice">{productPrice}</div>
+        <div className="productName">예제 타르트</div>
+        <div className="productPrice">50원</div>
       </div>
       {isProductHover && (
         <div

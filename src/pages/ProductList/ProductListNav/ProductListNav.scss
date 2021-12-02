@@ -3,11 +3,12 @@
 .productListNav {
   @include flexCenter(row, flex-start);
   align-items: flex-end;
-  padding: 55px 60px 20px;
+  padding: 55px 60px 0px;
   border-bottom: 1px solid $lightGrey;
 
   .productListNavHead {
     margin-right: 45px;
+    padding-bottom: 20px;
     color: $black;
     font-size: 32px;
     font-weight: 600;
@@ -21,14 +22,34 @@
       margin-right: 25px;
 
       .menuButton {
-        border: none;
-        font-size: 14px;
-        font-weight: 500;
-        color: $grey;
-        transition: 0.2s;
+        padding-bottom: 20px;
+
+        .menuUnderline {
+          font-size: 14px;
+          font-weight: 500;
+          color: $grey;
+          transition: 0.2s;
+
+          &::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 10px;
+            position: absolute;
+            left: 0;
+            bottom: 0px;
+            background: #38567d;
+            opacity: 0.5;
+          }
+        }
 
         &:hover {
           color: $black;
+
+          &.menuUnderline {
+            width: 100%;
+            transition: width 0.3s;
+          }
         }
       }
     }
