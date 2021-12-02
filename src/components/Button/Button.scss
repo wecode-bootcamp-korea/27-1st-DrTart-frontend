@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.button {
+  width: 318px;
+  height: 46px;
+  margin-top: 70px;
+  border: 1px solid $black;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button {
+  &:hover {
+    transition: 0.3s ease-in-out;
+    background-color: $pointMint;
+    border: none;
+  }
+}
