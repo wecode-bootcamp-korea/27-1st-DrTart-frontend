@@ -1,11 +1,11 @@
 import React from 'react';
-import ImageSlide from '../ProductList/ImageSlide/ImageSlide';
+import Footer from '../../components/Footer/Footer';
 
 export default function Main() {
   return (
     <div>
       <i className="fab fa-react" />
-      <ImageSlide />
+      <Footer />
     </div>
   );
 }
