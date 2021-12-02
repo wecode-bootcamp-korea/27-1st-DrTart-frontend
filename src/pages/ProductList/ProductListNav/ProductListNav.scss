@@ -5,6 +5,7 @@
   align-items: flex-end;
   padding: 55px 60px 0px;
   border-bottom: 1px solid $lightGrey;
+  z-index: 100;
 
   .productListNavHead {
     margin-right: 45px;
@@ -15,41 +16,58 @@
   }
 
   .productListMenuContainer {
-    list-style-type: none;
+    @include flexCenter(row);
 
     .productListMenu {
-      float: left;
+      position: relative;
       margin-right: 25px;
 
       .menuButton {
         padding-bottom: 20px;
+        border: none;
+        border-bottom: 2px solid transparent;
+        font-size: 14px;
+        font-weight: 500;
+        color: $grey;
+        transition: 0.2s;
+      }
 
-        .menuUnderline {
+      .dropDownList {
+        position: absolute;
+        top: 43px;
+        left: -20px;
+        max-height: 0%;
+        min-width: 200%;
+        overflow: hidden;
+        background-color: $white;
+        z-index: 88;
+        transition: 0.5s ease;
+
+        .dropDownElement {
+          padding: 15px 20px;
           font-size: 14px;
           font-weight: 500;
           color: $grey;
-          transition: 0.2s;
 
-          &::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 10px;
-            position: absolute;
-            left: 0;
-            bottom: 0px;
-            background: #38567d;
-            opacity: 0.5;
+          &:hover {
+            color: $black;
+          }
+        }
+      }
+
+      &:hover {
+        .menuButton {
+          color: $black;
+
+          &.menuDropDown {
+            border-bottom: 2px solid $black;
           }
         }
 
-        &:hover {
-          color: $black;
-
-          &.menuUnderline {
-            width: 100%;
-            transition: width 0.3s;
-          }
+        .dropDownList {
+          max-height: 100vh;
+          border: 0.4px solid $veryLightGrey;
+          border-top: none;
         }
       }
     }

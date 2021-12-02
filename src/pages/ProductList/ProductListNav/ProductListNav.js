@@ -7,12 +7,16 @@ function ProductListNav() {
       <h1 className="productListNavHead">제품</h1>
       <ul className="productListMenuContainer">
         <li className="productListMenu">
-          <button className="menuButton">
-            <span className="menuUnderline">모든 제품</span>
-          </button>
+          <button className="menuButton">모든 제품</button>
         </li>
-        <li className="productListMenu dropDown">
-          <button className="menuButton">종류별 제품</button>
+        <li className="productListMenu">
+          <button className="menuButton  menuDropDown">디저트</button>
+          <ul className="dropDownList">
+            <li className="dropDownElement">타르트</li>
+            <li className="dropDownElement">케이크</li>
+            <li className="dropDownElement">마카롱</li>
+            <li className="dropDownElement">쿠키</li>
+          </ul>
         </li>
       </ul>
     </nav>
