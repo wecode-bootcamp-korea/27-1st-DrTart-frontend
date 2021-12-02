@@ -11,7 +11,7 @@ const Slide = ({ slideId, imgUrl }) => {
     return () => {
       setAnimation('closeSlide');
       setTimeout(() => {
-        console.log(1);
+        setAnimation('');
       }, 600);
     };
   }, []);
