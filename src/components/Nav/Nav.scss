@@ -1,0 +1,92 @@
+@import '../../styles/variables.scss';
+
+.sideNav {
+  .basicNav {
+    @include flexCenter(column, space-between);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 89px;
+    padding: 18px 0;
+    background-color: #fff;
+    border-right: 1px solid $veryLightGrey;
+    z-index: 999;
+    transition: 0.7s;
+
+    &.toggledNav {
+      border-color: transparent;
+    }
+
+    .navButton {
+      @include flexCenter;
+      width: 48px;
+      height: 48px;
+      border-color: transparent;
+
+      font-size: 32px;
+      color: $black;
+      cursor: pointer;
+
+      &.signInOut {
+        color: $pointMint;
+      }
+    }
+
+    .dummyElement {
+      width: 48px;
+      height: 48px;
+    }
+
+    .navButtonContainer {
+      position: absolute;
+      bottom: 16px;
+    }
+  }
+
+  .extentionNav {
+    @include flexCenter(column, space-between);
+    position: fixed;
+    left: 88px;
+    top: 0;
+    bottom: 0;
+    width: 270px;
+    padding: 30px 0;
+    background-color: #fff;
+    border-right: 1px solid $veryLightGrey;
+    opacity: 1;
+    z-index: 998;
+    transition: 1.6s;
+
+    &.toggledNav {
+      left: -270px;
+      opacity: 0;
+    }
+
+    .extentionNavContainer {
+      margin-left: -56px;
+
+      .tartLogo {
+        margin-bottom: 80px;
+        color: $black;
+        font-size: 38px;
+        font-weight: 900;
+      }
+
+      .extentionNavButtonWrapper {
+        padding-inline-start: 4px;
+
+        .extentionNavButton {
+          margin: 22px 0;
+          color: grey;
+          font-size: 22px;
+          font-weight: 600;
+
+          &:hover {
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}

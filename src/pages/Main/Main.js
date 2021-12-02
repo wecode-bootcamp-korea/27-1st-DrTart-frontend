@@ -1,9 +1,11 @@
 import React from 'react';
+import ImageSlide from '../ProductList/ImageSlide/ImageSlide';
 
 export default function Main() {
   return (
     <div>
-      <i class="fab fa-react" />
+      <i className="fab fa-react" />
+      <ImageSlide />
     </div>
   );
 }
