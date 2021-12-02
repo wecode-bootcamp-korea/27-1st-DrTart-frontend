@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import ProductListNav from './ProductListNav/ProductListNav';
-import Product from './Product/Product';
+
+import ProductsMain from './ProductsMain/ProductsMain';
 import './ProductList.scss';
-import ImageSlide from './ImageSlide/ImageSlide';
 
 const ProductList = () => {
   const [isProductLoading, setIsProductLoading] = useState(true);
@@ -23,20 +24,14 @@ const ProductList = () => {
   return (
     <div className="productList">
       <ProductListNav />
-      <ImageSlide />
-      <div className="productContentsWrapper">
-        <div className="productListHead">현재 판매하는 제품</div>
-        <div className="productListContainer">
-          {!isProductLoading &&
-            productsList.map(product => (
-              <Product
-                key={product.id}
-                productName={product.korean_name}
-                productPrice={product.price}
-              />
-            ))}
-        </div>
-      </div>
+      {!isProductLoading && (
+        <Routes>
+          <Route
+            path="/"
+            element={<ProductsMain productsList={productsList} />}
+          />
+        </Routes>
+      )}
     </div>
   );
 };
