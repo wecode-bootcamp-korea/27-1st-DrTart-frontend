@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
-import './Signup.scss';
+import React, { useState } from 'react';
 import TERMS_DATA from './SignupData';
+import './Signup.scss';
 
 export default function Signup() {
   const [memberInput, setMemberInput] = useState({
@@ -16,42 +16,27 @@ export default function Signup() {
   const [addressValid, setAddressValid] = useState(false);
   const [checkedList, setCheckedList] = useState([]);
 
-  //전체 체크
-  const onCheckedAll = useCallback(checked => {
-    if (checked) {
-      const checkedListArray = [];
+  const { email, password, passwordRe, address, isVegan } = memberInput;
 
-      TERMS_DATA.forEach(term => checkedListArray.push(term.id));
-      setCheckedList(checkedListArray);
-    } else {
-      setCheckedList([]);
-    }
-  }, []);
+  const onCheckedAll = checked => {
+    const newCheckedList = checked ? TERMS_DATA.map(term => term.id) : [];
+    setCheckedList(newCheckedList);
+  };
 
-  //개별 체크
-  const onCheckedElement = useCallback(
-    (checked, termId) => {
-      if (checked) {
-        setCheckedList([...checkedList, termId]);
-      } else {
-        setCheckedList(checkedList.filter(el => el !== termId));
-      }
-    },
-    [checkedList]
-  );
-
-  const { email, password, passwordRe, address } = memberInput;
+  const onCheckedElement = (checked, termId) => {
+    checked
+      ? setCheckedList([...checkedList, termId])
+      : setCheckedList(checkedList.filter(el => el !== termId));
+  };
 
   function handleMemberInput(e) {
     const { name, value } = e.target;
-    if (name === 'isVegan') {
-      setMemberInput({ ...memberInput, isVegan: e.target.checked });
-    } else {
-      setMemberInput({ ...memberInput, [name]: value });
-    }
+    name === 'isVegan'
+      ? setMemberInput({ ...memberInput, isVegan: e.target.checked })
+      : setMemberInput({ ...memberInput, [name]: value });
   }
 
-  function emailValidBlur(e) {
+  function validateEmail(e) {
     const value = e.target.value;
     if (!value) {
       setEmailValid(true);
@@ -62,7 +47,7 @@ export default function Signup() {
     }
   }
 
-  function passwordValidBlur(e) {
+  function validatePassword(e) {
     const value = e.target.value;
     if (value.length < 10 || value.length > 20) {
       setPasswordValid(true);
@@ -71,42 +56,32 @@ export default function Signup() {
     }
   }
 
-  function passwordReValidBlur(e) {
+  function validatePasswordRe(e) {
     const value = e.target.value;
-    if (value !== memberInput.password) {
-      setPasswordReValid(true);
-    } else {
-      setPasswordReValid(false);
-    }
+    value !== memberInput.password
+      ? setPasswordReValid(true)
+      : setPasswordReValid(false);
   }
 
-  function addressValidBlur(e) {
+  function validateAddress(e) {
     const value = e.target.value;
-    return !value ? setAddressValid(true) : setAddressValid(false);
+    !value ? setAddressValid(true) : setAddressValid(false);
   }
 
-  // function submit() {
-  //   if (!emailValid && !passwordValid && !passwordReValid && isVegan !== null) {
-  //     console.log('완료');
-  //   } else {
-  //     console.log('다시');
-  //   }
-  // }
-  const isSameLength = checkedList.length === TERMS_DATA.length ? true : false;
+  const isSameLength = checkedList.length === TERMS_DATA.length;
+
   return (
     <div className="signupWrap">
-      <div className="registerStep">
-        <ul>
-          <li>01 정보입력</li>
-          <li>02 가입완료</li>
-        </ul>
-      </div>
+      <ul className="registerStep">
+        <li className="stepItem">01 정보입력</li>
+        <li className="stepItem">02 가입완료</li>
+      </ul>
       <h2 className="signupTitle">회원가입</h2>
       <div className="section">
         <div className="joinTerms">
-          <h3>이용약관 동의</h3>
+          <h3 className="termsTitle">이용약관 동의</h3>
           <div className="termsBox">
-            <p>
+            <p className="termsContent">
               회원가입 및 정상적인 서비스 이용을 위해
               <br />
               아래 약관을 읽어보시고, 동의 여부를 결정해 주세요.
@@ -114,24 +89,26 @@ export default function Signup() {
               필수 약관에 동의하셔야 회원가입이 가능합니다.
             </p>
           </div>
-          <input
-            type="checkbox"
-            id="allChk"
-            className="allCheck"
-            onChange={e => onCheckedAll(e.target.checked)}
-            checked={checkedList.length === 0 ? false : isSameLength}
-          />
-          <label for="allChk" className="termsAllCheck">
+          <label
+            className={`blockCheckBox ${
+              checkedList.length === 5 ? 'checkActive' : ''
+            }`}
+          >
+            <input
+              type="checkbox"
+              className="allCheck"
+              onChange={e => onCheckedAll(e.target.checked)}
+              checked={checkedList.length === 0 ? false : isSameLength}
+            />
             <i class="fas fa-check" /> &nbsp;필수 항목 및 선택 항목 모두
             동의합니다.
           </label>
           <div className="termsCheckWrap">
-            <ul>
+            <ul className="termsCheckList">
               {TERMS_DATA.map(term => {
                 return (
                   <li key={term.id}>
                     <input
-                      key={term.id}
                       type="checkbox"
                       onChange={e =>
                         onCheckedElement(e.target.checked, term.id)
@@ -151,17 +128,19 @@ export default function Signup() {
         <form onChange={handleMemberInput}>
           <ul className="formWrap">
             <li>
-              <h3>회원정보 입력</h3>
+              <h3 className="formTitle">회원정보 입력</h3>
             </li>
             <li>
               <div className="email">
                 <input
                   type="email"
-                  className={`email ${emailValid ? 'validBorder' : null}`}
+                  className={`formInput email ${
+                    emailValid ? 'validBorder' : ''
+                  }`}
                   name="email"
                   placeholder="이메일"
                   value={email}
-                  onBlur={emailValidBlur}
+                  onBlur={validateEmail}
                 />
               </div>
               <button type="button" className="emailValidBtn">
@@ -177,10 +156,12 @@ export default function Signup() {
               <input
                 type="password"
                 name="password"
-                className={`password ${passwordValid ? 'validBorder' : null}`}
+                className={`formInput password ${
+                  passwordValid ? 'validBorder' : null
+                }`}
                 placeholder="패스워드 : 영문/숫자 조합으로 10~20자 이내"
                 value={password}
-                onBlur={passwordValidBlur}
+                onBlur={validatePassword}
               />
             </li>
             {passwordValid && (
@@ -194,12 +175,12 @@ export default function Signup() {
               <input
                 type="password"
                 name="passwordRe"
-                className={`passwordRe ${
+                className={`formInput passwordRe ${
                   passwordReValid ? 'validBorder' : null
                 }`}
                 placeholder="패스워드를 다시 입력해 주세요."
                 value={passwordRe}
-                onBlur={passwordReValidBlur}
+                onBlur={validatePasswordRe}
               />
             </li>
             {passwordReValid && (
@@ -213,10 +194,12 @@ export default function Signup() {
               <input
                 type="text"
                 name="address"
-                className={`address ${addressValid ? 'validBorder' : null}`}
+                className={`formInput address ${
+                  addressValid ? 'validBorder' : null
+                }`}
                 placeholder="주소를 입력해주세요."
                 value={address}
-                onBlur={addressValidBlur}
+                onBlur={validateAddress}
               />
             </li>
             {addressValid && (
@@ -225,13 +208,14 @@ export default function Signup() {
               </li>
             )}
             <li>
-              <input
-                type="checkbox"
-                name="isVegan"
-                id="veganCheck"
-                className="veganCheckBox"
-              />
-              <label className="veganBtn" for="veganCheck">
+              <label
+                className={`blockCheckBox ${isVegan ? 'checkActive' : ''}`}
+              >
+                <input
+                  type="checkbox"
+                  name="isVegan"
+                  className="veganCheckBox"
+                />
                 <i class="fas fa-check" /> &nbsp;비건이시라면 체크해주세요!
               </label>
             </li>
