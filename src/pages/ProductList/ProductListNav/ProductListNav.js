@@ -1,24 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import ProductListMenu from './ProductListMenu/ProductListMenu';
 import './ProductListNav.scss';
 
 function ProductListNav() {
+  const [isProductNavLoading, setIsProductNavLoading] = useState(false);
+  const [productNavData, setProductNavData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      setIsProductNavLoading(true);
+      await productNavFetchData();
+      setIsProductNavLoading(false);
+    })();
+  }, []);
+
+  const productNavFetchData = async () => {
+    const data = await fetch('/data/product_nav_data.json');
+    const res = await data.json();
+    setProductNavData(res);
+  };
+
   return (
     <nav className="productListNav">
-      <h1 className="productListNavHead">제품</h1>
-      <ul className="productListMenuContainer">
-        <li className="productListMenu">
-          <button className="menuButton">모든 제품</button>
-        </li>
-        <li className="productListMenu">
-          <button className="menuButton  menuDropDown">디저트</button>
-          <ul className="dropDownList">
-            <li className="dropDownElement">타르트</li>
-            <li className="dropDownElement">케이크</li>
-            <li className="dropDownElement">마카롱</li>
-            <li className="dropDownElement">쿠키</li>
-          </ul>
-        </li>
-      </ul>
+      <div className="productListNavContainer">
+        <h1 className="productListNavHead">제품</h1>
+        <ul className="productListMenuContainer">
+          <ProductListMenu list_name="모든 제품" />
+          {!isProductNavLoading &&
+            productNavData.map(({ id, list_name, small_category }) => (
+              <ProductListMenu
+                key={id}
+                list_name={list_name}
+                small_category={small_category}
+              />
+            ))}
+        </ul>
+      </div>
     </nav>
   );
 }
