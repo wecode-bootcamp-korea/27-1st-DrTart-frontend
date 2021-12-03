@@ -27,11 +27,11 @@ function ProductListNav() {
         <ul className="productListMenuContainer">
           <ProductListMenu list_name="모든 제품" />
           {!isProductNavLoading &&
-            productNavData.map(({ id, list_name, small_category }) => (
+            productNavData.map(({ id, name, category }) => (
               <ProductListMenu
                 key={id}
-                list_name={list_name}
-                small_category={small_category}
+                list_name={name}
+                small_category={category}
               />
             ))}
         </ul>

@@ -16,7 +16,7 @@
 
   .dropDownList {
     position: absolute;
-    top: 43px;
+    top: 47px;
     left: -20px;
     max-height: 0%;
     min-width: 200%;
@@ -27,12 +27,15 @@
 
     .dropDownElement {
       padding: 15px 20px;
-      font-size: 14px;
-      font-weight: 500;
-      color: $grey;
 
-      &:hover {
-        color: $black;
+      .dropDownLink {
+        font-size: 14px;
+        color: $grey;
+        font-weight: 500;
+
+        &:hover {
+          color: $black;
+        }
       }
     }
   }

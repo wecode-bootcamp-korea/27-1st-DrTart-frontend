@@ -1,22 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProductListMenu.scss';
 
-const ProductListMenu = ({ list_name, small_category }) => {
+const ProductListMenu = ({ mainCategory, subCategory }) => {
   return (
     <li className="productListMenu">
-      {!!small_category ? (
+      {!!subCategory ? (
         <>
-          <button className="menuButton  menuDropDown">{list_name}</button>
+          <button className="menuButton  menuDropDown">{mainCategory}</button>
           <ul className="dropDownList">
-            {small_category.map(({ id, name }) => (
+            {subCategory.map(({ id, name }) => (
               <li className="dropDownElement" key={id}>
-                {name}
+                <Link
+                  className="dropDownLink"
+                  to={`/product_list/${mainCategory}/${subCategory}`}
+                >
+                  {name}
+                </Link>
               </li>
             ))}
           </ul>
         </>
       ) : (
-        <button className="menuButton">{list_name}</button>
+        <button className="menuButton">{mainCategory}</button>
       )}
     </li>
   );

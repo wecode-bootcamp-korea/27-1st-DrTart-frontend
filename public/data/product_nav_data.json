@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "list_name": "디저트",
-    "small_category": [
+    "name": "디저트",
+    "category": [
       { "id": 0, "name": "타르트" },
       { "id": 1, "name": "케이트" },
       { "id": 2, "name": "마카롱" },

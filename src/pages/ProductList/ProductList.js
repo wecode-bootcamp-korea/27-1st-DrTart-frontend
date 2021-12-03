@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ProductListNav from './ProductListNav/ProductListNav';
 import ProductsMain from './ProductsMain/ProductsMain';
+import SortedProducts from './SortedProducts/SortedProducts';
 
 const ProductList = () => {
   const [isProductLoading, setIsProductLoading] = useState(false);
@@ -27,6 +28,16 @@ const ProductList = () => {
           <Route
             path="/"
             element={<ProductsMain productsList={productsList} />}
+          />
+          <Route
+            path={`/${'desert'}/${'tart'}`}
+            element={
+              <SortedProducts
+                name="desert"
+                category="tart"
+                productsList={productsList}
+              />
+            }
           />
         </Routes>
       )}
