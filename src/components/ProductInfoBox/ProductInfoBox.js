@@ -4,26 +4,21 @@ import NumBtn from '../ProductInfoBox/NumBtn/NumBtn';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router';
 
-const ProductInfoBox = ({ productName, productSubTag, originPrice }) => {
+const ProductInfoBox = ({ koreanName, category, price }) => {
   const [numValue, setNumValue] = useState(1);
 
-  const btnTitle = '바로구매';
-
   const minusOne = () => {
-    if (numValue === 1) {
-      setNumValue(1);
-    } else {
-      setNumValue(numValue - 1);
-    }
+    numValue === 1 ? setNumValue(1) : setNumValue(numValue - 1);
   };
 
   const plusOne = () => {
     setNumValue(numValue + 1);
   };
+
   const navigate = useNavigate();
 
   const btnOnClick = () => {
-    navigate('#');
+    navigate('./');
   };
 
   return (
@@ -32,10 +27,10 @@ const ProductInfoBox = ({ productName, productSubTag, originPrice }) => {
         <div className="stickerBest">BEST</div>
         <div className="stickerVegan">VEGAN</div>
       </div>
-      <h3 className="productName">{productName}</h3>
-      <p className="infoTag">{productSubTag}</p>
+      <h3 className="productName">{koreanName}</h3>
+      <p className="infoTag">{category}</p>
       <div className="price">
-        <p className="originPrice">{originPrice.toLocaleString()}</p>
+        <p className="originPrice">{price.toLocaleString()}</p>
       </div>
       <ul className="tabBar">
         <li className="infoToBuy">구매정보</li>
@@ -50,12 +45,11 @@ const ProductInfoBox = ({ productName, productSubTag, originPrice }) => {
       </div>
       <div className="totalPriceInfo">
         <p className="totalPriceTitle">총 구매금액</p>
-        <p className="totalPrice">
-          {(originPrice * numValue).toLocaleString()}
-        </p>
+        <p className="totalPrice">{(price * numValue).toLocaleString()}</p>
       </div>
-      <Button btnTitle={btnTitle} btnOnClick={btnOnClick} />
+      <Button btnOnClick={btnOnClick}>바로구매</Button>
     </div>
   );
 };
+
 export default ProductInfoBox;

@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../ModalBuyNow/ModalBuyNow.scss';
 import ProductInfoBox from '../../../components/ProductInfoBox/ProductInfoBox';
 
-const ModalBuyNow = ({ isPopModal, setIsPopModal }) => {
-  const imgUrl = 'images/x-Mas.jpg';
-  const originPrice = 28000;
-  const productName = '닥터 타르트';
-  const productSubTag = '#가심비갑';
+const ModalBuyNow = ({ setIsPopModal }) => {
+  const [dataOfBuyNow, setDataOfBuyNow] = useState([]);
 
   const clickRemoveModal = () => {
-    setIsPopModal(!isPopModal);
+    setIsPopModal(prev => !prev);
   };
+
+  useEffect(() => {
+    fetch('http://localhost:3000/data/productData.json', {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data => {
+        setDataOfBuyNow(data);
+      });
+  }, []);
 
   return (
     <div className="popUp">
@@ -19,18 +26,28 @@ const ModalBuyNow = ({ isPopModal, setIsPopModal }) => {
       </button>
       <div className="inner">
         <div className="imageBox">
-          <img className="imageMain" src={imgUrl} alt="product" />
+          <img className="imageMain" src="images/x-Mas.jpg" alt="product" />
           <div className="smallImagesLine">
             <div className="smallImageBox">
-              <img className="smallImage" src={imgUrl} alt="product to small" />
+              <img
+                className="smallImage"
+                src="images/x-Mas.jpg"
+                alt="product to small"
+              />
             </div>
           </div>
         </div>
-        <ProductInfoBox
-          productName={productName}
-          productSubTag={productSubTag}
-          originPrice={originPrice}
-        />
+
+        {dataOfBuyNow
+          .filter(e => e.id === 0)
+          .map(product => (
+            <ProductInfoBox
+              koreanName={product.korean_name}
+              category={product.category}
+              price={product.price}
+              key={product.id}
+            />
+          ))}
       </div>
     </div>
   );
