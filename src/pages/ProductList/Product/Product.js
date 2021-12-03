@@ -31,10 +31,10 @@ const Product = ({ productName, productPrice }) => {
             <div className="productButtonContainer">
               <button className="productBuyButton">구매하기</button>
               <button className="productCartButton">
-                <i class="fas fa-shopping-cart" />
+                <i className="fas fa-shopping-cart" />
               </button>
               <button className="productLikeButton">
-                <i class="far fa-heart" />
+                <i className="far fa-heart" />
               </button>
             </div>
           </div>

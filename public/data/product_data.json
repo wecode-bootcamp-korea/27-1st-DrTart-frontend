@@ -1,0 +1,68 @@
+[
+  {
+    "id": 0,
+    "korean_name": "dummy1",
+    "price": "1000",
+    "thumbnail_image_url": "",
+    "vegan_or_not": false,
+    "sugar_level": 1,
+    "category": "desert",
+    "description": "",
+    "url": ""
+  },
+  {
+    "id": 1,
+    "korean_name": "dummy2",
+    "price": "1000",
+    "thumbnail_image_url": "",
+    "vegan_or_not": false,
+    "sugar_level": 1,
+    "category": "desert",
+    "description": "",
+    "url": ""
+  },
+  {
+    "id": 2,
+    "korean_name": "dummy3",
+    "price": "1000",
+    "thumbnail_image_url": "",
+    "vegan_or_not": false,
+    "sugar_level": 1,
+    "category": "desert",
+    "description": "",
+    "url": ""
+  },
+  {
+    "id": 3,
+    "korean_name": "dummy4",
+    "price": "1000",
+    "thumbnail_image_url": "",
+    "vegan_or_not": false,
+    "sugar_level": 1,
+    "category": "desert",
+    "description": "",
+    "url": ""
+  },
+  {
+    "id": 4,
+    "korean_name": "dummy5",
+    "price": "1000",
+    "thumbnail_image_url": "",
+    "vegan_or_not": false,
+    "sugar_level": 1,
+    "category": "desert",
+    "description": "",
+    "url": ""
+  },
+  {
+    "id": 5,
+    "korean_name": "dummy6",
+    "price": "1000",
+    "thumbnail_image_url": "",
+    "vegan_or_not": false,
+    "sugar_level": 1,
+    "category": "desert",
+    "description": "",
+    "url": ""
+  }
+]
