@@ -6,7 +6,7 @@
     "thumbnail_image_url": "",
     "vegan_or_not": false,
     "sugar_level": 1,
-    "cartegory": "desert",
+    "category": "desert",
     "description": "",
     "url": ""
   },
@@ -17,7 +17,7 @@
     "thumbnail_image_url": "",
     "vegan_or_not": false,
     "sugar_level": 1,
-    "cartegory": "desert",
+    "category": "desert",
     "description": "",
     "url": ""
   },
@@ -28,7 +28,7 @@
     "thumbnail_image_url": "",
     "vegan_or_not": false,
     "sugar_level": 1,
-    "cartegory": "desert",
+    "category": "desert",
     "description": "",
     "url": ""
   },
@@ -39,7 +39,7 @@
     "thumbnail_image_url": "",
     "vegan_or_not": false,
     "sugar_level": 1,
-    "cartegory": "desert",
+    "category": "desert",
     "description": "",
     "url": ""
   },
@@ -50,7 +50,7 @@
     "thumbnail_image_url": "",
     "vegan_or_not": false,
     "sugar_level": 1,
-    "cartegory": "desert",
+    "category": "desert",
     "description": "",
     "url": ""
   },
@@ -61,7 +61,7 @@
     "thumbnail_image_url": "",
     "vegan_or_not": false,
     "sugar_level": 1,
-    "cartegory": "desert",
+    "category": "desert",
     "description": "",
     "url": ""
   }
