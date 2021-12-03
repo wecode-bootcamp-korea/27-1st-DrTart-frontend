@@ -12,11 +12,11 @@ const ProductList = () => {
     const data = await fetch('/data/product_data.json');
     const res = await data.json();
     setProductsList(res);
+    setIsProductLoading(false);
   };
 
   useEffect(() => {
     fetchData();
-    setIsProductLoading(false);
   }, []);
 
   return (
