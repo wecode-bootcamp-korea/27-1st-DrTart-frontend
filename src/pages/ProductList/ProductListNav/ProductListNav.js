@@ -22,18 +22,20 @@ function ProductListNav() {
 
   return (
     <nav className="productListNav">
-      <h1 className="productListNavHead">제품</h1>
-      <ul className="productListMenuContainer">
-        <ProductListMenu list_name="모든 제품" />
-        {!isProductNavLoading &&
-          productNavData.map(({ id, list_name, small_category }) => (
-            <ProductListMenu
-              key={id}
-              list_name={list_name}
-              small_category={small_category}
-            />
-          ))}
-      </ul>
+      <div className="productListNavContainer">
+        <h1 className="productListNavHead">제품</h1>
+        <ul className="productListMenuContainer">
+          <ProductListMenu list_name="모든 제품" />
+          {!isProductNavLoading &&
+            productNavData.map(({ id, list_name, small_category }) => (
+              <ProductListMenu
+                key={id}
+                list_name={list_name}
+                small_category={small_category}
+              />
+            ))}
+        </ul>
+      </div>
     </nav>
   );
 }
