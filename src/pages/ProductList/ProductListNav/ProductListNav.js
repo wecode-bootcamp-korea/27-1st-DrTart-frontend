@@ -9,12 +9,16 @@ function ProductListNav() {
   useEffect(() => {
     (async () => {
       setIsProductNavLoading(true);
-      const data = await fetch('/data/product_nav_data.json');
-      const res = await data.json();
-      setProductNavData(res);
+      await productNavFetchData();
       setIsProductNavLoading(false);
     })();
   }, []);
+
+  const productNavFetchData = async () => {
+    const data = await fetch('/data/product_nav_data.json');
+    const res = await data.json();
+    setProductNavData(res);
+  };
 
   return (
     <nav className="productListNav">
