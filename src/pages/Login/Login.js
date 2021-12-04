@@ -34,8 +34,20 @@ function Login() {
     validateId() && validatePw() ? navigate('/product_list') : alertEachValid();
   };
 
-  const goToJoin = () => {
-    navigate('/signup');
+  const goToProduct = () => {
+    fetch('http://10.58.6.3:8000/users/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: idInputRef.current.value,
+        password: pwInputRef.current.value,
+      }),
+    })
+      .then(response => response.json())
+      .then(result =>
+        result.message === 'SUCCESS'
+          ? navigate('/product_list')
+          : console.log('안됨')
+      );
   };
 
   return (
@@ -63,10 +75,10 @@ function Login() {
           <span className="findPw">비밀번호 찾기</span>
         </div>
         <div className="btnWrap">
-          <button className="loginBtn" type="button" onClick={goToMain}>
+          <button className="loginBtn" type="button" onClick={goToProduct}>
             로그인
           </button>
-          <button className="joinBtn" type="button" onClick={goToJoin}>
+          <button className="joinBtn" type="button" onClick={goToMain}>
             회원가입
           </button>
         </div>
