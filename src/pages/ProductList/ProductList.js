@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import ProductListNav from './ProductListNav/ProductListNav';
 import ProductsMain from './ProductsMain/ProductsMain';
 import SortedProducts from './SortedProducts/SortedProducts';
+import './ProductList.scss';
 
 const ProductList = props => {
   const [isProductLoading, setIsProductLoading] = useState(false);

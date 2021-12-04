@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Product from '../Product/Product';
-import { TRANSELATE } from '../translate';
+import { TRANSELATE } from '../Transelate';
 import './SortedProducts.scss';
 
 const SortedProducts = ({ productsList }) => {

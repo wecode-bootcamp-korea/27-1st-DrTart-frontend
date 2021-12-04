@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "korean_name": "dummy1",
+    "korean_name": "Tart 1",
     "price": 1000,
     "thumbnail_image_url": "",
     "vegan_or_not": false,
@@ -12,7 +12,7 @@
   },
   {
     "id": 1,
-    "korean_name": "dummy2",
+    "korean_name": "Cake 1",
     "price": 2000,
     "thumbnail_image_url": "",
     "vegan_or_not": false,
@@ -23,7 +23,7 @@
   },
   {
     "id": 2,
-    "korean_name": "dummy3",
+    "korean_name": "Cookie 1",
     "price": 3000,
     "thumbnail_image_url": "",
     "vegan_or_not": false,
@@ -34,7 +34,7 @@
   },
   {
     "id": 3,
-    "korean_name": "dummy4",
+    "korean_name": "Makaron 1",
     "price": 4000,
     "thumbnail_image_url": "",
     "vegan_or_not": false,
@@ -45,7 +45,7 @@
   },
   {
     "id": 4,
-    "korean_name": "dummy5",
+    "korean_name": "Cookie 2",
     "price": 5000,
     "thumbnail_image_url": "",
     "vegan_or_not": false,
@@ -56,7 +56,7 @@
   },
   {
     "id": 5,
-    "korean_name": "dummy6",
+    "korean_name": "Tart 2",
     "price": 6000,
     "thumbnail_image_url": "",
     "vegan_or_not": false,

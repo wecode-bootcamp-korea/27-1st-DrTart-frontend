@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './ProductListMenu.scss';
-import { TRANSELATE } from '../../translate';
+import { TRANSELATE } from '../../Transelate';
 
 const ProductListMenu = ({ mainCategory, subCategory }) => {
   return (
