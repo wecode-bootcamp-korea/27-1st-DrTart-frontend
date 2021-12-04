@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DETAIL_DATA } from './ProductDetailData';
 import SlickThumbnail from './SlickThumbnail';
 import ProductListNav from '../ProductList/ProductListNav/ProductListNav';
@@ -11,16 +11,29 @@ export default function ProductDetail() {
     setCurrentSlideId(slideId);
   };
 
+  useEffect(() => {
+    function countPlus() {
+      setTimeout(() => {
+        setCurrentSlideId(currentSlideId + 1);
+        if (currentSlideId === 5) {
+          setCurrentSlideId(0);
+        }
+      }, 5000);
+    }
+    countPlus();
+    return () => clearTimeout(countPlus);
+  }, [currentSlideId]);
+
   return (
     <>
       <ProductListNav />
       <div className="slideAndInfoWrap">
         <div className="slide">
-          <div className="imgSlide">
-            {DETAIL_DATA.filter(({ id }) => id === currentSlideId).map(el => (
-              <img key={el.id} src={el.imageUrl} alt={el.id} className="img" />
-            ))}
-          </div>
+          {DETAIL_DATA.filter(({ id }) => id === currentSlideId).map(el => (
+            <div className="imgSlide" key={el.id}>
+              <img src={el.imageUrl} alt={el.id} className="img" />
+            </div>
+          ))}
           <ul className="thumbnailWrap">
             {DETAIL_DATA.map(el => (
               <SlickThumbnail

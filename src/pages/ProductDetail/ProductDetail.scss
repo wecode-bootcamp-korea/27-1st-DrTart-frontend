@@ -1,5 +1,14 @@
 @import '../../styles/variables.scss';
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .slideAndInfoWrap {
   display: flex;
   height: 800px;
@@ -17,6 +26,7 @@
     .imgSlide {
       width: 100%;
       height: 100%;
+      animation: 0.7s ease-in-out fadeIn;
     }
   }
 
