@@ -5,20 +5,22 @@ import ProductsMain from './ProductsMain/ProductsMain';
 import SortedProducts from './SortedProducts/SortedProducts';
 import './ProductList.scss';
 
-const ProductList = props => {
+const ProductList = () => {
   const [isProductLoading, setIsProductLoading] = useState(false);
   const [productsList, setProductsList] = useState([]);
 
   const fetchData = async () => {
-    setIsProductLoading(true);
     const data = await fetch('/data/product_data.json');
     const res = await data.json();
     setProductsList(res);
-    setIsProductLoading(false);
   };
 
   useEffect(() => {
-    fetchData();
+    (async () => {
+      setIsProductLoading(true);
+      await fetchData();
+      setIsProductLoading(false);
+    })();
   }, []);
 
   return (
@@ -29,6 +31,10 @@ const ProductList = props => {
           <Route
             path="/"
             element={<ProductsMain productsList={productsList} />}
+          />
+          <Route
+            path="/:mainCategory"
+            element={<SortedProducts productsList={productsList} />}
           />
           <Route
             path="/:mainCategory/:subCategory"

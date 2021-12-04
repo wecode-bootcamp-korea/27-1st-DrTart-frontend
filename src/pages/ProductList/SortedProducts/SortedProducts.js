@@ -10,18 +10,23 @@ const SortedProducts = ({ productsList }) => {
   return (
     <div className="sortedProducts">
       <div className="sortedProductsHead">
-        <div className="sortedProductsTitle">{`${TRANSELATE[mainCategory]} > ${TRANSELATE[subCategory]}`}</div>
+        <div className="sortedProductsTitle">
+          {`${TRANSELATE[mainCategory]}`}
+          {!!subCategory && ` > ${TRANSELATE[subCategory]}`}
+        </div>
       </div>
       <div className="sortedProductsContainer">
-        {productsList
-          .filter(
-            product =>
-              product.category.name === mainCategory &&
-              product.category.category === subCategory
-          )
-          .map(({ id, korean_name, price }) => (
-            <Product key={id} productName={korean_name} productPrice={price} />
-          ))}
+        {(mainCategory !== 'all_product'
+          ? productsList.filter(product =>
+              !!subCategory
+                ? product.category.name === mainCategory &&
+                  product.category.category === subCategory
+                : product.category.name === mainCategory
+            )
+          : productsList
+        ).map(({ id, korean_name, price }) => (
+          <Product key={id} productName={korean_name} productPrice={price} />
+        ))}
       </div>
     </div>
   );
