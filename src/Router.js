@@ -7,7 +7,7 @@ import ProductList from './pages/ProductList/ProductList';
 import Signup from './pages/Signup/Signup';
 import Nav from './components/Nav/Nav';
 import Footer from './components/Footer/Footer';
-import './styles/routingBody.scss';
+import './styles/router.scss';
 
 const Router = () => {
   return (

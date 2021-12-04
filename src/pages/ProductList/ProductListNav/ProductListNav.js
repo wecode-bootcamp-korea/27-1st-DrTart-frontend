@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProductListMenu from './ProductListMenu/ProductListMenu';
 import './ProductListNav.scss';
 
@@ -23,9 +24,11 @@ const ProductListNav = () => {
   return (
     <nav className="productListNav">
       <div className="productListNavContainer">
-        <h1 className="productListNavHead">제품</h1>
+        <Link to="/product_list" className="productListNavHead">
+          제품
+        </Link>
         <ul className="productListMenuContainer">
-          <ProductListMenu mainCategory="모든 제품" />
+          <ProductListMenu mainCategory="all_product" />
           {!isProductNavLoading &&
             productNavData.map(({ id, name, category }) => (
               <ProductListMenu
