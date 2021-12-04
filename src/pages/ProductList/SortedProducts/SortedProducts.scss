@@ -1,1 +1,23 @@
 @import '../../../styles/variables.scss';
+
+.sortedProducts {
+  @include flexCenter(column, center);
+  padding: 0 60px;
+
+  .sortedProductsHead {
+    @include flexCenter(row, flex-start);
+    width: 100%;
+    padding: 50px 0px;
+
+    .sortedProductsTitle {
+      color: $black;
+      font-size: 22px;
+      font-weight: 500;
+    }
+  }
+
+  .sortedProductsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

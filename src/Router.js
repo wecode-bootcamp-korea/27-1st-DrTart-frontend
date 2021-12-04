@@ -6,6 +6,7 @@ import Product from './pages/ProductList/Product/Product';
 import ProductList from './pages/ProductList/ProductList';
 import Signup from './pages/Signup/Signup';
 import Nav from './components/Nav/Nav';
+import Footer from './components/Footer/Footer';
 import './styles/routingBody.scss';
 
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
           <Route path="/product" element={<Product />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );

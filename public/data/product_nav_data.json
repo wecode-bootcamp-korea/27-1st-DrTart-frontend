@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "name": "디저트",
+    "name": "dessert",
     "category": [
-      { "id": 0, "name": "타르트" },
-      { "id": 1, "name": "케이트" },
-      { "id": 2, "name": "마카롱" },
-      { "id": 3, "name": "쿠키" }
+      { "id": 0, "name": "tart" },
+      { "id": 1, "name": "cake" },
+      { "id": 2, "name": "makaron" },
+      { "id": 3, "name": "cookie" }
     ]
   }
 ]

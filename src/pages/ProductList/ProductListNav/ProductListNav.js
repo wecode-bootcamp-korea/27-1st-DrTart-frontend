@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProductListMenu from './ProductListMenu/ProductListMenu';
 import './ProductListNav.scss';
 
-function ProductListNav() {
+const ProductListNav = () => {
   const [isProductNavLoading, setIsProductNavLoading] = useState(false);
   const [productNavData, setProductNavData] = useState([]);
 
@@ -25,19 +25,19 @@ function ProductListNav() {
       <div className="productListNavContainer">
         <h1 className="productListNavHead">제품</h1>
         <ul className="productListMenuContainer">
-          <ProductListMenu list_name="모든 제품" />
+          <ProductListMenu mainCategory="모든 제품" />
           {!isProductNavLoading &&
             productNavData.map(({ id, name, category }) => (
               <ProductListMenu
                 key={id}
-                list_name={name}
-                small_category={category}
+                mainCategory={name}
+                subCategory={category}
               />
             ))}
         </ul>
       </div>
     </nav>
   );
-}
+};
 
 export default ProductListNav;

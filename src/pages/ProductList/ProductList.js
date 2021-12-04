@@ -4,7 +4,7 @@ import ProductListNav from './ProductListNav/ProductListNav';
 import ProductsMain from './ProductsMain/ProductsMain';
 import SortedProducts from './SortedProducts/SortedProducts';
 
-const ProductList = () => {
+const ProductList = props => {
   const [isProductLoading, setIsProductLoading] = useState(false);
   const [productsList, setProductsList] = useState([]);
 
@@ -30,14 +30,8 @@ const ProductList = () => {
             element={<ProductsMain productsList={productsList} />}
           />
           <Route
-            path={`/${'desert'}/${'tart'}`}
-            element={
-              <SortedProducts
-                name="desert"
-                category="tart"
-                productsList={productsList}
-              />
-            }
+            path="/:mainCategory/:subCategory"
+            element={<SortedProducts productsList={productsList} />}
           />
         </Routes>
       )}
