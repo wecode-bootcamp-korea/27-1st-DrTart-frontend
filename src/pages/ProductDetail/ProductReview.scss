@@ -1,0 +1,40 @@
+@import '../../styles/variables.scss';
+
+.detailWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 20rem;
+
+  .detailMenu {
+    display: flex;
+
+    li {
+      margin: 10px;
+    }
+  }
+
+  .reviewInputBox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 100px 0px;
+
+    .reviewInput {
+      width: 100%;
+      height: 100px;
+      padding: 15px;
+      resize: none;
+      border: 1px solid $lightGrey;
+      margin-bottom: 10px;
+    }
+
+    .submitBtn {
+      border: 1px solid $black;
+      padding: 10px;
+      background-color: $black;
+      color: $white;
+      font-weight: 600;
+    }
+  }
+}
