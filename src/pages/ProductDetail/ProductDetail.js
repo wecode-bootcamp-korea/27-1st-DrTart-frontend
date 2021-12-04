@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { DETAIL_DATA } from './ProductDetailData';
 import SlickThumbnail from './SlickThumbnail';
 import ProductListNav from '../ProductList/ProductListNav/ProductListNav';
-import ProductReview from './ProductReview';
+import ProductReview from './ProductReview/ProductReview';
 import './ProductDetail.scss';
 export default function ProductDetail() {
   const [currentSlideId, setCurrentSlideId] = useState(0);

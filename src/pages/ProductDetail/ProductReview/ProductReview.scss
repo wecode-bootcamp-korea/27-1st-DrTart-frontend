@@ -1,16 +1,23 @@
-@import '../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .detailWrap {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 20rem;
+  padding: 100px 15rem;
 
   .detailMenu {
     display: flex;
+    color: $grey;
+    font-size: 18px;
 
     li {
       margin: 10px;
+    }
+
+    :nth-child(2) {
+      color: $black;
+      border-bottom: 1px solid $black;
     }
   }
 
@@ -18,7 +25,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 100px 0px;
+    margin: 50px 0px;
 
     .reviewInput {
       width: 100%;
@@ -35,6 +42,15 @@
       background-color: $black;
       color: $white;
       font-weight: 600;
+    }
+  }
+
+  .reviewsWrap {
+    width: 100%;
+    .reviewTitle {
+      padding-bottom: 10px;
+      font-size: 20px;
+      border-bottom: 1px solid $lightGrey;
     }
   }
 }
