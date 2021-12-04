@@ -1,0 +1,152 @@
+@import '../../styles/variables.scss';
+
+.signupWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 1000px;
+  padding-top: 20px;
+  margin: 0 auto;
+
+  .blockCheckBox {
+    display: block;
+    padding: 8px 0px;
+    border: 1px solid $lightGrey;
+    color: $grey;
+    text-align: center;
+
+    &.checkActive {
+      border: 1px solid $black;
+      color: $black;
+    }
+  }
+
+  .registerStep {
+    display: flex;
+    justify-content: flex-end;
+
+    .stepItem {
+      margin-left: 20px;
+    }
+  }
+
+  .signupTitle {
+    padding: 50px 0px;
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .joinTerms {
+    margin-bottom: 20px;
+
+    .termsTitle {
+      padding: 15px 0px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .termsBox {
+      padding: 20px 0px;
+      margin: 10px 0px;
+      background-color: #f7f7f7;
+      color: $grey;
+
+      .termsContent {
+        text-align: center;
+        line-height: 20px;
+      }
+    }
+
+    .allCheck {
+      display: none;
+    }
+
+    .termsCheckWrap {
+      padding: 20px 0px;
+
+      .termsCheckList {
+        display: flex;
+        flex-direction: column;
+
+        li {
+          display: flex;
+          align-items: center;
+          margin: 0px 0px 10px 0px;
+          font-weight: 600;
+        }
+      }
+
+      .checkTip {
+        font-size: 10px;
+        color: $grey;
+      }
+    }
+  }
+
+  .formWrap {
+    display: flex;
+    flex-direction: column;
+
+    .formInput {
+      width: 100%;
+      padding: 8px 8px;
+      border: 1px solid $grey;
+      border-radius: 0px;
+    }
+
+    li {
+      width: 100%;
+      margin: 0px 0px 10px 0px;
+
+      &:nth-child(2) {
+        display: flex;
+      }
+
+      .formTitle {
+        padding: 15px 0px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .email {
+        flex-basis: 70%;
+        margin-right: 10px;
+      }
+
+      .emailValidBtn {
+        flex-basis: 30%;
+        border: 1px solid $black;
+      }
+
+      .signTip {
+        color: $grey;
+        font-size: 10px;
+      }
+
+      .validText {
+        color: red;
+        font-size: 8px;
+      }
+
+      .validBorder {
+        border: 1px solid red;
+      }
+
+      .veganCheckBox {
+        display: none;
+      }
+
+      .submitBtn {
+        width: 100%;
+        padding: 8px 0px;
+        margin-top: 40px;
+        outline: none;
+        border: 1px solid $black;
+        background-color: $black;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+  }
+}
