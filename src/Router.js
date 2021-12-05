@@ -7,6 +7,7 @@ import ProductList from './pages/ProductList/ProductList';
 import Signup from './pages/Signup/Signup';
 import Nav from './components/Nav/Nav';
 import './styles/routingBody.scss';
+import Order from './pages/Order/Order';
 
 const Router = () => {
   return (
@@ -19,6 +20,7 @@ const Router = () => {
           <Route path="/product_list/*" element={<ProductList />} />
           <Route path="/product" element={<Product />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/order" element={<Order />} />
         </Routes>
       </div>
     </BrowserRouter>

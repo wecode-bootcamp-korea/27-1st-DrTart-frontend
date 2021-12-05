@@ -12,6 +12,7 @@
 
     .progressNav {
       @include flexCenter(row, center);
+      // position: relative;
       position: absolute;
       top: 60px;
       right: 60px;
@@ -22,15 +23,23 @@
       .stepOne {
         margin-right: 20px;
         padding-bottom: 7px;
-        // position: absolute;
+        position: absolute;
+        top: 0;
+        right: 60px;
       }
       .stepTwo {
         margin-right: 20px;
         padding-bottom: 7px;
         border-bottom: 1px solid $black;
+        position: absolute;
+        top: 0;
+        right: 30px;
       }
       .stepThree {
         padding-bottom: 7px;
+        position: absolute;
+        top: 0;
+        right: 0;
       }
     }
     .pageTitle {
