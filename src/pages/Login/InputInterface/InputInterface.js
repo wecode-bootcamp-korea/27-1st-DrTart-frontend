@@ -1,18 +1,22 @@
 import React from 'react';
 import './InputInterface.scss';
 
-const InputInterface = ({ isAlertPop, placeholder, inputRef, alertWord }) => {
+const InputInterface = ({
+  isAlertPop,
+  placeholder,
+  type,
+  inputRef,
+  alertWord,
+}) => {
   return (
     <div className="inputInterface">
       <input
         className={isAlertPop ? 'alertInput' : 'loginInput'}
-        type="email"
+        type={type}
         placeholder={placeholder}
         ref={inputRef}
       />
-      {isAlertPop && (
-        <span className="alertWord">{alertWord}를 입력하세요.</span>
-      )}
+      {isAlertPop && <span className="alertWord">{alertWord}</span>}
     </div>
   );
 };
