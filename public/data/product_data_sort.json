@@ -9,7 +9,7 @@
     "category": "desert",
     "description": "",
     "url": "",
-    "up_date": "2021-02-02",
+    "created_at": "2021-02-02T13:00:28.220Z",
     "review_num": 30,
     "like_num": 20
   },
@@ -23,7 +23,7 @@
     "category": "desert",
     "description": "",
     "url": "",
-    "up_date": "2021-12-02",
+    "created_at": "2021-12-02",
     "review_num": 70,
     "like_num": 10
   },
@@ -37,7 +37,7 @@
     "category": "desert",
     "description": "",
     "url": "",
-    "up_date": "2021-08-02",
+    "created_at": "2021-08-02",
     "review_num": 2,
     "like_num": 15
   },
@@ -51,7 +51,7 @@
     "category": "desert",
     "description": "",
     "url": "",
-    "up_date": "2021-05-02",
+    "created_at": "2021-05-02",
     "review_num": 10,
     "like_num": 12
   },
@@ -65,7 +65,7 @@
     "category": "desert",
     "description": "",
     "url": "",
-    "up_date": "2021-09-02",
+    "created_at": "2021-09-02",
     "review_num": 32,
     "like_num": 20
   },
@@ -79,7 +79,7 @@
     "category": "desert",
     "description": "",
     "url": "",
-    "up_date": "2021-03-02",
+    "created_at": "2021-03-02",
     "review_num": 30,
     "like_num": 10
   }
