@@ -1,0 +1,38 @@
+@import '../../styles/variables.scss';
+
+.button {
+  min-width: 318px;
+  height: 46px;
+  margin-top: 70px;
+  padding: 0 50px;
+  border: 1px solid $black;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+
+  &::after {
+    content: '';
+    width: 0%;
+    height: 100%;
+    top: 0;
+    position: absolute;
+    left: 0;
+    transition: all 0.6s;
+    background-color: $pointPink;
+  }
+
+  &:hover {
+    color: $white;
+    border: 1px solid $pointPink;
+
+    &::after {
+      width: 100%;
+      z-index: -1;
+    }
+  }
+
+  .btnTitle {
+    padding: 0 30px;
+  }
+}

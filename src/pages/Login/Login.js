@@ -10,15 +10,18 @@ function Login() {
   const [isAlertPopPw, setIsAlertPopPw] = useState(false);
 
   const validateId = () => {
+    const idValidRegex = /^([a-z0-9_.-]+)@([da-z.-]+).([a-z.]{2,6})$/g;
     const idValue = idInputRef.current.value;
-    const isIdValid = idValue.includes('@') && idValue.length > 2;
+    const isIdValid = !!idValue.match(idValidRegex);
 
     return isIdValid;
   };
 
   const validatePw = () => {
+    const pwValidRegex =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/g;
     const pwValue = pwInputRef.current.value;
-    const isPwValid = pwValue.length > 4;
+    const isPwValid = !!pwValue.match(pwValidRegex);
 
     return isPwValid;
   };
@@ -30,11 +33,27 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const goToMain = () => {
+  const onValidation = () => {
     validateId() && validatePw() ? navigate('/product_list') : alertEachValid();
   };
 
-  const goToJoin = () => {
+  const onSignIn = () => {
+    onValidation();
+  };
+
+  // const onSignIn = () => {
+  //   fetch('http://10.58.6.3:8000/users/signin', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       email: idInputRef.current.value,
+  //       password: pwInputRef.current.value,
+  //     }),
+  //   })
+  //     .then(response => response.json())
+  //     .then(result => result.message === 'SUCCESS' && onValidation());
+  // };
+
+  const onSignUp = () => {
     navigate('/signup');
   };
 
@@ -47,15 +66,17 @@ function Login() {
             name="id"
             inputRef={idInputRef}
             placeholder="아이디 또는 이메일"
+            type="email"
             isAlertPop={isAlertPopId}
-            alertWord="아이디"
+            alertWord="아이디를 입력하세요."
           />
           <InputInterface
             name="pw"
             inputRef={pwInputRef}
             placeholder="비밀번호"
+            type="password"
             isAlertPop={isAlertPopPw}
-            alertWord="비밀번호"
+            alertWord="비밀번호를 입력하세요."
           />
         </form>
         <div className="findBtn">
@@ -63,10 +84,10 @@ function Login() {
           <span className="findPw">비밀번호 찾기</span>
         </div>
         <div className="btnWrap">
-          <button className="loginBtn" type="button" onClick={goToMain}>
+          <button className="loginBtn" type="button" onClick={onSignIn}>
             로그인
           </button>
-          <button className="joinBtn" type="button" onClick={goToJoin}>
+          <button className="joinBtn" type="button" onClick={onSignUp}>
             회원가입
           </button>
         </div>
