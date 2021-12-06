@@ -6,6 +6,7 @@ import ProductList from './pages/ProductList/ProductList';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Signup from './pages/Signup/Signup';
 import Nav from './components/Nav/Nav';
+import Order from './pages/Order/Order';
 import Footer from './components/Footer/Footer';
 import './styles/router.scss';
 
@@ -20,6 +21,7 @@ const Router = () => {
           <Route path="/product-list/*" element={<ProductList />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/order/" element={<Order />} />
         </Routes>
         <Footer />
       </div>
