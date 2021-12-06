@@ -1,22 +1,34 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import TERMS_DATA from './SignupData';
 import './Signup.scss';
 
 export default function Signup() {
   const [memberInput, setMemberInput] = useState({
+    name: '',
     email: '',
     password: '',
     passwordRe: '',
     address: '',
     isVegan: false,
   });
-  const [emailValid, setEmailValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
-  const [passwordReValid, setPasswordReValid] = useState(false);
-  const [addressValid, setAddressValid] = useState(false);
+  const { name, email, password, passwordRe, address, isVegan } = memberInput;
+  const [nameValid, setNameValid] = useState(true);
+  const [emailValid, setEmailValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
+  const [passwordReValid, setPasswordReValid] = useState(true);
+  const [addressValid, setAddressValid] = useState(true);
   const [checkedList, setCheckedList] = useState([]);
 
-  const { email, password, passwordRe, address, isVegan } = memberInput;
+  const emailRegex =
+    /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/g;
+  const passwordRegex =
+    /(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,}/g;
+
+  const isEmailRegexValid = !!email.match(emailRegex);
+  const isPasswordRegexValid = !!password.match(passwordRegex);
+
+  const termsValid = checkedList.includes(1) && checkedList.includes(2);
 
   const onCheckedAll = checked => {
     const newCheckedList = checked ? TERMS_DATA.map(term => term.id) : [];
@@ -24,9 +36,10 @@ export default function Signup() {
   };
 
   const onCheckedElement = (checked, termId) => {
-    checked
-      ? setCheckedList([...checkedList, termId])
-      : setCheckedList(checkedList.filter(el => el !== termId));
+    const newCheckedList = checked
+      ? [...checkedList, termId]
+      : checkedList.filter(el => el !== termId);
+    setCheckedList(newCheckedList);
   };
 
   function handleMemberInput(e) {
@@ -36,39 +49,44 @@ export default function Signup() {
       : setMemberInput({ ...memberInput, [name]: value });
   }
 
-  function validateEmail(e) {
-    const value = e.target.value;
-    if (!value) {
-      setEmailValid(true);
-    } else if (!value.includes('@')) {
-      setEmailValid(true);
-    } else {
-      setEmailValid(false);
-    }
-  }
-
-  function validatePassword(e) {
-    const value = e.target.value;
-    if (value.length < 10 || value.length > 20) {
-      setPasswordValid(true);
-    } else {
-      setPasswordValid(false);
-    }
-  }
-
   function validatePasswordRe(e) {
     const value = e.target.value;
     value !== memberInput.password
-      ? setPasswordReValid(true)
-      : setPasswordReValid(false);
-  }
-
-  function validateAddress(e) {
-    const value = e.target.value;
-    !value ? setAddressValid(true) : setAddressValid(false);
+      ? setPasswordReValid(false)
+      : setPasswordReValid(true);
   }
 
   const isSameLength = checkedList.length === TERMS_DATA.length;
+
+  const submitValid =
+    termsValid &&
+    nameValid &&
+    emailValid &&
+    passwordValid &&
+    passwordReValid &&
+    addressValid;
+
+  const navigate = useNavigate();
+
+  function onSignup() {
+    if (submitValid) {
+      fetch('http://10.58.6.3:8000/users/signup', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+          address: address,
+          vegan_or_not: isVegan,
+        }),
+      })
+        .then(response => response.json())
+        .then(result => result.message === 'SUCCESS')
+        .then(navigate('/product'));
+    } else {
+      alert('실패');
+    }
+  }
 
   return (
     <div className="signupWrap">
@@ -131,23 +149,36 @@ export default function Signup() {
               <h3 className="formTitle">회원정보 입력</h3>
             </li>
             <li>
+              <input
+                type="text"
+                name="name"
+                className={`formInput name ${!nameValid && 'validBorder'}`}
+                placeholder="성  함"
+                value={name}
+                onBlur={() => setNameValid(name)}
+              />
+            </li>
+            {!nameValid && (
+              <li>
+                <span className="validText">성함을 입력 해주세요.</span>
+              </li>
+            )}
+            <li className="emailWrap">
               <div className="email">
                 <input
                   type="email"
-                  className={`formInput email ${
-                    emailValid ? 'validBorder' : ''
-                  }`}
+                  className={`formInput email ${!emailValid && 'validBorder'}`}
                   name="email"
                   placeholder="이메일"
                   value={email}
-                  onBlur={validateEmail}
+                  onBlur={() => setEmailValid(isEmailRegexValid)}
                 />
               </div>
               <button type="button" className="emailValidBtn">
                 중복확인
               </button>
             </li>
-            {emailValid && (
+            {!emailValid && (
               <li>
                 <span className="validText">이메일 형식을 확인 해주세요.</span>
               </li>
@@ -157,14 +188,14 @@ export default function Signup() {
                 type="password"
                 name="password"
                 className={`formInput password ${
-                  passwordValid ? 'validBorder' : null
+                  !passwordValid && 'validBorder'
                 }`}
-                placeholder="패스워드 : 영문/숫자 조합으로 10~20자 이내"
+                placeholder="패스워드 : 영문 대, 소문자, 특수문자 1개 포함 8자리 이상"
                 value={password}
-                onBlur={validatePassword}
+                onBlur={() => setPasswordValid(isPasswordRegexValid)}
               />
             </li>
-            {passwordValid && (
+            {!passwordValid && (
               <li>
                 <span className="validText">
                   공백없이 10~20자로 입력 해주세요.
@@ -176,14 +207,14 @@ export default function Signup() {
                 type="password"
                 name="passwordRe"
                 className={`formInput passwordRe ${
-                  passwordReValid ? 'validBorder' : null
+                  !passwordReValid && 'validBorder'
                 }`}
                 placeholder="패스워드를 다시 입력해 주세요."
                 value={passwordRe}
                 onBlur={validatePasswordRe}
               />
             </li>
-            {passwordReValid && (
+            {!passwordReValid && (
               <li>
                 <span className="validText">
                   입력된 비밀번호와 일치하지 않습니다.
@@ -195,22 +226,20 @@ export default function Signup() {
                 type="text"
                 name="address"
                 className={`formInput address ${
-                  addressValid ? 'validBorder' : null
+                  !addressValid && 'validBorder'
                 }`}
                 placeholder="주소를 입력해주세요."
                 value={address}
-                onBlur={validateAddress}
+                onBlur={() => setAddressValid(address)}
               />
             </li>
-            {addressValid && (
+            {!addressValid && (
               <li>
                 <span className="validText">배송주소를 입력해주세요.</span>
               </li>
             )}
             <li>
-              <label
-                className={`blockCheckBox ${isVegan ? 'checkActive' : ''}`}
-              >
+              <label className={`blockCheckBox ${isVegan && 'checkActive'}`}>
                 <input
                   type="checkbox"
                   name="isVegan"
@@ -225,7 +254,7 @@ export default function Signup() {
               </span>
             </li>
             <li>
-              <button type="button" className="submitBtn">
+              <button type="button" className="submitBtn" onClick={onSignup}>
                 가입하기
               </button>
             </li>
