@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { API_ADDRESS } from '../apiConfig';
 import Product from '../Product/Product';
 import ImageSlide from './ImageSlide/ImageSlide';
-import SortListArea from '../../../components/SortSelectArea/SortSelectArea';
 import './ProductsMain.scss';
 
 function ProductsMain() {
@@ -9,9 +9,9 @@ function ProductsMain() {
   const [productsList, setProductsList] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch('/data/product_data.json');
+    const data = await fetch(API_ADDRESS.product_main);
     const res = await data.json();
-    setProductsList(res);
+    setProductsList(res.product_list);
   };
 
   useEffect(() => {
@@ -28,7 +28,6 @@ function ProductsMain() {
         <ImageSlide />
         <div className="productListHead">현재 판매하는 제품</div>
         <div className="productListContainer">
-          <SortListArea />
           {productsList.map(({ id, korean_name, price }) => (
             <Product key={id} productName={korean_name} productPrice={price} />
           ))}
