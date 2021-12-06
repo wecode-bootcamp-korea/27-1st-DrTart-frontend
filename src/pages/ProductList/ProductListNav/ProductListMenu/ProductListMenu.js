@@ -13,7 +13,7 @@ const ProductListMenu = ({ mainCategory, subCategory }) => {
   return (
     <li className="productListMenu">
       <button
-        className={`menuButton ${!!!subCategory && 'menuDropDown'}`}
+        className={`menuButton ${!!subCategory && 'menuDropDown'}`}
         onClick={goToAllProduct}
       >
         {TRANSELATE[mainCategory]}
