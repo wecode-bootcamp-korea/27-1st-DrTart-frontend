@@ -1,21 +1,27 @@
 import React from 'react';
-import '../Order/Order.scss';
+import { Route, Routes } from 'react-router-dom';
+import Cart from './Cart/Cart';
+import Check from './Check/Check';
+import './Order.scss';
 
 const Order = () => {
   return (
     <div className="order">
       <div className="pageTitleArea">
-        <ol className="progressNav">
-          <li className="stepOne">
-            <p>01 장바구니</p>
-          </li>
-          <li className="stepTwo">
-            <p>02 결제진행</p>
-          </li>
-          <li className="stepThree">
-            <p>03 주문완료</p>
-          </li>
-        </ol>
+        <div className="progressNav">
+          <ul className="progress">
+            <li className="stepOne">
+              <p>01 장바구니</p>
+            </li>
+            <li className="stepTwo">
+              <p>02 결제진행</p>
+              <span className="line" />
+            </li>
+            <li className="stepThree">
+              <p>03 주문완료</p>
+            </li>
+          </ul>
+        </div>
         <div className="pageTitle">
           <div className="title">
             <h1 className="orderTitle">결제진행</h1>
@@ -23,8 +29,14 @@ const Order = () => {
         </div>
       </div>
       <div className="pageContent">
-        <div className="contentList">x</div>
-
+        <div className="goodsList">
+          <ul className="goodsTable">
+            <Routes>
+              <Route path="/cart" element={Cart} />
+              <Route path="/check" element={Check} />
+            </Routes>
+          </ul>
+        </div>
         <div className="orderTotal">
           <div className="sec">
             <dl className="pdtPrice">

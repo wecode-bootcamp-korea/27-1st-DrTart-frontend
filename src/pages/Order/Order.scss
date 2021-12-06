@@ -11,36 +11,39 @@
     position: relative;
 
     .progressNav {
-      @include flexCenter(row, center);
-      position: absolute;
-      top: 60px;
-      right: 60px;
+      @include flexCenter(row, flex-end);
       font-size: 14px;
       color: $grey;
-      border-bottom: 1px solid $lightGrey;
 
-      .stepOne {
-        margin-right: 20px;
-        padding-bottom: 7px;
-        position: absolute;
-        top: 0;
-        right: 60px;
-      }
-      
-      .stepTwo {
-        margin-right: 20px;
-        padding-bottom: 7px;
-        border-bottom: 1px solid $black;
-        position: absolute;
-        top: 0;
-        right: 30px;
-      }
-      
-      .stepThree {
-        padding-bottom: 7px;
-        position: absolute;
-        top: 0;
-        right: 0;
+      .progress {
+        @include flexCenter(row, flex-end);
+        border-bottom: 1px solid $lightGrey;
+
+        .stepOne {
+          position: relative;
+          margin-right: 20px;
+          padding-bottom: 7px;
+        }
+
+        .stepTwo {
+          position: relative;
+          margin-right: 20px;
+          padding-bottom: 7px;
+
+          &::after {
+            position: absolute;
+            content: '';
+            width: 105%;
+            bottom: -1px;
+            height: 2px;
+            background-color: black;
+          }
+        }
+
+        .stepThree {
+          position: relative;
+          padding-bottom: 7px;
+        }
       }
     }
     .pageTitle {
@@ -51,17 +54,18 @@
       }
     }
   }
-  
+
   .pageContent {
     display: flex;
     justify-content: center;
     align-items: flex-start;
 
-    .contentList {
+    .goodsList {
       width: 660px;
       height: auto;
       background-color: rgb(160, 200, 201);
     }
+
     .orderTotal {
       width: 280px;
       height: auto;
@@ -78,6 +82,7 @@
           padding: 17px 0 16px;
           font-size: 14px;
         }
+
         .payPrice {
           @include flexCenter(row, space-between);
           padding: 17px 0 21px;
