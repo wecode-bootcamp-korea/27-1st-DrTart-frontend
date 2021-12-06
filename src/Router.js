@@ -6,7 +6,8 @@ import ProductList from './pages/ProductList/ProductList';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import Signup from './pages/Signup/Signup';
 import Nav from './components/Nav/Nav';
-import './styles/routingBody.scss';
+import Footer from './components/Footer/Footer';
+import './styles/router.scss';
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
           <Route path="/product" element={<ProductDetail />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );
