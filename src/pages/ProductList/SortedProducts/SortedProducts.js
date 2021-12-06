@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SortSelectArea from '../../../components/SortSelectArea/SortSelectArea';
 import Product from '../Product/Product';
@@ -11,7 +11,7 @@ const SortedProducts = () => {
   const [productsList, setProductsList] = useState([]);
   const { mainCategory, subCategory } = useParams();
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     let address;
     if (mainCategory === 'all') {
       address = API_ADDRESS.product_main;
@@ -28,7 +28,7 @@ const SortedProducts = () => {
         (a, b) => Date.parse(b.create_at) - Date.parse(a.create_at)
       )
     );
-  };
+  }, [mainCategory, subCategory]);
 
   useEffect(() => {
     (async () => {
@@ -36,7 +36,7 @@ const SortedProducts = () => {
       await fetchData();
       setIsProductLoading(false);
     })();
-  }, [mainCategory, subCategory]);
+  }, [fetchData, subCategory, mainCategory]);
 
   const adjustList = products => {
     setProductsList(products);

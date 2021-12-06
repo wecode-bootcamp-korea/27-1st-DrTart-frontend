@@ -9,7 +9,8 @@ function ProductsMain() {
   const [productsList, setProductsList] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch(API_ADDRESS.product_main);
+    const data = await fetch('/data/product_data.json');
+    // const data = await fetch(API_ADDRESS.product_main);
     const res = await data.json();
     setProductsList(res.product_list);
   };
