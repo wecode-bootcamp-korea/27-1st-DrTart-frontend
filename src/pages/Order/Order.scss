@@ -4,7 +4,7 @@
   @include flexCenter(column, flex-start);
   height: 100%;
   padding: 0 60px;
-  // position: relative;
+
   .pageTitleArea {
     width: 100%;
     padding: 55px 0 57px 0;
@@ -22,21 +22,28 @@
       .stepOne {
         margin-right: 20px;
         padding-bottom: 7px;
-        // position: absolute;
+        position: absolute;
+        top: 0;
+        right: 60px;
       }
+      
       .stepTwo {
         margin-right: 20px;
         padding-bottom: 7px;
         border-bottom: 1px solid $black;
+        position: absolute;
+        top: 0;
+        right: 30px;
       }
+      
       .stepThree {
         padding-bottom: 7px;
+        position: absolute;
+        top: 0;
+        right: 0;
       }
     }
     .pageTitle {
-      // padding: 55px 0 57px 0;
-      // position: relative;
-
       .orderTitle {
         font-size: 48px;
         margin: 110px 0 0 0;
@@ -44,6 +51,7 @@
       }
     }
   }
+  
   .pageContent {
     display: flex;
     justify-content: center;
@@ -74,25 +82,30 @@
           @include flexCenter(row, space-between);
           padding: 17px 0 21px;
           font-size: 14px;
+
           .payPriceNum {
             font-size: 20px;
             font-weight: bold;
           }
         }
+
         .selectBox {
           @include flexCenter(row, space-between);
           padding: 17px 0 16px;
           font-size: 14px;
+
           .selectedValue {
             width: 220px;
             height: 38px;
             border: 1px solid $lightGrey;
             text-align: left;
           }
+
           .valueList {
             display: none;
           }
         }
+
         .mustCheck {
           display: flex;
           flex-direction: row;
@@ -107,6 +120,7 @@
           }
         }
       }
+
       .secBtn {
         padding: 20px 28px 30px;
         background-color: #f9f9f9;
