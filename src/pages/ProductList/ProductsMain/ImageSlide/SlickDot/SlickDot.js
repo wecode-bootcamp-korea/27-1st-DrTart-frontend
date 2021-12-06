@@ -1,13 +1,11 @@
 import React from 'react';
 import './SlickDot.scss';
 
-function SlickDot({ currentSlideId, slideId, changeSlide }) {
+function SlickDot({ changeSlide, checkSlideId }) {
   return (
     <li className="slickDot">
       <button
-        className={`dotButton ${
-          currentSlideId === slideId ? 'clickedDot' : ''
-        }`}
+        className={`dotButton ${checkSlideId ? 'clickedDot' : ''}`}
         onClick={changeSlide}
       />
     </li>
