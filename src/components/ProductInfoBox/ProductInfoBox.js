@@ -4,9 +4,16 @@ import NumBtn from '../ProductInfoBox/NumBtn/NumBtn';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router';
 
-const ProductInfoBox = ({ koreanName, category, price }) => {
+const ProductInfoBox = ({
+  category,
+  productId,
+  koreanName,
+  price,
+  sugarLevel,
+  isVegan,
+}) => {
   const [numValue, setNumValue] = useState(1);
-
+  price = 100000;
   const minusOne = () => {
     numValue === 1 ? setNumValue(1) : setNumValue(numValue - 1);
   };
@@ -15,17 +22,29 @@ const ProductInfoBox = ({ koreanName, category, price }) => {
     setNumValue(numValue + 1);
   };
 
+  const totalPrice = price * numValue;
+
   const navigate = useNavigate();
 
   const btnOnClick = () => {
-    navigate('./');
+    fetch('API주소', {
+      method: 'POST',
+      body: JSON.stringify({
+        productId: productId,
+        korean_name: koreanName,
+        price: totalPrice,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => result.message === 'SUCCESS')
+      .then(navigate('./'));
   };
 
   return (
     <div className="productInfoBox">
       <div className="stickerWrap">
         <div className="stickerBest">BEST</div>
-        <div className="stickerVegan">VEGAN</div>
+        {isVegan && <div className="stickerVegan">VEGAN</div>}
       </div>
       <h3 className="productName">{koreanName}</h3>
       <p className="infoTag">{category}</p>
@@ -42,10 +61,14 @@ const ProductInfoBox = ({ koreanName, category, price }) => {
             <NumBtn minusOne={minusOne} plusOne={plusOne} numValue={numValue} />
           </dd>
         </dl>
+        <dl className="list">
+          <dt className="title">당도</dt>
+          <dt>{sugarLevel}</dt>
+        </dl>
       </div>
       <div className="totalPriceInfo">
         <p className="totalPriceTitle">총 구매금액</p>
-        <p className="totalPrice">{(price * numValue).toLocaleString()}</p>
+        <p className="totalPrice">{(price * numValue).toLocaleString}</p>
       </div>
       <Button btnOnClick={btnOnClick}>바로구매</Button>
     </div>

@@ -9,6 +9,7 @@ import Nav from './components/Nav/Nav';
 import Order from './pages/Order/Order';
 import Footer from './components/Footer/Footer';
 import './styles/router.scss';
+import ProductInfoBox from './components/ProductInfoBox/ProductInfoBox';
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
           <Route path="/product" element={<Product />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/order/" element={<Order />} />
+          <Route path="/productinfo" element={<ProductInfoBox />} />
         </Routes>
         <Footer />
       </div>
