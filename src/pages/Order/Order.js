@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Cart from './Cart/Cart';
-import Check from './Check/Check';
+import { useParams } from 'react-router-dom';
 import './Order.scss';
 
 const Order = () => {
+  const { pageType } = useParams();
+
   return (
     <div className="order">
       <div className="pageTitleArea">
@@ -12,10 +12,11 @@ const Order = () => {
           <ul className="progress">
             <li className="stepOne">
               <p>01 장바구니</p>
+              {pageType === 'cart' && <span className="line" />}
             </li>
             <li className="stepTwo">
               <p>02 결제진행</p>
-              <span className="line" />
+              {pageType === 'check' && <span className="line" />}
             </li>
             <li className="stepThree">
               <p>03 주문완료</p>
@@ -24,18 +25,35 @@ const Order = () => {
         </div>
         <div className="pageTitle">
           <div className="title">
-            <h1 className="orderTitle">결제진행</h1>
+            <h1 className="orderTitle">
+              {pageType === 'cart' && '장바구니'}
+              {pageType === 'check' && '결제진행'}
+            </h1>
           </div>
         </div>
       </div>
       <div className="pageContent">
         <div className="goodsList">
-          <ul className="goodsTable">
-            <Routes>
-              <Route path="/cart" element={Cart} />
-              <Route path="/check" element={Check} />
-            </Routes>
-          </ul>
+          <table className="goodsTable">
+            <thead className="goodsTableHead">
+              <th className="tableHeadElement tableHeadImage" />
+              <th className="tableHeadElement tableHeadGoods">상품</th>
+              <th className="tableHeadElement tableHeadQuantity">수량</th>
+              <th className="tableHeadElement tableHeadPrice">금액</th>
+              <th className="tableHeadElement tableHeadButton" />
+            </thead>
+            <tbody className="goodsTableBody">
+              <tr className="goodsContainer">
+                <td className="tableBodyImage">
+                  <img className="goodsImage" alt="" src="/images/choco.jpg" />
+                </td>
+                <td className="tableBodyGoods">상품</td>
+                <td className="tableBodyQuantity">수량</td>
+                <td className="tableBodyPrice">금액</td>
+                <td className="tableBodyButton" />
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div className="orderTotal">
           <div className="sec">
