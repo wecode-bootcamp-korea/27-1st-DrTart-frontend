@@ -38,21 +38,28 @@ function Login() {
     validateId() && validatePw() ? navigate('/product_list') : alertEachValid();
   };
 
-  const onSignIn = () => {
-    onValidation();
-  };
-
   // const onSignIn = () => {
-  //   fetch('http://10.58.6.3:8000/users/signin', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       email: idInputRef.current.value,
-  //       password: pwInputRef.current.value,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => result.message === 'SUCCESS' && onValidation());
+  //   onValidation();
   // };
+
+  const onSignIn = () => {
+    fetch('http://10.58.6.3:8000/users/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: idInputRef.current.value,
+        password: pwInputRef.current.value,
+      }),
+    })
+      .then(response => response.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          localStorage.setItem('TOKEN', res.access_token);
+          onValidation();
+        } else {
+          alert('입력하신 정보를 다시 확인해주세요.');
+        }
+      });
+  };
 
   const onSignUp = () => {
     navigate('/signup');
