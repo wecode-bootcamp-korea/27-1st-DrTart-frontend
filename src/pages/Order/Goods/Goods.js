@@ -4,6 +4,7 @@ import './Goods.scss';
 
 const Goods = ({
   product: { id, korean_name, thumbnail_image_url, price, quantity },
+  pageType,
   deleteGoods,
   adjustTotalPrice,
 }) => {
@@ -37,19 +38,25 @@ const Goods = ({
           <p>{korean_name}</p>
         </td>
         <td className="tableBody quantity">
-          <NumBtn
-            minusOne={() => adjustQuantity('minus')}
-            plusOne={() => adjustQuantity('plus')}
-            numValue={currentQuantity}
-          />
+          {pageType === 'cart' ? (
+            <NumBtn
+              minusOne={() => adjustQuantity('minus')}
+              plusOne={() => adjustQuantity('plus')}
+              numValue={currentQuantity}
+            />
+          ) : (
+            quantity
+          )}
         </td>
         <td className="tableBody price">
           <p>{price * currentQuantity}원</p>
         </td>
         <td className="tableBody goodsButton">
-          <button className="deleteButton" onClick={() => deleteGoods(id)}>
-            <p>x</p>
-          </button>
+          {pageType === 'cart' && (
+            <button className="deleteButton" onClick={() => deleteGoods(id)}>
+              <p>x</p>
+            </button>
+          )}
         </td>
       </tr>
     </tbody>

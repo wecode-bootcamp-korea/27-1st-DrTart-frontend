@@ -90,52 +90,61 @@ const Order = () => {
                 <Goods
                   key={product.id}
                   product={product}
+                  pageType={pageType}
                   deleteGoods={deleteGoods}
                   adjustTotalPrice={adjustTotalPrice}
                 />
               ))}
           </table>
-          <div className="rade">
-            <div className="allDeleteButtonWrapper">
-              <Button btnOnClick={deleteAllGoods}>장바구니 비우기</Button>
+          {pageType === 'cart' && (
+            <div className="allDeleteButtonContainer">
+              <div className="allDeleteButtonWrapper">
+                <Button btnOnClick={deleteAllGoods}>장바구니 비우기</Button>
+              </div>
             </div>
-          </div>
+          )}
         </section>
         <div className="orderTotal">
-          <div className="sec">
+          <div className="orderInfoContainer">
             <dl className="pdtPrice">
               <dt>총 상품 금액</dt>
               <dd>{totalPrice}</dd>
             </dl>
           </div>
-          <div className="sec">
+          <div className="orderInfoContainer">
             <dl className="payPrice">
               <dt>최종 결제 금액</dt>
               <dd className="payPriceNum">{totalPrice}</dd>
             </dl>
           </div>
-          <div className="sec">
-            <div className="selectBox">
-              <button className="selectedValue">신용카드</button>
-              <ul className="valueList">
-                <li>신용카드</li>
-                <li>카카오페이</li>
-                <li>네이버페이</li>
-                <li>휴대폰결제</li>
-                <li>포인트</li>
-              </ul>
+          {pageType !== 'cart' && (
+            <div className="orderInfoContainer">
+              <div className="selectBox">
+                <button className="selectedValue">신용카드</button>
+                <ul className="valueList">
+                  <li>신용카드</li>
+                  <li>카카오페이</li>
+                  <li>네이버페이</li>
+                  <li>휴대폰결제</li>
+                  <li>포인트</li>
+                </ul>
+              </div>
+              <div className="mustCheck">
+                <input className="checkBox" type="checkbox" />
+                <label className="label" htmlFor="agree">
+                  구매하실 상품의 판매조건을 명확히 확인하였으며, 이에
+                  동의합니다.
+                  <br />
+                  (전자상거래법 제8조 2항)
+                </label>
+              </div>
             </div>
-            <div className="mustCheck">
-              <input className="checkBox" type="checkbox" />
-              <label className="label" htmlFor="agree">
-                구매하실 상품의 판매조건을 명확히 확인하였으며, 이에 동의합니다.
-                <br />
-                (전자상거래법 제8조 2항)
-              </label>
-            </div>
-          </div>
-          <div className="secBtn">
-            <Button>결제하기</Button>
+          )}
+
+          <div className="orderCheckButtonWrapper">
+            <Button>
+              {pageType === 'cart' ? '선택상품 주문하기' : '결제하기'}
+            </Button>
           </div>
         </div>
       </div>
