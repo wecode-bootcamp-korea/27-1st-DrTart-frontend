@@ -12,8 +12,7 @@
       "price": "7000.00",
       "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": true,
-      "review_num": 30,
-      "like_num": 20,
+      "like": 20,
       "description": "#당충전"
     },
     {
@@ -28,8 +27,7 @@
       "price": "6500.00",
       "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": false,
-      "review_num": 40,
-      "like_num": 10,
+      "like": 10,
       "description": "#당충전"
     },
     {
@@ -44,8 +42,7 @@
       "price": "7000.00",
       "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": true,
-      "review_num": 35,
-      "like_num": 22,
+      "like": 22,
       "description": "#당충전"
     },
     {
@@ -60,8 +57,7 @@
       "price": "5000.00",
       "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": false,
-      "review_num": 10,
-      "like_num": 10,
+      "like": 10,
       "description": "#당충전"
     },
     {
@@ -76,8 +72,7 @@
       "price": "5500.00",
       "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": true,
-      "review_num": 60,
-      "like_num": 70,
+      "like": 70,
       "description": "#당충전"
     }
   ]
