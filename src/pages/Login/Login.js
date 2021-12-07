@@ -38,10 +38,6 @@ function Login() {
     validateId() && validatePw() ? navigate('/product_list') : alertEachValid();
   };
 
-  // const onSignIn = () => {
-  //   onValidation();
-  // };
-
   const onSignIn = () => {
     fetch('http://10.58.6.3:8000/users/signin', {
       method: 'POST',
@@ -56,7 +52,7 @@ function Login() {
           localStorage.setItem('TOKEN', res.access_token);
           onValidation();
         } else {
-          alert('입력하신 정보를 다시 확인해주세요.');
+          alertEachValid();
         }
       });
   };
