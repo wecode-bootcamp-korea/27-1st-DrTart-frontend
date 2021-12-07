@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import SortSelectArea from '../../../components/SortSelectArea/SortSelectArea';
 import Product from '../Product/Product';
 import { TRANSELATE } from '../Transelate';
-import { API_ADDRESS } from '../apiConfig';
+// import { API_ADDRESS } from '../apiConfig';
 import './SortedProducts.scss';
 
 const SortedProducts = () => {
@@ -12,23 +12,25 @@ const SortedProducts = () => {
   const { mainCategory, subCategory } = useParams();
 
   const fetchData = useCallback(async () => {
-    let address;
-    if (mainCategory === 'all') {
-      address = API_ADDRESS.product_main;
-    } else {
-      address = !!subCategory
-        ? `${API_ADDRESS.products_category}${subCategory}`
-        : `${API_ADDRESS.products_menu}${mainCategory}`;
-    }
+    // let address;
+    // if (mainCategory === 'all') {
+    //   address = API_ADDRESS.product_main;
+    // } else {
+    //   address = !!subCategory
+    //     ? `${API_ADDRESS.products_category}${subCategory}`
+    //     : `${API_ADDRESS.products_menu}${mainCategory}`;
+    // }
 
-    const data = await fetch(address);
+    // const data = await fetch(address);
+    const data = await fetch('/data/product_data.json');
+
     const res = await data.json();
     setProductsList(
       res.product_list.sort(
         (a, b) => Date.parse(b.create_at) - Date.parse(a.create_at)
       )
     );
-  }, [mainCategory, subCategory]);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -53,8 +55,21 @@ const SortedProducts = () => {
           <SortSelectArea adjustList={adjustList} productsList={productsList} />
         </div>
         <div className="sortedProductsContainer">
-          {productsList.map(({ id, korean_name, price }) => (
-            <Product key={id} productName={korean_name} productPrice={price} />
+          {(mainCategory !== 'all_product'
+            ? productsList.filter(product =>
+                !!subCategory
+                  ? product.category.name === mainCategory &&
+                    product.category.category === subCategory
+                  : product.category.name === mainCategory
+              )
+            : productsList
+          ).map(({ id, description, korean_name, price }) => (
+            <Product
+              key={id}
+              description={description}
+              productName={korean_name}
+              productPrice={price}
+            />
           ))}
         </div>
       </div>

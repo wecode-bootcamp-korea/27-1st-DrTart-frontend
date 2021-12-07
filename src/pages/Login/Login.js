@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import '../Login/Login.scss';
 import InputInterface from './InputInterface/InputInterface';
+import Button from '../../components/Button/Button';
 
 function Login() {
   const idInputRef = useRef();
@@ -84,12 +85,15 @@ function Login() {
           <span className="findPw">비밀번호 찾기</span>
         </div>
         <div className="btnWrap">
-          <button className="loginBtn" type="button" onClick={onSignIn}>
+          {/* <button className="loginBtn" type="button" onClick={onSignIn}>
             로그인
-          </button>
-          <button className="joinBtn" type="button" onClick={onSignUp}>
+          </button> */}
+          <Button btnOnClick={onSignIn}>로그인</Button>
+
+          {/* <button className="joinBtn" type="button" onClick={onSignUp}>
             회원가입
-          </button>
+          </button> */}
+          <Button btnOnClick={onSignUp}>회원가입</Button>
         </div>
       </div>
     </div>

@@ -1,16 +1,36 @@
 @import '../../styles/variables.scss';
 
 .button {
-  min-width: 318px;
-  height: 46px;
-  margin-top: 70px;
-  padding: 0 50px;
+  width: 100%;
+  margin: 2px;
+  padding: 10px 30px;
   border: 1px solid $black;
   font-size: 16px;
   cursor: pointer;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
   position: relative;
+  color: $black;
 
+  &.point {
+    &::after {
+      content: '';
+      width: 0%;
+      height: 100%;
+      top: 0;
+      position: absolute;
+      left: 0;
+      transition: all 0.6s;
+      background-color: $pointMint;
+    }
+    &:hover {
+      color: $white;
+      border: 1px solid $pointMint;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
   &::after {
     content: '';
     width: 0%;
@@ -19,20 +39,19 @@
     position: absolute;
     left: 0;
     transition: all 0.6s;
-    background-color: $pointPink;
+    background-color: $black;
   }
 
   &:hover {
     color: $white;
-    border: 1px solid $pointPink;
+    border: 1px solid $black;
 
     &::after {
       width: 100%;
-      z-index: -1;
     }
   }
-
   .btnTitle {
-    padding: 0 30px;
+    position: relative;
+    z-index: 99;
   }
 }

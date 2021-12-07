@@ -10,10 +10,11 @@
       "korean_name": "당근케이크",
       "order_quantity": 10,
       "price": "7000.00",
-      "thumbnail_image_url": "https://pixabay.com/get/gf740fe31fe1eee20f679fc31cacc1d29385edf12e431b4f5321556db068ae54a0865d000a5076dc98b16b213f60ed1fc.jpg",
+      "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": true,
       "review_num": 30,
-      "like_num": 20
+      "like_num": 20,
+      "description": "#당충전"
     },
     {
       "category": {
@@ -25,10 +26,11 @@
       "korean_name": "딸기케이크",
       "order_quantity": 5,
       "price": "6500.00",
-      "thumbnail_image_url": "https://pixabay.com/get/g9107ddd5d067a7c77dad33fb27349d0b5046ab166bf64243357bb436707bac1af31d325116e86fc193eab9543d5f1110acf45546fa54ff82d10b37f95977b37c_1920.jpg",
+      "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": false,
       "review_num": 40,
-      "like_num": 10
+      "like_num": 10,
+      "description": "#당충전"
     },
     {
       "category": {
@@ -40,10 +42,11 @@
       "korean_name": "치즈케이크",
       "order_quantity": 150,
       "price": "7000.00",
-      "thumbnail_image_url": "https://pixabay.com/photos/cheese-cake-strawberries-dessert-6263345/",
+      "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": true,
       "review_num": 35,
-      "like_num": 22
+      "like_num": 22,
+      "description": "#당충전"
     },
     {
       "category": {
@@ -55,10 +58,11 @@
       "korean_name": "에그타르트",
       "order_quantity": 20,
       "price": "5000.00",
-      "thumbnail_image_url": "https://pixabay.com/get/g3f0b04163e73df082bd8d203d1433f769379d7529bfc72d9da360bee3137caddb503007c9b13d846e560a339dd8a0823fbe2a995e95d93a4258563e7154ebdbb_1920.jpg",
+      "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": false,
       "review_num": 10,
-      "like_num": 10
+      "like_num": 10,
+      "description": "#당충전"
     },
     {
       "category": {
@@ -70,10 +74,11 @@
       "korean_name": "딸기타르트",
       "order_quantity": 25,
       "price": "5500.00",
-      "thumbnail_image_url": "https://pixabay.com/get/gf03c9e412f60a40c04fa67c330a553d8912cffe062e26c87f75a9035550dc4f31e0797e78153af34bb35311e1ade536d72c38945820541d8f932dad85d9072a7_1920.jpg",
+      "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": true,
       "review_num": 60,
-      "like_num": 70
+      "like_num": 70,
+      "description": "#당충전"
     }
   ]
 }
