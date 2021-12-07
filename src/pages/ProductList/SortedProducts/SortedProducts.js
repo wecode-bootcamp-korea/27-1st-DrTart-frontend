@@ -24,8 +24,13 @@ const SortedProducts = ({ productsList }) => {
                 : product.category.name === mainCategory
             )
           : productsList
-        ).map(({ id, korean_name, price }) => (
-          <Product key={id} productName={korean_name} productPrice={price} />
+        ).map(({ id, description, korean_name, price }) => (
+          <Product
+            key={id}
+            description={description}
+            productName={korean_name}
+            productPrice={price}
+          />
         ))}
       </div>
     </div>

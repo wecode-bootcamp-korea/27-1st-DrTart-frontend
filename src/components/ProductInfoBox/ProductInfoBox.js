@@ -4,7 +4,7 @@ import NumBtn from '../ProductInfoBox/NumBtn/NumBtn';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router';
 
-const ProductInfoBox = ({ koreanName, category, price }) => {
+const ProductInfoBox = ({ koreanName, infoTag, price }) => {
   const [numValue, setNumValue] = useState(1);
 
   const minusOne = () => {
@@ -28,7 +28,7 @@ const ProductInfoBox = ({ koreanName, category, price }) => {
         <div className="stickerVegan">VEGAN</div>
       </div>
       <h3 className="productName">{koreanName}</h3>
-      <p className="infoTag">{category}</p>
+      <p className="infoTag">{infoTag}</p>
       <div className="price">
         <p className="originPrice">{price.toLocaleString()}</p>
       </div>
