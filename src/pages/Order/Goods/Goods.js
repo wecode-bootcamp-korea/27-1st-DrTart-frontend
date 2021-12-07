@@ -3,19 +3,21 @@ import NumBtn from '../../../components/ProductInfoBox/NumBtn/NumBtn';
 import './Goods.scss';
 
 const Goods = ({
-  id,
-  korean_name,
-  thumbnail_image_url,
-  price,
+  product: { id, korean_name, thumbnail_image_url, price, quantity },
   deleteGoods,
+  adjustTotalPrice,
 }) => {
-  const [currentQuantity, setCurrentQuantity] = useState(1);
+  const [currentQuantity, setCurrentQuantity] = useState(quantity);
 
   const adjustQuantity = operator => {
     if (operator === 'minus') {
-      setCurrentQuantity(prev => (prev - 1 > 0 ? prev - 1 : 1));
+      if (currentQuantity > 1) {
+        setCurrentQuantity(prev => prev - 1);
+        adjustTotalPrice(operator, price);
+      }
     } else if (operator === 'plus') {
       setCurrentQuantity(prev => prev + 1);
+      adjustTotalPrice(operator, price);
     }
   };
 

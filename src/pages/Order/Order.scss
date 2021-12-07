@@ -109,14 +109,17 @@
           }
         }
       }
-
-      .allDeleteButtonWrapper {
+      .rade {
         width: 100%;
+        .allDeleteButtonWrapper {
+          width: 26%;
 
-        .allDeleteButton {
-          padding: 5px 13px;
-          border: 1px solid $veryLightGrey;
-          font-size: 13px;
+          .allDeleteButton {
+            width: 100px;
+            padding: 5px 13px;
+            border: 1px solid $veryLightGrey;
+            font-size: 13px;
+          }
         }
       }
     }

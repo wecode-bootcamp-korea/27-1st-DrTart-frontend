@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Button from '../../components/Button/Button';
 import Goods from './Goods/Goods';
+import { API_ADDRESS } from '../ProductList/apiConfig';
 import './Order.scss';
 
 const Order = () => {
   const [cartList, setCartList] = useState([]);
   const [isOrderLoading, setIsOrderLoading] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
   const { pageType } = useParams();
 
-  const fetchCartData = async () => {
+  const fetchCartData = useCallback(async () => {
+    // const data = await fetch(API_ADDRESS.order_cart, {
+    //   method: 'POST',
+    //   body: JSON.stringify({}),
+    // });
     const data = await fetch('/data/cart.json');
     const res = await data.json();
     setCartList(res);
-  };
-
-  const deleteGoods = id => {
-    console.log(id);
-    setCartList(cartList.filter(product => product.id !== id));
-  };
-
-  const deleteAllGoods = () => {
-    setCartList([]);
-  };
+    res.forEach(({ price, quantity }) => {
+      setTotalPrice(prev => prev + price * quantity);
+    });
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -29,8 +30,19 @@ const Order = () => {
       await fetchCartData();
       setIsOrderLoading(false);
     })();
-    fetchCartData();
   }, []);
+
+  const deleteGoods = id => {
+    setCartList(cartList.filter(product => product.id !== id));
+  };
+
+  const deleteAllGoods = () => {
+    setCartList([]);
+  };
+
+  const adjustTotalPrice = (type, price) => {
+    setTotalPrice(prev => (type === 'minus' ? prev - price : prev + price));
+  };
 
   return (
     <div className="order">
@@ -74,34 +86,32 @@ const Order = () => {
               <th className="tableHeadElement tableHeadButton" />
             </thead>
             {!isOrderLoading &&
-              cartList.map(
-                ({ id, korean_name, thumbnail_image_url, price }) => (
-                  <Goods
-                    key={id}
-                    id={id}
-                    korean_name={korean_name}
-                    thumbnail_image_url={thumbnail_image_url}
-                    price={price}
-                    deleteGoods={deleteGoods}
-                  />
-                )
-              )}
+              cartList.map(product => (
+                <Goods
+                  key={product.id}
+                  product={product}
+                  deleteGoods={deleteGoods}
+                  adjustTotalPrice={adjustTotalPrice}
+                />
+              ))}
           </table>
-          <div className="allDeleteButtonWrapper">
-            <button className="allDeleteButton">장바구니 비우기</button>
+          <div className="rade">
+            <div className="allDeleteButtonWrapper">
+              <Button btnOnClick={deleteAllGoods}>장바구니 비우기</Button>
+            </div>
           </div>
         </section>
         <div className="orderTotal">
           <div className="sec">
             <dl className="pdtPrice">
               <dt>총 상품 금액</dt>
-              <dd>9000</dd>
+              <dd>{totalPrice}</dd>
             </dl>
           </div>
           <div className="sec">
             <dl className="payPrice">
               <dt>최종 결제 금액</dt>
-              <dd className="payPriceNum">9000</dd>
+              <dd className="payPriceNum">{totalPrice}</dd>
             </dl>
           </div>
           <div className="sec">
@@ -125,7 +135,7 @@ const Order = () => {
             </div>
           </div>
           <div className="secBtn">
-            <button className="btn">결제하기</button>
+            <Button>결제하기</Button>
           </div>
         </div>
       </div>
