@@ -5,14 +5,13 @@ import Button from '../Button/Button';
 import '../ProductInfoBox/ProductInfoBox.scss';
 
 const ProductInfoBox = ({
-  category,
   productId,
   koreanName,
-  price,
   sugarLevel,
+  price,
+  infoTag,
   isVegan,
   cartAndLikeBtn,
-  infoTag,
 }) => {
   const [numValue, setNumValue] = useState(1);
 
@@ -73,24 +72,28 @@ const ProductInfoBox = ({
         <p className="totalPrice">{Math.round(price * numValue)}</p>
       </div>
       <div className="btnWrap">
-        <Link
-          to={{
-            pathname: '/order',
-            state: {
-              productId: productId,
-              koreanName: koreanName,
-              price: price,
-            },
-          }}
-        >
-          <Button>바로구매</Button>
-        </Link>
-        <button className="productCartButton">
-          <i className="fas fa-shopping-cart" />
-        </button>
-        <button className="productLikeButton">
-          <i className="far fa-heart" />
-        </button>
+        <div className="buyBtn">
+          <Link
+            to={{
+              pathname: '/login',
+              state: {
+                koreanName: { koreanName },
+              },
+            }}
+          >
+            <Button point={true}>바로구매</Button>
+          </Link>
+        </div>
+        {cartAndLikeBtn && (
+          <div className="cartAndLikeBtn">
+            <Button btnOnClick={addToCart}>
+              <i className="fas fa-shopping-cart" />
+            </Button>
+            <Button>
+              <i className="far fa-heart" />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

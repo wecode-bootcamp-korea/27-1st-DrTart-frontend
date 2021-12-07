@@ -136,5 +136,14 @@
 
   .btnWrap {
     display: flex;
+    justify-content: space-between;
+
+    .buyBtn {
+      flex-basis: 100%;
+    }
+
+    .cartAndLikeBtn {
+      display: flex;
+    }
   }
 }

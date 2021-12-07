@@ -9,7 +9,6 @@ import Nav from './components/Nav/Nav';
 import Order from './pages/Order/Order';
 import Footer from './components/Footer/Footer';
 import './styles/router.scss';
-import ProductInfoBox from './components/ProductInfoBox/ProductInfoBox';
 
 const Router = () => {
   return (
