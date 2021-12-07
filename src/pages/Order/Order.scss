@@ -105,31 +105,6 @@
             }
           }
         }
-
-        .goodsTableBody {
-          color: #555555;
-          font-size: 14px;
-
-          .goodsContainer {
-            border-bottom: 1px solid $lightGrey;
-
-            .tableBodyImage {
-              padding: 16px 0;
-
-              .goodsImage {
-                width: 120px;
-                height: 105px;
-                object-fit: cover;
-              }
-            }
-
-            .tableBodyGoods {
-              display: flex;
-              height: 100%;
-              padding: 10px 10px 10px 20px;
-            }
-          }
-        }
       }
     }
 

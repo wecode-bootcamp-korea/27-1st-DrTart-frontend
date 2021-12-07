@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import Goods from './Goods/Goods';
 import './Order.scss';
 
 const Order = () => {
@@ -42,17 +43,7 @@ const Order = () => {
               <th className="tableHeadElement tableHeadPrice">금액</th>
               <th className="tableHeadElement tableHeadButton" />
             </thead>
-            <tbody className="goodsTableBody">
-              <tr className="goodsContainer">
-                <td className="tableBodyImage">
-                  <img className="goodsImage" alt="" src="/images/choco.jpg" />
-                </td>
-                <td className="tableBodyGoods">상품</td>
-                <td className="tableBodyQuantity">수량</td>
-                <td className="tableBodyPrice">금액</td>
-                <td className="tableBodyButton" />
-              </tr>
-            </tbody>
+            <Goods />
           </table>
         </div>
         <div className="orderTotal">

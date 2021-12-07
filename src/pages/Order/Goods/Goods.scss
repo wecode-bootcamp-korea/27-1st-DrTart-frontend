@@ -1,0 +1,50 @@
+@import '../../../styles/variables.scss';
+
+.goods {
+  color: #555555;
+  font-size: 14px;
+
+  .tableRow {
+    height: 140px;
+    border-bottom: 1px solid $lightGrey;
+    vertical-align: inherit;
+
+    .tableBody {
+      padding: 10px;
+      vertical-align: middle;
+
+      &.image {
+        padding: 16px 0;
+
+        .imageContainer {
+          display: inline;
+
+          .goodsImage {
+            width: 120px;
+            height: 105px;
+            object-fit: cover;
+          }
+        }
+      }
+
+      &.goods {
+        padding: 10px 10px 10px 30px;
+        vertical-align: center;
+      }
+
+      &.quantity {
+        text-align: center;
+      }
+
+      &.price {
+        padding-right: 10px;
+        text-align: right;
+      }
+
+      &.button {
+        padding: 10px;
+        text-align: center;
+      }
+    }
+  }
+}
