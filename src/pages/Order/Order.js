@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Goods from './Goods/Goods';
-import { API_ADDRESS } from '../ProductList/apiConfig';
+// import { API_ADDRESS } from '../ProductList/apiConfig';
 import './Order.scss';
 
 const Order = () => {
@@ -30,7 +30,7 @@ const Order = () => {
       await fetchCartData();
       setIsOrderLoading(false);
     })();
-  }, []);
+  }, [fetchCartData]);
 
   const deleteGoods = id => {
     setCartList(cartList.filter(product => product.id !== id));
