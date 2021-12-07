@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import SortSelectArea from '../../../components/SortSelectArea/SortSelectArea';
 import Product from '../Product/Product';
 import { TRANSELATE } from '../Transelate';
-import { API_ADDRESS } from '../apiConfig';
+// import { API_ADDRESS } from '../apiConfig';
 import './SortedProducts.scss';
 
 const SortedProducts = () => {
