@@ -1,49 +1,33 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react/cjs/react.development';
 import './SortSelectArea.scss';
 
-const SortSelectArea = () => {
-  const [sortedData, setSortedData] = useState([]);
+const SortSelectArea = ({ adjustList, productsList }) => {
   const [sortType, setSortType] = useState('upDate');
 
-  useEffect(() => {
-    fetch('http://localhost:3000/data/product_data_sort.json', {
-      method: 'GET',
-    })
-      .then(response => response.json())
-      .then(data => {
-        setSortedData(data);
-      });
-    return () => {
-      setSortedData([]);
-    };
-  }, []);
-
-  const types = {
+  const TYPES = {
     upDate: 'created_at',
-    reviewNum: 'review_num',
+    order_quantity: 'order_quantity',
     likeNum: 'like_num',
   };
 
-  const sortProperty = types[sortType];
-
-  const sorted = [...sortedData].sort(
-    (a, b) => b[sortProperty] - a[sortProperty]
-  );
-
-  // eslint-disable-next-line no-unused-expressions
-  sorted;
+  const sortList = e => {
+    setSortType(e.target.value);
+    const sortProperty = TYPES[sortType];
+    const sortedList =
+      sortProperty === 'created_at'
+        ? [...productsList].sort(
+            (a, b) => Date.parse(b[sortProperty]) - Date.parse(a[sortProperty])
+          )
+        : [...productsList].sort((a, b) => b[sortProperty] - a[sortProperty]);
+    adjustList(sortedList);
+  };
 
   return (
     <form className="sortSelectArea">
-      <select
-        className="selectBox"
-        onChange={e => {
-          setSortType(e.target.value);
-        }}
-      >
+      <select className="selectBox" onChange={sortList}>
         <option value="upDate">신상품 순</option>
-        <option value="reviewNum">리뷰 순</option>
+        <option value="order_quantity">판매량 순</option>
         <option value="likeNum">좋아요 순</option>
       </select>
     </form>
