@@ -30,7 +30,7 @@ const ProductInfoBox = ({ koreanName, infoTag, price }) => {
       <h3 className="productName">{koreanName}</h3>
       <p className="infoTag">{infoTag}</p>
       <div className="price">
-        <p className="originPrice">{price.toLocaleString()}</p>
+        <p className="originPrice">{Math.round(price)}</p>
       </div>
       <ul className="tabBar">
         <li className="infoToBuy">구매정보</li>

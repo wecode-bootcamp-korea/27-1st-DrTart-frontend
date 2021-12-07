@@ -15,6 +15,7 @@
 .product {
   overflow: hidden;
   position: relative;
+  min-width: 280px;
   margin: 10px 10px 0 10px;
   padding: 20px 20px 30px 20px;
 
@@ -46,41 +47,42 @@
   .productContainer {
     @include flexCenter(column, space-between);
 
-    .productImageWrapper {
-      @include flexCenter(column, center);
-      width: 260px;
-      height: 260px;
+    .goToProductDetail {
+      .productImageWrapper {
+        @include flexCenter(column, center);
+        width: 260px;
+        height: 260px;
 
-      .productImage {
-        width: 90%;
+        .productImage {
+          width: 90%;
+        }
       }
-    }
-    .pdtInfo {
-      @include flexCenter(column, center);
-      width: 240px;
-      height: 130px;
-      .infoTag {
-        font-size: 14px;
-        color: $darkGrey;
-      }
-      .productName {
-        padding: 0 10px;
-        margin: 20px 0 10px 0;
-        font-size: 18px;
-        font-weight: bold;
-        color: $black;
-      }
-      .price {
-        padding: 0 30px;
-        margin: 5px 0 20px;
-        font-size: 15px;
-        font-weight: bold;
-        color: $black;
+      .pdtInfo {
+        @include flexCenter(column, center);
+        width: 240px;
+        height: 130px;
+        .infoTag {
+          font-size: 14px;
+          color: $darkGrey;
+        }
+        .productName {
+          padding: 0 10px;
+          margin: 20px 0 10px 0;
+          font-size: 18px;
+          font-weight: bold;
+          color: $black;
+        }
+        .price {
+          padding: 0 30px;
+          margin: 5px 0 20px;
+          font-size: 15px;
+          font-weight: bold;
+          color: $black;
+        }
       }
     }
     .productButtonContainer {
       @include flexCenter(row, space-between);
-      // width: 260px;
       opacity: 0;
       transition: all 1s ease-in-out;
 
