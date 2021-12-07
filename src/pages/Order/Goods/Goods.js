@@ -2,8 +2,22 @@ import React, { useState } from 'react';
 import NumBtn from '../../../components/ProductInfoBox/NumBtn/NumBtn';
 import './Goods.scss';
 
-const Goods = () => {
+const Goods = ({
+  id,
+  korean_name,
+  thumbnail_image_url,
+  price,
+  deleteGoods,
+}) => {
   const [currentQuantity, setCurrentQuantity] = useState(1);
+
+  const adjustQuantity = operator => {
+    if (operator === 'minus') {
+      setCurrentQuantity(prev => (prev - 1 > 0 ? prev - 1 : 1));
+    } else if (operator === 'plus') {
+      setCurrentQuantity(prev => prev + 1);
+    }
+  };
 
   return (
     <tbody className="goods">
@@ -13,24 +27,28 @@ const Goods = () => {
             <img
               className="goodsImage"
               alt="example_goods"
-              src="/images/choco.jpg"
+              src={thumbnail_image_url}
             />
           </div>
         </td>
         <td className="tableBody goods">
-          <p>상품명</p>
+          <p>{korean_name}</p>
         </td>
         <td className="tableBody quantity">
           <NumBtn
-            minusOne={() =>
-              setCurrentQuantity(prev => (prev - 1 > 0 ? prev - 1 : 1))
-            }
-            plusOne={() => setCurrentQuantity(prev => prev + 1)}
+            minusOne={() => adjustQuantity('minus')}
+            plusOne={() => adjustQuantity('plus')}
             numValue={currentQuantity}
           />
         </td>
-        <td className="tableBody price">금액</td>
-        <td className="tableBody button">x</td>
+        <td className="tableBody price">
+          <p>{price * currentQuantity}원</p>
+        </td>
+        <td className="tableBody goodsButton">
+          <button className="deleteButton" onClick={() => deleteGoods(id)}>
+            <p>x</p>
+          </button>
+        </td>
       </tr>
     </tbody>
   );

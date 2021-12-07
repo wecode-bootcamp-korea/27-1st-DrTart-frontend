@@ -41,9 +41,14 @@
         text-align: right;
       }
 
-      &.button {
+      &.goodsButton {
         padding: 10px;
         text-align: center;
+
+        .deleteButton {
+          border: transparent;
+          color: #555555;
+        }
       }
     }
   }

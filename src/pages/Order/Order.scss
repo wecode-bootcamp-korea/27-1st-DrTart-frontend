@@ -56,6 +56,8 @@
       }
     }
     .pageTitle {
+      @include flexCenter;
+
       .orderTitle {
         font-size: 48px;
         margin: 110px 0 0 0;
@@ -69,12 +71,13 @@
     justify-content: center;
     align-items: flex-start;
 
-    .leftSection {
+    .productSection {
       width: 660px;
       height: auto;
 
       .goodsTable {
         width: 100%;
+        margin-bottom: 20px;
         border-top: 1px solid $black;
 
         .goodsTableHead {
@@ -104,6 +107,16 @@
               width: 45px;
             }
           }
+        }
+      }
+
+      .allDeleteButtonWrapper {
+        width: 100%;
+
+        .allDeleteButton {
+          padding: 5px 13px;
+          border: 1px solid $veryLightGrey;
+          font-size: 13px;
         }
       }
     }

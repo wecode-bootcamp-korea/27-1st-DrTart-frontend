@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Goods from './Goods/Goods';
 import './Order.scss';
 
 const Order = () => {
+  const [cartList, setCartList] = useState([]);
+  const [isOrderLoading, setIsOrderLoading] = useState(false);
   const { pageType } = useParams();
+
+  const fetchCartData = async () => {
+    const data = await fetch('/data/cart.json');
+    const res = await data.json();
+    setCartList(res);
+  };
+
+  const deleteGoods = id => {
+    console.log(id);
+    setCartList(cartList.filter(product => product.id !== id));
+  };
+
+  const deleteAllGoods = () => {
+    setCartList([]);
+  };
+
+  useEffect(() => {
+    (async () => {
+      setIsOrderLoading(true);
+      await fetchCartData();
+      setIsOrderLoading(false);
+    })();
+    fetchCartData();
+  }, []);
 
   return (
     <div className="order">
@@ -25,26 +51,45 @@ const Order = () => {
           </ul>
         </div>
         <div className="pageTitle">
-          <div className="title">
-            <h1 className="orderTitle">
-              {pageType === 'cart' && '장바구니'}
-              {pageType === 'check' && '결제진행'}
-            </h1>
-          </div>
+          <h1 className="orderTitle">
+            {pageType === 'cart' && '장바구니'}
+            {pageType === 'check' && '결제진행'}
+          </h1>
         </div>
       </div>
       <div className="pageContent">
-        <section className="leftSection">
+        <section className="productSection">
           <table className="goodsTable">
             <thead className="goodsTableHead">
               <th className="tableHeadElement tableHeadImage" />
-              <th className="tableHeadElement tableHeadGoods">상품</th>
-              <th className="tableHeadElement tableHeadQuantity">수량</th>
-              <th className="tableHeadElement tableHeadPrice">금액</th>
+              <th className="tableHeadElement tableHeadGoods">
+                <p>상품</p>
+              </th>
+              <th className="tableHeadElement tableHeadQuantity">
+                <p>수량</p>
+              </th>
+              <th className="tableHeadElement tableHeadPrice">
+                <p>금액</p>
+              </th>
               <th className="tableHeadElement tableHeadButton" />
             </thead>
-            <Goods />
+            {!isOrderLoading &&
+              cartList.map(
+                ({ id, korean_name, thumbnail_image_url, price }) => (
+                  <Goods
+                    key={id}
+                    id={id}
+                    korean_name={korean_name}
+                    thumbnail_image_url={thumbnail_image_url}
+                    price={price}
+                    deleteGoods={deleteGoods}
+                  />
+                )
+              )}
           </table>
+          <div className="allDeleteButtonWrapper">
+            <button className="allDeleteButton">장바구니 비우기</button>
+          </div>
         </section>
         <div className="orderTotal">
           <div className="sec">
