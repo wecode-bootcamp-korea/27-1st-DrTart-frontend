@@ -34,7 +34,7 @@ const Order = () => {
         </div>
       </div>
       <div className="pageContent">
-        <div className="goodsList">
+        <section className="leftSection">
           <table className="goodsTable">
             <thead className="goodsTableHead">
               <th className="tableHeadElement tableHeadImage" />
@@ -45,7 +45,7 @@ const Order = () => {
             </thead>
             <Goods />
           </table>
-        </div>
+        </section>
         <div className="orderTotal">
           <div className="sec">
             <dl className="pdtPrice">
