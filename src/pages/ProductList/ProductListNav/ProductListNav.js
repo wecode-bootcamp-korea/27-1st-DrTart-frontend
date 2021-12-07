@@ -28,7 +28,7 @@ const ProductListNav = () => {
           제품
         </Link>
         <ul className="productListMenuContainer">
-          <ProductListMenu mainCategory="all_product" />
+          <ProductListMenu mainCategory="all" />
           {!isProductNavLoading &&
             productNavData.map(({ id, name, category }) => (
               <ProductListMenu

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import TERMS_DATA from './SignupData';
 import './Signup.scss';
+import Button from '../../components/Button/Button';
 
 export default function Signup() {
   const [memberInput, setMemberInput] = useState({
@@ -153,7 +154,7 @@ export default function Signup() {
                 type="text"
                 name="name"
                 className={`formInput name ${!nameValid && 'validBorder'}`}
-                placeholder="성  함"
+                placeholder="이름"
                 value={name}
                 onBlur={() => setNameValid(name)}
               />
@@ -174,9 +175,9 @@ export default function Signup() {
                   onBlur={() => setEmailValid(isEmailRegexValid)}
                 />
               </div>
-              <button type="button" className="emailValidBtn">
-                중복확인
-              </button>
+              <div className="btnWrap">
+                <Button btnOnClick={onSignup}>중복확인</Button>
+              </div>
             </li>
             {!emailValid && (
               <li>
@@ -198,7 +199,7 @@ export default function Signup() {
             {!passwordValid && (
               <li>
                 <span className="validText">
-                  공백없이 10~20자로 입력 해주세요.
+                  공백없이 10~20자로 입력해주세요.
                 </span>
               </li>
             )}
@@ -209,7 +210,7 @@ export default function Signup() {
                 className={`formInput passwordRe ${
                   !passwordReValid && 'validBorder'
                 }`}
-                placeholder="패스워드를 다시 입력해 주세요."
+                placeholder="패스워드를 다시 입력해주세요."
                 value={passwordRe}
                 onBlur={validatePasswordRe}
               />
@@ -254,9 +255,7 @@ export default function Signup() {
               </span>
             </li>
             <li>
-              <button type="button" className="submitBtn" onClick={onSignup}>
-                가입하기
-              </button>
+              <Button btnOnClick={onSignup}>가입하기</Button>
             </li>
           </ul>
         </form>

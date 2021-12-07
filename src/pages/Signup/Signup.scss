@@ -95,7 +95,7 @@
     }
 
     .emailWrap {
-      display: flex;
+      @include flexCenter(row, space-between);
     }
 
     li {
@@ -113,9 +113,8 @@
         margin-right: 10px;
       }
 
-      .emailValidBtn {
+      .btnWrap {
         flex-basis: 30%;
-        border: 1px solid $black;
       }
 
       .signTip {
@@ -134,20 +133,6 @@
 
       .veganCheckBox {
         display: none;
-      }
-
-      .submitBtn {
-        width: 100%;
-        padding: 8px 0px;
-        margin-top: 40px;
-        margin-bottom: 100px;
-        cursor: pointer;
-        outline: none;
-        border: 1px solid $black;
-        background-color: $black;
-        color: white;
-        font-size: 16px;
-        font-weight: 600;
       }
     }
   }
