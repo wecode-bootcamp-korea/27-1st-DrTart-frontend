@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Product from '../Product/Product';
 import ImageSlide from './ImageSlide/ImageSlide';
 import ModalBuyNow from '../ModalBuyNow/ModalBuyNow';
-// import { API_ADDRESS } from '../apiConfig';
+import { API_ADDRESS } from '../apiConfig';
 import './ProductsMain.scss';
 
 function ProductsMain() {

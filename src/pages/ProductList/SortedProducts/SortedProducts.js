@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import SortSelectArea from '../../../components/SortSelectArea/SortSelectArea';
 import Product from '../Product/Product';
 import { TRANSELATE } from '../Transelate';
-// import { API_ADDRESS } from '../apiConfig';
+import { API_ADDRESS } from '../apiConfig';
 import './SortedProducts.scss';
 
 const SortedProducts = () => {
@@ -14,17 +14,16 @@ const SortedProducts = () => {
   const fetchData = useCallback(async () => {
     // let address;
     // if (mainCategory === 'all') {
-    //   address = API_ADDRESS.product_main;
+    //   address = API_ADDRESS.product_all;
     // } else {
     //   address = !!subCategory
     //     ? `${API_ADDRESS.products_category}${subCategory}`
     //     : `${API_ADDRESS.products_menu}${mainCategory}`;
     // }
-
     // const data = await fetch(address);
     const data = await fetch('/data/product_data.json');
-
     const res = await data.json();
+
     setProductsList(
       res.product_list.sort(
         (a, b) => Date.parse(b.create_at) - Date.parse(a.create_at)
@@ -55,7 +54,7 @@ const SortedProducts = () => {
           <SortSelectArea adjustList={adjustList} productsList={productsList} />
         </div>
         <div className="sortedProductsContainer">
-          {(mainCategory !== 'all_product'
+          {(mainCategory !== 'all'
             ? productsList.filter(product =>
                 !!subCategory
                   ? product.category.name === mainCategory &&
