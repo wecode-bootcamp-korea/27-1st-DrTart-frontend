@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import '../ProductInfoBox/ProductInfoBox.scss';
+import { Link, useNavigate } from 'react-router-dom';
 import NumBtn from '../ProductInfoBox/NumBtn/NumBtn';
 import Button from '../Button/Button';
-import { useNavigate } from 'react-router';
+import '../ProductInfoBox/ProductInfoBox.scss';
 
 const ProductInfoBox = ({
   category,
@@ -11,9 +11,10 @@ const ProductInfoBox = ({
   price,
   sugarLevel,
   isVegan,
+  cartAndLikeBtn,
 }) => {
   const [numValue, setNumValue] = useState(1);
-  price = 100000;
+
   const minusOne = () => {
     numValue === 1 ? setNumValue(1) : setNumValue(numValue - 1);
   };
@@ -26,7 +27,7 @@ const ProductInfoBox = ({
 
   const navigate = useNavigate();
 
-  const btnOnClick = () => {
+  const addToCart = () => {
     fetch('API주소', {
       method: 'POST',
       body: JSON.stringify({
@@ -49,7 +50,7 @@ const ProductInfoBox = ({
       <h3 className="productName">{koreanName}</h3>
       <p className="infoTag">{category}</p>
       <div className="price">
-        <p className="originPrice">{price.toLocaleString()}</p>
+        <p className="originPrice">{Math.round(price)}</p>
       </div>
       <ul className="tabBar">
         <li className="infoToBuy">구매정보</li>
@@ -68,9 +69,28 @@ const ProductInfoBox = ({
       </div>
       <div className="totalPriceInfo">
         <p className="totalPriceTitle">총 구매금액</p>
-        <p className="totalPrice">{(price * numValue).toLocaleString}</p>
+        <p className="totalPrice">{Math.round(price * numValue)}</p>
       </div>
-      <Button btnOnClick={btnOnClick}>바로구매</Button>
+      <div className="btnWrap">
+        <Link
+          to={{
+            pathname: '/order',
+            state: {
+              productId: productId,
+              koreanName: koreanName,
+              price: price,
+            },
+          }}
+        >
+          <Button>바로구매</Button>
+        </Link>
+        <button className="productCartButton">
+          <i className="fas fa-shopping-cart" />
+        </button>
+        <button className="productLikeButton">
+          <i className="far fa-heart" />
+        </button>
+      </div>
     </div>
   );
 };

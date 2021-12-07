@@ -75,6 +75,7 @@ export default function ProductDetail() {
             koreanName={data.korean_name}
             category={data.category}
             price={data.price}
+            cartAndLikeBtn={true}
           />
         </div>
       </div>
