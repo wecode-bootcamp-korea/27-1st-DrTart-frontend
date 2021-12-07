@@ -12,6 +12,7 @@ const ProductInfoBox = ({
   sugarLevel,
   isVegan,
   cartAndLikeBtn,
+  infoTag,
 }) => {
   const [numValue, setNumValue] = useState(1);
 
@@ -48,7 +49,7 @@ const ProductInfoBox = ({
         {isVegan && <div className="stickerVegan">VEGAN</div>}
       </div>
       <h3 className="productName">{koreanName}</h3>
-      <p className="infoTag">{category}</p>
+      <p className="infoTag">{infoTag}</p>
       <div className="price">
         <p className="originPrice">{Math.round(price)}</p>
       </div>

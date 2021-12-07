@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../ModalBuyNow/ModalBuyNow.scss';
 import ProductInfoBox from '../../../components/ProductInfoBox/ProductInfoBox';
 
-const ModalBuyNow = ({ setIsPopModal }) => {
+const ModalBuyNow = ({ setIsPopModal, infoTag }) => {
   const [dataOfBuyNow, setDataOfBuyNow] = useState([]);
 
   const clickRemoveModal = () => {
@@ -10,9 +10,7 @@ const ModalBuyNow = ({ setIsPopModal }) => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/data/productData.json', {
-      method: 'GET',
-    })
+    fetch('/data/productData.json')
       .then(response => response.json())
       .then(data => {
         setDataOfBuyNow(data);
@@ -43,7 +41,7 @@ const ModalBuyNow = ({ setIsPopModal }) => {
           .map(product => (
             <ProductInfoBox
               koreanName={product.korean_name}
-              category={product.category}
+              infoTag={infoTag}
               price={product.price}
               key={product.id}
             />

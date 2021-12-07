@@ -3,9 +3,6 @@
 .sortSelectArea {
   width: 140px;
   height: 40px;
-  position: absolute;
-  top: 700px;
-  right: 100px;
   text-align: right;
   color: inherit;
 
@@ -20,7 +17,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    // background: url(이미지 경로) no-repeat 95% 50%;
+
     .selectedBox::after {
       position: absolute;
       content: '';

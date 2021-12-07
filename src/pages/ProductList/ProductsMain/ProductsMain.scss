@@ -1,18 +1,31 @@
 @import '../../../styles/variables.scss';
 
 .productsMain {
-  @include flexCenter(column);
+  @include flexCenter(column, center);
+
+  .maskOff {
+    display: none;
+  }
+  .mask {
+    width: 110%;
+    height: 100%;
+    background-color: rgba(34, 34, 34, 0.7);
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    left: -90px;
+  }
 
   .productListHead {
-    @include flexCenter(column);
-    padding: 100px 0 20px;
+    margin: 100px 0 70px 0;
     color: $black;
     font-size: 26px;
-    font-weight: bolder;
+    font-weight: bold;
   }
 
   .productListContainer {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
