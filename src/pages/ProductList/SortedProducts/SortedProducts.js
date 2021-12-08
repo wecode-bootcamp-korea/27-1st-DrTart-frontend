@@ -55,7 +55,7 @@ const SortedProducts = () => {
           <SortSelectArea adjustList={adjustList} productsList={productsList} />
         </div>
         <div className="sortedProductsContainer">
-          {(mainCategory !== 'all_product'
+          {(mainCategory !== 'all'
             ? productsList.filter(product =>
                 !!subCategory
                   ? product.category.name === mainCategory &&
