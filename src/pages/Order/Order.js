@@ -37,7 +37,7 @@ const Order = () => {
         setIsOrderLoading(false);
       })();
     } else {
-      console.log(location.state);
+      // console.log(location.state);
     }
   }, [fetchCartData, pageType, location]);
 
