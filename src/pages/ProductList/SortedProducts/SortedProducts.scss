@@ -4,6 +4,21 @@
   @include flexCenter(column, center);
   padding: 0 60px;
 
+  .maskOff {
+    display: none;
+  }
+
+  .mask {
+    width: 110%;
+    height: 100%;
+    background-color: rgba(34, 34, 34, 0.7);
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    left: -90px;
+  }
+
   .sortedProductsHead {
     @include flexCenter(row, space-between);
     width: 100%;
