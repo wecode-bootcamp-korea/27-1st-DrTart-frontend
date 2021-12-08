@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Goods from './Goods/Goods';
-// import { API_ADDRESS } from '../ProductList/apiConfig';
+import { API_ADDRESS } from '../../apiConfig';
 import './Order.scss';
 
 const Order = () => {
@@ -10,38 +10,90 @@ const Order = () => {
   const [isOrderLoading, setIsOrderLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const { pageType } = useParams();
+  const location = useLocation();
+  let token = localStorage.getItem('TOKEN') || '';
 
   const fetchCartData = useCallback(async () => {
-    // const data = await fetch(API_ADDRESS.order_cart, {
-    //   method: 'POST',
-    //   body: JSON.stringify({}),
-    // });
-    const data = await fetch('/data/cart.json');
-    const res = await data.json();
-    setCartList(res);
-    res.forEach(({ price, quantity }) => {
-      setTotalPrice(prev => prev + price * quantity);
+    const data = await fetch(API_ADDRESS.order_cart, {
+      headers: { Authorization: token },
     });
-  }, []);
+    // const data = await fetch('/data/cart.json');
+    const res = await data.json();
+    if (res.cart_info) {
+      setCartList(() => res.cart_info);
+      res.cart_info.forEach(({ price, quantity }) => {
+        setTotalPrice(prev => prev + price * quantity);
+      });
+    } else {
+      setCartList(() => []);
+    }
+  }, [token]);
 
   useEffect(() => {
-    (async () => {
-      setIsOrderLoading(true);
-      await fetchCartData();
-      setIsOrderLoading(false);
-    })();
-  }, [fetchCartData]);
+    if (pageType === 'cart') {
+      (async () => {
+        setIsOrderLoading(true);
+        await fetchCartData();
+        setIsOrderLoading(false);
+      })();
+    } else {
+      console.log(location.state);
+    }
+  }, [fetchCartData, pageType, location]);
 
-  const deleteGoods = id => {
-    setCartList(cartList.filter(product => product.id !== id));
-  };
+  const adjustCart = (id, quantity) => {
+    let adjustedList = [];
+    let differ = 0;
+    let productId = 0;
+    cartList.forEach(product => {
+      if (product.cart_id === id) {
+        differ = quantity - product.quantity;
+        productId = product.product_id;
+        adjustedList.push({ ...product, quantity: quantity });
+      } else {
+        adjustedList.push({ ...product });
+      }
+    });
+    setCartList(adjustedList);
 
-  const deleteAllGoods = () => {
-    setCartList([]);
+    fetch(API_ADDRESS.order_cart, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        product_id: productId,
+        quantity: differ,
+      }),
+    });
   };
 
   const adjustTotalPrice = (type, price) => {
     setTotalPrice(prev => (type === 'minus' ? prev - price : prev + price));
+  };
+
+  const deleteGoods = id => {
+    const [targetToDelete] = cartList.filter(product => product.cart_id === id);
+    adjustTotalPrice('minus', targetToDelete.price * targetToDelete.quantity);
+    setCartList(cartList.filter(product => product.cart_id !== id));
+
+    fetch(API_ADDRESS.order_cart, {
+      method: 'DELETE',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        cart: id,
+      }),
+    });
+  };
+
+  const deleteAllGoods = async () => {
+    const targetIndex = cartList.map(product => product.cart_id);
+    for (let index of targetIndex) {
+      deleteGoods(index);
+    }
+    setCartList([]);
   };
 
   return (
@@ -88,11 +140,12 @@ const Order = () => {
             {!isOrderLoading &&
               cartList.map(product => (
                 <Goods
-                  key={product.id}
+                  key={product.cart_id}
                   product={product}
                   pageType={pageType}
                   deleteGoods={deleteGoods}
                   adjustTotalPrice={adjustTotalPrice}
+                  adjustCart={adjustCart}
                 />
               ))}
           </table>
@@ -108,13 +161,13 @@ const Order = () => {
           <div className="orderInfoContainer">
             <dl className="pdtPrice">
               <dt>총 상품 금액</dt>
-              <dd>{totalPrice}</dd>
+              <dd>{totalPrice}원</dd>
             </dl>
           </div>
           <div className="orderInfoContainer">
             <dl className="payPrice">
               <dt>최종 결제 금액</dt>
-              <dd className="payPriceNum">{totalPrice}</dd>
+              <dd className="payPriceNum">{totalPrice}원</dd>
             </dl>
           </div>
           {pageType !== 'cart' && (
@@ -142,9 +195,15 @@ const Order = () => {
           )}
 
           <div className="orderCheckButtonWrapper">
-            <Button>
-              {pageType === 'cart' ? '선택상품 주문하기' : '결제하기'}
-            </Button>
+            {pageType === 'cart' ? (
+              <Link to="/order/check" state={{ cartList }}>
+                <Button> 장바구니 상품 주문</Button>
+              </Link>
+            ) : (
+              <Link to="/order/check" state={cartList}>
+                <Button>결제하기</Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
