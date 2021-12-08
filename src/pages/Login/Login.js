@@ -39,20 +39,23 @@ function Login() {
   };
 
   const onSignIn = () => {
-    onValidation();
+    fetch('http://10.58.6.3:8000/users/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: idInputRef.current.value,
+        password: pwInputRef.current.value,
+      }),
+    })
+      .then(response => response.json())
+      .then(res => {
+        if (res.message === 'SUCCESS') {
+          localStorage.setItem('TOKEN', res.access_token);
+          onValidation();
+        } else {
+          alertEachValid();
+        }
+      });
   };
-
-  // const onSignIn = () => {
-  //   fetch('http://10.58.6.3:8000/users/signin', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       email: idInputRef.current.value,
-  //       password: pwInputRef.current.value,
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => result.message === 'SUCCESS' && onValidation());
-  // };
 
   const onSignUp = () => {
     navigate('/signup');
