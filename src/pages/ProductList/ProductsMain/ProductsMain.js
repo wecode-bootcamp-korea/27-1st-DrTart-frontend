@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Product from '../Product/Product';
 import ImageSlide from './ImageSlide/ImageSlide';
 import ModalBuyNow from '../ModalBuyNow/ModalBuyNow';
-// import { API_ADDRESS } from '../../../apiConfig';
+import { API_ADDRESS } from '../../../apiConfig';
 import './ProductsMain.scss';
 
 function ProductsMain() {
@@ -17,8 +17,8 @@ function ProductsMain() {
   };
 
   const fetchData = async () => {
-    // const data = await fetch(API_ADDRESS.product_main);
-    const data = await fetch('/data/product_data.json');
+    const data = await fetch(API_ADDRESS.product_main);
+    // const data = await fetch('/data/product_data.json');
     const res = await data.json();
     setProductsList(res.product_list);
   };

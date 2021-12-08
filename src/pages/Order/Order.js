@@ -37,7 +37,7 @@ const Order = () => {
         setIsOrderLoading(false);
       })();
     } else {
-      // console.log(location.state);
+      setCartList(location.state.cartList);
     }
   }, [fetchCartData, pageType, location]);
 
@@ -94,6 +94,31 @@ const Order = () => {
       deleteGoods(index);
     }
     setCartList([]);
+  };
+
+  const onOrder = () => {
+    const orderTable = cartList.map(product => ({
+      product_id: product.product_id,
+      quantity: product.quantity,
+    }));
+
+    fetch(API_ADDRESS.order_checkout, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify(orderTable),
+    });
+  };
+
+  const onPayment = () => {
+    fetch(API_ADDRESS.order_checkout, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify(),
+    });
   };
 
   return (
@@ -197,11 +222,11 @@ const Order = () => {
           <div className="orderCheckButtonWrapper">
             {pageType === 'cart' ? (
               <Link to="/order/check" state={{ cartList }}>
-                <Button> 장바구니 상품 주문</Button>
+                <Button btnOnClick={onOrder}>장바구니 상품 주문</Button>
               </Link>
             ) : (
-              <Link to="/order/check" state={cartList}>
-                <Button>결제하기</Button>
+              <Link to="/order/check">
+                <Button btnOnClick={onPayment}>결제하기</Button>
               </Link>
             )}
           </div>
