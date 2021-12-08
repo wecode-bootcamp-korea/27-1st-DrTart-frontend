@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NumBtn from '../../../components/ProductInfoBox/NumBtn/NumBtn';
 import './Goods.scss';
 
 const Goods = ({
-  product: { id, korean_name, thumbnail_image_url, price, quantity },
+  product: { cart_id, korean_name, thumbnail_image_url, price, quantity },
   pageType,
   deleteGoods,
   adjustTotalPrice,
+  adjustCart,
 }) => {
-  const [currentQuantity, setCurrentQuantity] = useState(quantity);
-
   const adjustQuantity = operator => {
     if (operator === 'minus') {
-      if (currentQuantity > 1) {
-        setCurrentQuantity(prev => prev - 1);
+      if (quantity > 1) {
+        adjustCart(cart_id, quantity - 1);
         adjustTotalPrice(operator, price);
       }
     } else if (operator === 'plus') {
-      setCurrentQuantity(prev => prev + 1);
+      adjustCart(cart_id, quantity + 1);
       adjustTotalPrice(operator, price);
     }
   };
@@ -42,18 +41,21 @@ const Goods = ({
             <NumBtn
               minusOne={() => adjustQuantity('minus')}
               plusOne={() => adjustQuantity('plus')}
-              numValue={currentQuantity}
+              numValue={quantity}
             />
           ) : (
             quantity
           )}
         </td>
         <td className="tableBody price">
-          <p>{price * currentQuantity}원</p>
+          <p>{price * quantity}원</p>
         </td>
         <td className="tableBody goodsButton">
           {pageType === 'cart' && (
-            <button className="deleteButton" onClick={() => deleteGoods(id)}>
+            <button
+              className="deleteButton"
+              onClick={() => deleteGoods(cart_id)}
+            >
               <p>x</p>
             </button>
           )}
