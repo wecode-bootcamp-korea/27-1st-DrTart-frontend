@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NumBtn from '../../../components/ProductInfoBox/NumBtn/NumBtn';
 import './Goods.scss';
 
 const Goods = ({
-  product: { id, korean_name, thumbnail_image_url, price, quantity },
+  product: { cart_id, korean_name, thumbnail_image_url, price, quantity },
   pageType,
   deleteGoods,
   adjustTotalPrice,
@@ -12,11 +12,11 @@ const Goods = ({
   const adjustQuantity = operator => {
     if (operator === 'minus') {
       if (quantity > 1) {
-        adjustCart(id, quantity - 1);
+        adjustCart(cart_id, quantity - 1);
         adjustTotalPrice(operator, price);
       }
     } else if (operator === 'plus') {
-      adjustCart(id, quantity + 1);
+      adjustCart(cart_id, quantity + 1);
       adjustTotalPrice(operator, price);
     }
   };
@@ -52,7 +52,10 @@ const Goods = ({
         </td>
         <td className="tableBody goodsButton">
           {pageType === 'cart' && (
-            <button className="deleteButton" onClick={() => deleteGoods(id)}>
+            <button
+              className="deleteButton"
+              onClick={() => deleteGoods(cart_id)}
+            >
               <p>x</p>
             </button>
           )}

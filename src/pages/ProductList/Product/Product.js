@@ -1,9 +1,25 @@
 import React from 'react';
-import './Product.scss';
-import Button from '../../../components/Button/Button';
 import { Link } from 'react-router-dom';
+import Button from '../../../components/Button/Button';
+import { API_ADDRESS } from '../../../apiConfig';
+import './Product.scss';
 
 const Product = ({ el, id, btnOnClick }) => {
+  let token = localStorage.getItem('TOKEN');
+
+  const addCartElement = () => {
+    fetch(API_ADDRESS.order_cart, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        product_id: id,
+        quantity: 1,
+      }),
+    });
+  };
+
   return (
     <div className="product">
       <div className="stickerWrap">
@@ -31,7 +47,7 @@ const Product = ({ el, id, btnOnClick }) => {
           <Button btnOnClick={event => btnOnClick(el)} point={true}>
             바로구매
           </Button>
-          <div className="smallBtn">
+          <div className="smallBtn" onClick={addCartElement}>
             <button className="productCartButton">
               <i className="fas fa-shopping-cart" />
             </button>

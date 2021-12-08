@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
-import { API_ADDRESS } from '../ProductList/apiConfig';
 import Goods from './Goods/Goods';
 // import { API_ADDRESS } from '../ProductList/apiConfig';
 import './Order.scss';
@@ -11,18 +10,22 @@ const Order = () => {
   const [isOrderLoading, setIsOrderLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const { pageType } = useParams();
-  let token = localStorage.getItem('TOKEN') || '';
+  // let token = localStorage.getItem('TOKEN') || '';
 
   const fetchCartData = useCallback(async () => {
     // const data = await fetch(API_ADDRESS.order_cart, {
-    //   headers: { token: token },
+    //   headers: { Authorization: token },
     // });
     const data = await fetch('/data/cart.json');
     const res = await data.json();
-    setCartList(res.cart_info);
-    res.cart_info.forEach(({ price, quantity }) => {
-      setTotalPrice(prev => prev + price * quantity);
-    });
+    if (res.cart_info) {
+      setCartList(() => res.cart_info);
+      res.cart_info.forEach(({ price, quantity }) => {
+        setTotalPrice(prev => prev + price * quantity);
+      });
+    } else {
+      setCartList(() => []);
+    }
   }, []);
 
   useEffect(() => {
@@ -34,42 +37,57 @@ const Order = () => {
   }, [fetchCartData]);
 
   const adjustCart = (id, quantity) => {
-    setCartList(() =>
-      cartList.map(cart =>
-        cart.id === id ? { ...cart, quantity: quantity } : { ...cart }
-      )
-    );
+    let adjustedList = [];
+    // let differ = 0;
+    // let productId = 0;
+    cartList.forEach(product => {
+      if (product.cart_id === id) {
+        // differ = quantity - product.quantity;
+        // productId = product.product_id;
+        adjustedList.push({ ...product, quantity: quantity });
+      } else {
+        adjustedList.push({ ...product });
+      }
+    });
+    setCartList(adjustedList);
+
+    // fetch(API_ADDRESS.order_cart, {
+    //   method: 'POST',
+    //   headers: {
+    //     Authorization: token,
+    //   },
+    //   body: JSON.stringify({
+    //     product_id: productId,
+    //     quantity: differ,
+    //   }),
+    // });
   };
 
   const adjustTotalPrice = (type, price) => {
     setTotalPrice(prev => (type === 'minus' ? prev - price : prev + price));
   };
 
-  const deleteGoods = async id => {
-    const [temp] = cartList.filter(product => product.id === id);
-    setCartList(cartList.filter(product => product.id !== id));
-    adjustTotalPrice('minus', temp.price * temp.quantity);
-    // await fetch(API_ADDRESS.order_cart, {
-    //   method: 'POST',
+  const deleteGoods = id => {
+    const [targetToDelete] = cartList.filter(product => product.cart_id === id);
+    adjustTotalPrice('minus', targetToDelete.price * targetToDelete.quantity);
+    setCartList(cartList.filter(product => product.cart_id !== id));
+
+    // fetch(API_ADDRESS.order_cart, {
+    //   method: 'DELETE',
     //   headers: {
-    //     token: token,
+    //     Authorization: token,
     //   },
     //   body: JSON.stringify({
-    //     cart_id: id,
+    //     cart: id,
     //   }),
     // });
   };
 
   const deleteAllGoods = async () => {
-    // const [temp] =
-    // for (let goods of cartList) {
-    //   const data = await fetch(API_ADDRESS.order_cart, {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //       token: token,
-    //     }),
-    //   });
-    // }
+    const targetIndex = cartList.map(product => product.cart_id);
+    for (let index of targetIndex) {
+      deleteGoods(index);
+    }
     setCartList([]);
   };
 
@@ -117,7 +135,7 @@ const Order = () => {
             {!isOrderLoading &&
               cartList.map(product => (
                 <Goods
-                  key={product.id}
+                  key={product.cart_id}
                   product={product}
                   pageType={pageType}
                   deleteGoods={deleteGoods}
