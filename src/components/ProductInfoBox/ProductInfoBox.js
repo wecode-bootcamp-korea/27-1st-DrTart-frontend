@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NumBtn from '../ProductInfoBox/NumBtn/NumBtn';
 import Button from '../Button/Button';
-import { API_ADDRESS } from '../../pages/ProductList/apiConfig';
+import { API_ADDRESS } from '../../apiConfig';
 import '../ProductInfoBox/ProductInfoBox.scss';
 
 const ProductInfoBox = ({
@@ -26,13 +26,18 @@ const ProductInfoBox = ({
     setNumValue(numValue + 1);
   };
 
+  const tokenValid = () => {
+    return token ? '' : alert('로그인이 필요합니다.');
+  };
+  const goCheckValid = token ? '/order/check' : '/login';
+
   const totalPrice = price * numValue;
 
   const navigate = useNavigate();
 
   const addToCart = () => {
     if (token) {
-      fetch(`${API_ADDRESS.order_cart}`, {
+      fetch(API_ADDRESS.order_cart, {
         method: 'POST',
         headers: {
           Authorization: token,
@@ -47,6 +52,7 @@ const ProductInfoBox = ({
         .then(navigate('/order/cart'));
     } else {
       alert('로그인이 필요합니다.');
+      navigate('/login');
     }
   };
 
@@ -83,15 +89,22 @@ const ProductInfoBox = ({
       <div className="btnWrap">
         <div className="buyBtn">
           <Link
-            to="/order/check"
+            to={goCheckValid}
             state={{
-              koreanName: koreanName,
-              quantity: numValue,
-              price: price,
-              thumbnailImg: thumbnailImg,
+              cartList: [
+                {
+                  product_id: productId,
+                  korean_name: koreanName,
+                  quantity: numValue,
+                  price: price,
+                  thumbnail_image_url: thumbnailImg,
+                },
+              ],
             }}
           >
-            <Button point={true}>바로구매</Button>
+            <Button point={true} btnOnClick={tokenValid}>
+              바로구매
+            </Button>
           </Link>
         </div>
         {cartAndLikeBtn && (

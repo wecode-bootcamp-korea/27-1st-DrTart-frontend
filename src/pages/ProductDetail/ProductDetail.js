@@ -4,17 +4,17 @@ import SlickThumbnail from './SlickThumbnail';
 import ProductListNav from '../ProductList/ProductListNav/ProductListNav';
 import ProductReview from './ProductReview/ProductReview';
 import ProductInfoBox from '../../components/ProductInfoBox/ProductInfoBox';
-import { API_ADDRESS } from '../ProductList/apiConfig';
+import { API_ADDRESS } from '../../apiConfig';
 import './ProductDetail.scss';
 
 export default function ProductDetail() {
+  window.scrollTo(0, 0);
   const params = useParams();
   const [data, setData] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     fetch(API_ADDRESS.products + params.id)
-      // fetch('/data/product_detail_data.json')
       .then(res => res.json())
       .then(res => {
         setData(res.product_list);

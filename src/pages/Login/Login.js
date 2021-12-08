@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import '../Login/Login.scss';
+import { API_ADDRESS } from '../../apiConfig';
 import InputInterface from './InputInterface/InputInterface';
 import Button from '../../components/Button/Button';
+import '../Login/Login.scss';
 
 function Login() {
   const idInputRef = useRef();
@@ -35,11 +36,11 @@ function Login() {
   const navigate = useNavigate();
 
   const onValidation = () => {
-    validateId() && validatePw() ? navigate('/product_list') : alertEachValid();
+    validateId() && validatePw() ? navigate('/') : alertEachValid();
   };
 
   const onSignIn = () => {
-    fetch('http://10.58.1.116:8000/users/signin', {
+    fetch(API_ADDRESS.sign_in, {
       method: 'POST',
       body: JSON.stringify({
         email: idInputRef.current.value,

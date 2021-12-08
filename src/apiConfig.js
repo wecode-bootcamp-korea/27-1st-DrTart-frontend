@@ -7,4 +7,7 @@ export const API_ADDRESS = {
   products_menu: `${BASE_URL}/products?menu=`,
   products_category: `${BASE_URL}/products?category=`,
   order_cart: `${BASE_URL}/orders/cart`,
+  sign_in: `${BASE_URL}/users/signin`,
+  sign_up: `${BASE_URL}/users/signup`,
+  id_check: `${BASE_URL}/users/idcheck`,
 };
