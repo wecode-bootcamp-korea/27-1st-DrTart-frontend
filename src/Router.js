@@ -23,6 +23,7 @@ const Router = () => {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/order/:pageType" element={<Order />} />
+          <Route path="/signupdone" element={<SignupDone />} />
         </Routes>
         <Footer />
       </div>

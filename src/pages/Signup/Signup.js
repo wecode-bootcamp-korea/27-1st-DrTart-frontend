@@ -69,6 +69,21 @@ export default function Signup() {
 
   const navigate = useNavigate();
 
+  function emailCheck() {
+    fetch('http://10.58.6.3:8000/users/idcheck', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: email,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        result.message === 'EMAIL_EXISTS'
+          ? alert('이미 존재하는 이메일입니다.')
+          : alert('사용가능한 이메일입니다.');
+      });
+  }
+
   function onSignup() {
     if (submitValid) {
       fetch('http://10.58.6.3:8000/users/signup', {
@@ -82,10 +97,13 @@ export default function Signup() {
         }),
       })
         .then(response => response.json())
-        .then(result => result.message === 'SUCCESS')
-        .then(navigate('/product'));
+        .then(result =>
+          result.message === 'SUCCESS'
+            ? navigate('/signupdone')
+            : alert('가입실패')
+        );
     } else {
-      alert('실패');
+      alert('가입 형식을 확인해주세요.');
     }
   }
 
@@ -176,7 +194,7 @@ export default function Signup() {
                 />
               </div>
               <div className="btnWrap">
-                <Button btnOnClick={onSignup}>중복확인</Button>
+                <Button btnOnClick={emailCheck}>중복확인</Button>
               </div>
             </li>
             {!emailValid && (
