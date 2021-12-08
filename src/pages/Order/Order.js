@@ -14,10 +14,10 @@ const Order = () => {
   let token = localStorage.getItem('TOKEN') || '';
 
   const fetchCartData = useCallback(async () => {
-    const data = await fetch(API_ADDRESS.order_cart, {
-      headers: { Authorization: token },
-    });
-    // const data = await fetch('/data/cart.json');
+    // const data = await fetch(API_ADDRESS.order_cart, {
+    //   headers: { Authorization: token },
+    // });
+    const data = await fetch('/data/cart.json');
     const res = await data.json();
     if (res.cart_info) {
       setCartList(() => res.cart_info);
@@ -27,7 +27,7 @@ const Order = () => {
     } else {
       setCartList(() => []);
     }
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     if (pageType === 'cart') {
@@ -111,16 +111,6 @@ const Order = () => {
     });
   };
 
-  const onPayment = () => {
-    fetch(API_ADDRESS.order_checkout, {
-      method: 'POST',
-      headers: {
-        Authorization: token,
-      },
-      body: JSON.stringify(),
-    });
-  };
-
   return (
     <div className="order">
       <div className="pageTitleArea">
@@ -148,36 +138,49 @@ const Order = () => {
       </div>
       <div className="pageContent">
         <section className="productSection">
-          <table className="goodsTable">
-            <thead className="goodsTableHead">
-              <th className="tableHeadElement tableHeadImage" />
-              <th className="tableHeadElement tableHeadGoods">
-                <p>상품</p>
-              </th>
-              <th className="tableHeadElement tableHeadQuantity">
-                <p>수량</p>
-              </th>
-              <th className="tableHeadElement tableHeadPrice">
-                <p>금액</p>
-              </th>
-              <th className="tableHeadElement tableHeadButton" />
-            </thead>
-            {!isOrderLoading &&
-              cartList.map(product => (
-                <Goods
-                  key={product.cart_id}
-                  product={product}
-                  pageType={pageType}
-                  deleteGoods={deleteGoods}
-                  adjustTotalPrice={adjustTotalPrice}
-                  adjustCart={adjustCart}
-                />
-              ))}
-          </table>
+          {cartList.length ? (
+            !isOrderLoading && (
+              <table className="goodsTable">
+                <thead className="goodsTableHead">
+                  <th className="tableHeadElement tableHeadImage" />
+                  <th className="tableHeadElement tableHeadGoods">
+                    <p>상품</p>
+                  </th>
+                  <th className="tableHeadElement tableHeadQuantity">
+                    <p>수량</p>
+                  </th>
+                  <th className="tableHeadElement tableHeadPrice">
+                    <p>금액</p>
+                  </th>
+                  <th className="tableHeadElement tableHeadButton" />
+                </thead>
+                {cartList.map(product => (
+                  <Goods
+                    key={product.cart_id}
+                    product={product}
+                    pageType={pageType}
+                    deleteGoods={deleteGoods}
+                    adjustTotalPrice={adjustTotalPrice}
+                    adjustCart={adjustCart}
+                  />
+                ))}
+              </table>
+            )
+          ) : (
+            <div className="nullContentTable">
+              <p>장바구니에 담긴 상품이 없습니다.</p>
+            </div>
+          )}
           {pageType === 'cart' && (
-            <div className="allDeleteButtonContainer">
-              <div className="allDeleteButtonWrapper">
-                <Button btnOnClick={deleteAllGoods}>장바구니 비우기</Button>
+            <div className="cartButtonContainer">
+              <div className="cartButtonWrapper">
+                {cartList.length ? (
+                  <Button btnOnClick={deleteAllGoods}>장바구니 비우기</Button>
+                ) : (
+                  <Link to="/product-list">
+                    <Button>쇼핑 계속하기</Button>
+                  </Link>
+                )}
               </div>
             </div>
           )}
@@ -222,11 +225,11 @@ const Order = () => {
           <div className="orderCheckButtonWrapper">
             {pageType === 'cart' ? (
               <Link to="/order/check" state={{ cartList }}>
-                <Button btnOnClick={onOrder}>장바구니 상품 주문</Button>
+                <Button>장바구니 상품 주문</Button>
               </Link>
             ) : (
-              <Link to="/order/check">
-                <Button btnOnClick={onPayment}>결제하기</Button>
+              <Link to="/order/">
+                <Button btnOnClick={onOrder}>결제하기</Button>
               </Link>
             )}
           </div>
