@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NumBtn from '../ProductInfoBox/NumBtn/NumBtn';
 import Button from '../Button/Button';
+import { API_ADDRESS } from '../../pages/ProductList/apiConfig';
 import '../ProductInfoBox/ProductInfoBox.scss';
 
 const ProductInfoBox = ({
@@ -12,8 +13,10 @@ const ProductInfoBox = ({
   infoTag,
   isVegan,
   cartAndLikeBtn,
+  thumbnailImg,
 }) => {
   const [numValue, setNumValue] = useState(1);
+  let token = localStorage.getItem('TOKEN');
 
   const minusOne = () => {
     numValue === 1 ? setNumValue(1) : setNumValue(numValue - 1);
@@ -28,17 +31,23 @@ const ProductInfoBox = ({
   const navigate = useNavigate();
 
   const addToCart = () => {
-    fetch('API주소', {
-      method: 'POST',
-      body: JSON.stringify({
-        productId: productId,
-        korean_name: koreanName,
-        price: totalPrice,
-      }),
-    })
-      .then(response => response.json())
-      .then(result => result.message === 'SUCCESS')
-      .then(navigate('./'));
+    if (token) {
+      fetch(`${API_ADDRESS.order_cart}`, {
+        method: 'POST',
+        headers: {
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          product_id: productId,
+          quantity: numValue,
+        }),
+      })
+        .then(response => response.json())
+        .then(result => result.message === 'SUCCESS')
+        .then(navigate('/order/cart'));
+    } else {
+      alert('로그인이 필요합니다.');
+    }
   };
 
   return (
@@ -69,16 +78,17 @@ const ProductInfoBox = ({
       </div>
       <div className="totalPriceInfo">
         <p className="totalPriceTitle">총 구매금액</p>
-        <p className="totalPrice">{Math.round(price * numValue)}</p>
+        <p className="totalPrice">{Math.round(totalPrice)}</p>
       </div>
       <div className="btnWrap">
         <div className="buyBtn">
           <Link
-            to={{
-              pathname: '/login',
-              state: {
-                koreanName: { koreanName },
-              },
+            to="/order/check"
+            state={{
+              koreanName: koreanName,
+              quantity: numValue,
+              price: price,
+              thumbnailImg: thumbnailImg,
             }}
           >
             <Button point={true}>바로구매</Button>
