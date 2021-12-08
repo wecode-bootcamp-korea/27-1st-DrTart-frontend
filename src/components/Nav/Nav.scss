@@ -1,5 +1,23 @@
 @import '../../styles/variables.scss';
 
+@keyframes openSlide {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes closeSlide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .sideNav {
   .basicNav {
     @include flexCenter(column, space-between);
@@ -23,7 +41,6 @@
       width: 48px;
       height: 48px;
       border-color: transparent;
-
       font-size: 32px;
       color: $black;
       cursor: pointer;
@@ -44,7 +61,7 @@
     }
   }
 
-  .extentionNav {
+  .extensionNav {
     @include flexCenter(column, space-between);
     position: fixed;
     left: 88px;
@@ -56,14 +73,14 @@
     border-right: 1px solid $veryLightGrey;
     opacity: 1;
     z-index: 998;
-    transition: 1.6s;
+    transition: all 1s ease-in-out;
 
     &.toggledNav {
       left: -270px;
       opacity: 0;
     }
 
-    .extentionNavContainer {
+    .extensionNavContainer {
       margin-left: -56px;
 
       .tartLogo {
@@ -73,14 +90,15 @@
         font-weight: 900;
       }
 
-      .extentionNavButtonWrapper {
+      .extensionNavButtonWrapper {
         padding-inline-start: 4px;
 
-        .extentionNavButton {
+        .extensionNavButton {
           margin: 22px 0;
           color: grey;
           font-size: 22px;
           font-weight: 600;
+          cursor: pointer;
 
           &:hover {
             color: black;
@@ -88,5 +106,20 @@
         }
       }
     }
+  }
+  .maskOff {
+    display: none;
+    animation: closeSlide 0.7s ease-in-out;
+  }
+  &.maskOn {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 34, 34, 0.7);
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    left: -90px;
+    animation: openSlide 0.7s ease-in-out;
   }
 }
