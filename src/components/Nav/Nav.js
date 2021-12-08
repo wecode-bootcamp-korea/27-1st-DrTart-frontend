@@ -11,25 +11,23 @@ const Nav = () => {
 
   return (
     <nav className="sideNav">
-      <div className={`basicNav ${isExtended ? 'toggledNav' : ''}`}>
-        <button className="navButton home">
-          <i className="fas fa-plus" />
-        </button>
-        <button
-          className="navButton toggle"
-          type="checkbox"
-          onClick={onNavToggled}
-        >
+      <div className={`basicNav ${isExtended && 'toggledNav'}`}>
+        <Link to="/">
+          <button className="navButton home">
+            <i className="fas fa-plus" />
+          </button>
+        </Link>
+
+        <button className="navButton" type="checkbox" onClick={onNavToggled}>
           <i className="fas fa-bars" />
         </button>
         <div className="dummyElement" />
         <div className="navButtonContainer">
-          <button className="navButton">
-            <i className="fas fa-shopping-cart" />
-          </button>
-          <button className="navButton">
-            <i className="fas fa-search" />
-          </button>
+          <Link to="/order/cart">
+            <button className="navButton">
+              <i className="fas fa-shopping-cart" />
+            </button>
+          </Link>
           <Link to="/login">
             <button className="navButton signInOut">
               <i className="fas fa-sign-out-alt" />
@@ -37,17 +35,19 @@ const Nav = () => {
           </Link>
         </div>
       </div>
-      <nav className={`extentionNav ${isExtended ? '' : 'toggledNav'}`}>
-        <div className="extentionNavContainer">
+      <nav className={`extensionNav ${isExtended ? '' : 'toggledNav'}`}>
+        <div className="extensionNavContainer">
           <h1 className="tartLogo">Dr.Tart+</h1>
-          <ul className="extentionNavButtonWrapper">
+          <ul className="extensionNavButtonWrapper">
             <Link to="/product-list">
-              <li className="extentionNavButton">제품</li>
+              <li className="extensionNavButton">제품</li>
             </Link>
-            <li className="extentionNavButton">마이페이지</li>
+            <li className="extensionNavButton">브랜드</li>
+            <li className="extensionNavButton">스토리</li>
           </ul>
         </div>
       </nav>
+      <div className={`maskOff ${isExtended && 'maskOn'}`} />
     </nav>
   );
 };

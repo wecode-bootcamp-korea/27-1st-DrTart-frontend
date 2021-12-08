@@ -1,11 +1,12 @@
 @import '../../../../../styles/variables.scss';
 
 .slickDot {
+  @include flexCenter;
   margin: 4px;
 
   .dotButton {
-    width: 16px;
-    height: 16px;
+    width: 8px;
+    height: 8px;
     background-color: $grey;
     border-color: transparent;
     border-radius: 8px;

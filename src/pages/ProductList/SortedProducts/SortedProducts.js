@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import SortSelectArea from '../../../components/SortSelectArea/SortSelectArea';
+import SortSelectArea from '../ProductsSorted/SortSelectArea/SortSelectArea';
 import Product from '../Product/Product';
 import ModalBuyNow from '../ModalBuyNow/ModalBuyNow';
 import { TRANSELATE } from '../Transelate';

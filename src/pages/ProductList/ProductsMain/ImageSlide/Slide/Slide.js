@@ -18,7 +18,9 @@ const Slide = ({ slideId, imgUrl }) => {
 
   return (
     <div className={`slide ${animation}`}>
-      <img src={imgUrl} alt={`slide${slideId}`} className="slideImg" />
+      <div className="imgOverflow">
+        <img src={imgUrl} alt={`slide${slideId}`} className="slideImg" />
+      </div>
     </div>
   );
 };
