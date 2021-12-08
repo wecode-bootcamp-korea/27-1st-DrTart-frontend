@@ -6,4 +6,5 @@ export const API_ADDRESS = {
   products: `${BASE_URL}/products/`,
   products_menu: `${BASE_URL}/products?menu=`,
   products_category: `${BASE_URL}/products?category=`,
+  order_cart: `${BASE_URL}/orders/cart`,
 };

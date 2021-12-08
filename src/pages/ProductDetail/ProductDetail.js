@@ -73,8 +73,11 @@ export default function ProductDetail() {
         <div className="productInfo">
           <ProductInfoBox
             koreanName={data.korean_name}
-            category={data.category}
+            sugarLevel={data.sugar_level}
             price={data.price}
+            infoTag={data.description}
+            isVegan={data.vegan_or_not}
+            cartAndLikeBtn={true}
           />
         </div>
       </div>

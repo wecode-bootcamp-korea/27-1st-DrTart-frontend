@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
-import '../ProductInfoBox/ProductInfoBox.scss';
+import { Link, useNavigate } from 'react-router-dom';
 import NumBtn from '../ProductInfoBox/NumBtn/NumBtn';
 import Button from '../Button/Button';
-import { useNavigate } from 'react-router';
+import '../ProductInfoBox/ProductInfoBox.scss';
 
-const ProductInfoBox = ({ koreanName, infoTag, price }) => {
+const ProductInfoBox = ({
+  productId,
+  koreanName,
+  sugarLevel,
+  price,
+  infoTag,
+  isVegan,
+  cartAndLikeBtn,
+}) => {
   const [numValue, setNumValue] = useState(1);
 
   const minusOne = () => {
@@ -15,22 +23,34 @@ const ProductInfoBox = ({ koreanName, infoTag, price }) => {
     setNumValue(numValue + 1);
   };
 
+  const totalPrice = price * numValue;
+
   const navigate = useNavigate();
 
-  const btnOnClick = () => {
-    navigate('./');
+  const addToCart = () => {
+    fetch('API주소', {
+      method: 'POST',
+      body: JSON.stringify({
+        productId: productId,
+        korean_name: koreanName,
+        price: totalPrice,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => result.message === 'SUCCESS')
+      .then(navigate('./'));
   };
 
   return (
     <div className="productInfoBox">
       <div className="stickerWrap">
         <div className="stickerBest">BEST</div>
-        <div className="stickerVegan">VEGAN</div>
+        {isVegan && <div className="stickerVegan">VEGAN</div>}
       </div>
       <h3 className="productName">{koreanName}</h3>
       <p className="infoTag">{infoTag}</p>
       <div className="price">
-        <p className="originPrice">{price.toLocaleString()}</p>
+        <p className="originPrice">{Math.round(price)}</p>
       </div>
       <ul className="tabBar">
         <li className="infoToBuy">구매정보</li>
@@ -42,12 +62,39 @@ const ProductInfoBox = ({ koreanName, infoTag, price }) => {
             <NumBtn minusOne={minusOne} plusOne={plusOne} numValue={numValue} />
           </dd>
         </dl>
+        <dl className="list">
+          <dt className="title">당도</dt>
+          <dt>{sugarLevel}</dt>
+        </dl>
       </div>
       <div className="totalPriceInfo">
         <p className="totalPriceTitle">총 구매금액</p>
-        <p className="totalPrice">{(price * numValue).toLocaleString()}</p>
+        <p className="totalPrice">{Math.round(price * numValue)}</p>
       </div>
-      <Button btnOnClick={btnOnClick}>바로구매</Button>
+      <div className="btnWrap">
+        <div className="buyBtn">
+          <Link
+            to={{
+              pathname: '/login',
+              state: {
+                koreanName: { koreanName },
+              },
+            }}
+          >
+            <Button point={true}>바로구매</Button>
+          </Link>
+        </div>
+        {cartAndLikeBtn && (
+          <div className="cartAndLikeBtn">
+            <Button btnOnClick={addToCart}>
+              <i className="fas fa-shopping-cart" />
+            </Button>
+            <Button>
+              <i className="far fa-heart" />
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

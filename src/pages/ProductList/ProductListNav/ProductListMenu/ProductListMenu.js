@@ -7,7 +7,7 @@ const ProductListMenu = ({ mainCategory, subCategory }) => {
   const navigate = useNavigate();
 
   const goToAllProduct = () => {
-    navigate(`/product_list/${mainCategory}`);
+    navigate(`/product-list/${mainCategory}`);
   };
 
   return (
@@ -24,7 +24,7 @@ const ProductListMenu = ({ mainCategory, subCategory }) => {
             <li className="dropDownElement" key={id}>
               <Link
                 className="dropDownLink"
-                to={`/product_list/${mainCategory}/${name}`}
+                to={`/product-list/${mainCategory}/${name}`}
               >
                 {TRANSELATE[name]}
               </Link>

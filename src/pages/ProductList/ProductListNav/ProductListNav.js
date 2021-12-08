@@ -24,7 +24,7 @@ const ProductListNav = () => {
   return (
     <nav className="productListNav">
       <div className="productListNavContainer">
-        <Link to="/product_list" className="productListNavHead">
+        <Link to="/product-list" className="productListNavHead">
           제품
         </Link>
         <ul className="productListMenuContainer">
