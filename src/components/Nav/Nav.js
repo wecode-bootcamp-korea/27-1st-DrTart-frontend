@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Cart } from '../../assets/cart.svg';
 import './Nav.scss';
 
 const Nav = () => {
@@ -24,8 +25,8 @@ const Nav = () => {
         <div className="dummyElement" />
         <div className="navButtonContainer">
           <Link to="/order/cart">
-            <button className="navButton">
-              <i className="fas fa-shopping-cart" />
+            <button className="navButton cart">
+              <img src="images/cart.svg" alt="" />
             </button>
           </Link>
           <Link to="/login">
