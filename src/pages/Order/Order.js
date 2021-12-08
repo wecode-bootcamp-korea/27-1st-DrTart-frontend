@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Goods from './Goods/Goods';
-// import { API_ADDRESS } from '../ProductList/apiConfig';
+import { API_ADDRESS } from '../../apiConfig';
 import './Order.scss';
 
 const Order = () => {
@@ -10,13 +10,14 @@ const Order = () => {
   const [isOrderLoading, setIsOrderLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const { pageType } = useParams();
-  // let token = localStorage.getItem('TOKEN') || '';
+  const location = useLocation();
+  let token = localStorage.getItem('TOKEN') || '';
 
   const fetchCartData = useCallback(async () => {
-    // const data = await fetch(API_ADDRESS.order_cart, {
-    //   headers: { Authorization: token },
-    // });
-    const data = await fetch('/data/cart.json');
+    const data = await fetch(API_ADDRESS.order_cart, {
+      headers: { Authorization: token },
+    });
+    // const data = await fetch('/data/cart.json');
     const res = await data.json();
     if (res.cart_info) {
       setCartList(() => res.cart_info);
@@ -26,24 +27,28 @@ const Order = () => {
     } else {
       setCartList(() => []);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
-    (async () => {
-      setIsOrderLoading(true);
-      await fetchCartData();
-      setIsOrderLoading(false);
-    })();
-  }, [fetchCartData]);
+    if (pageType === 'cart') {
+      (async () => {
+        setIsOrderLoading(true);
+        await fetchCartData();
+        setIsOrderLoading(false);
+      })();
+    } else {
+      console.log(location.state);
+    }
+  }, [fetchCartData, pageType, location]);
 
   const adjustCart = (id, quantity) => {
     let adjustedList = [];
-    // let differ = 0;
-    // let productId = 0;
+    let differ = 0;
+    let productId = 0;
     cartList.forEach(product => {
       if (product.cart_id === id) {
-        // differ = quantity - product.quantity;
-        // productId = product.product_id;
+        differ = quantity - product.quantity;
+        productId = product.product_id;
         adjustedList.push({ ...product, quantity: quantity });
       } else {
         adjustedList.push({ ...product });
@@ -51,16 +56,16 @@ const Order = () => {
     });
     setCartList(adjustedList);
 
-    // fetch(API_ADDRESS.order_cart, {
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization: token,
-    //   },
-    //   body: JSON.stringify({
-    //     product_id: productId,
-    //     quantity: differ,
-    //   }),
-    // });
+    fetch(API_ADDRESS.order_cart, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        product_id: productId,
+        quantity: differ,
+      }),
+    });
   };
 
   const adjustTotalPrice = (type, price) => {
@@ -72,15 +77,15 @@ const Order = () => {
     adjustTotalPrice('minus', targetToDelete.price * targetToDelete.quantity);
     setCartList(cartList.filter(product => product.cart_id !== id));
 
-    // fetch(API_ADDRESS.order_cart, {
-    //   method: 'DELETE',
-    //   headers: {
-    //     Authorization: token,
-    //   },
-    //   body: JSON.stringify({
-    //     cart: id,
-    //   }),
-    // });
+    fetch(API_ADDRESS.order_cart, {
+      method: 'DELETE',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        cart: id,
+      }),
+    });
   };
 
   const deleteAllGoods = async () => {
@@ -190,9 +195,15 @@ const Order = () => {
           )}
 
           <div className="orderCheckButtonWrapper">
-            <Button>
-              {pageType === 'cart' ? '선택상품 주문하기' : '결제하기'}
-            </Button>
+            {pageType === 'cart' ? (
+              <Link to="/order/check" state={{ cartList }}>
+                <Button> 장바구니 상품 주문</Button>
+              </Link>
+            ) : (
+              <Link to="/order/check" state={cartList}>
+                <Button>결제하기</Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

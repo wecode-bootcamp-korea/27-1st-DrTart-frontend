@@ -4,7 +4,7 @@ import SortSelectArea from '../../../components/SortSelectArea/SortSelectArea';
 import Product from '../Product/Product';
 import ModalBuyNow from '../ModalBuyNow/ModalBuyNow';
 import { TRANSELATE } from '../Transelate';
-// import { API_ADDRESS } from '../../../apiConfig';
+import { API_ADDRESS } from '../../../apiConfig';
 import './SortedProducts.scss';
 
 const SortedProducts = () => {
@@ -20,16 +20,16 @@ const SortedProducts = () => {
   };
 
   const fetchData = useCallback(async () => {
-    // let address;
-    // if (mainCategory === 'all') {
-    //   address = API_ADDRESS.product_all;
-    // } else {
-    //   address = !!subCategory
-    //     ? `${API_ADDRESS.products_category}${subCategory}`
-    //     : `${API_ADDRESS.products_menu}${mainCategory}`;
-    // }
-    // const data = await fetch(address);
-    const data = await fetch('/data/product_data.json');
+    let address;
+    if (mainCategory === 'all') {
+      address = API_ADDRESS.product_all;
+    } else {
+      address = !!subCategory
+        ? `${API_ADDRESS.products_category}${subCategory}`
+        : `${API_ADDRESS.products_menu}${mainCategory}`;
+    }
+    const data = await fetch(address);
+    // const data = await fetch('/data/product_data.json');
     const res = await data.json();
 
     setProductsList(

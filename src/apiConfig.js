@@ -1,4 +1,4 @@
-const BASE_URL = '';
+const BASE_URL = 'http://10.58.1.116:8000';
 
 export const API_ADDRESS = {
   product_main: `${BASE_URL}/products?menu=dessert&?offset=1&limit=5`,
