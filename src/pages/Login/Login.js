@@ -36,7 +36,12 @@ function Login() {
   const navigate = useNavigate();
 
   const onValidation = () => {
-    validateId() && validatePw() ? navigate('/') : alertEachValid();
+    if (validateId() && validatePw()) {
+      navigate('/');
+      alert('로그인 되었습니다! 환영합니다 :)');
+    } else {
+      alertEachValid();
+    }
   };
 
   const onSignIn = () => {
