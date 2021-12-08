@@ -41,7 +41,7 @@ const Nav = () => {
         <div className="extentionNavContainer">
           <h1 className="tartLogo">Dr.Tart+</h1>
           <ul className="extentionNavButtonWrapper">
-            <Link to="/product_list">
+            <Link to="/product-list">
               <li className="extentionNavButton">제품</li>
             </Link>
             <li className="extentionNavButton">마이페이지</li>

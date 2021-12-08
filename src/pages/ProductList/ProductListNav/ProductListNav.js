@@ -24,11 +24,11 @@ const ProductListNav = () => {
   return (
     <nav className="productListNav">
       <div className="productListNavContainer">
-        <Link to="/product_list" className="productListNavHead">
+        <Link to="/product-list" className="productListNavHead">
           제품
         </Link>
         <ul className="productListMenuContainer">
-          <ProductListMenu mainCategory="all_product" />
+          <ProductListMenu mainCategory="all" />
           {!isProductNavLoading &&
             productNavData.map(({ id, name, category }) => (
               <ProductListMenu

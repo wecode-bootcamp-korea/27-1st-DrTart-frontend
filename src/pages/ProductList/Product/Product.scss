@@ -1,84 +1,112 @@
 @import '../../../styles/variables.scss';
-@keyframes hoverAnimation {
+
+@keyframes slideIn {
   from {
+    bottom: 100px;
     opacity: 0;
-    transform: translateY(10%);
   }
+
   to {
+    bottom: 0;
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 .product {
+  overflow: hidden;
   position: relative;
-  width: 280px;
+  min-width: 280px;
+  margin: 10px 10px 0 10px;
   padding: 20px 20px 30px 20px;
-  margin: 20px 10px 0 10px;
+
+  .stickerWrap {
+    @include flexCenter(row, flex-start);
+    position: absolute;
+
+    .stickerBest {
+      @include flexCenter;
+      width: 44px;
+      height: 20px;
+      border: 1px solid $black;
+      color: $black;
+      font-size: 10px;
+      margin-right: 5px;
+    }
+
+    .stickerVegan {
+      @include flexCenter;
+      width: 44px;
+      height: 20px;
+      border: 1px solid #33a75d;
+      color: #33a75d;
+      font-size: 10px;
+      margin-right: 5px;
+    }
+  }
 
   .productContainer {
-    @include flexCenter(column, center);
-    width: 100%;
+    @include flexCenter(column, space-between);
 
-    .productImageWrapper {
-      width: 240px;
-      height: 215px;
+    .goToProductDetail {
+      .productImageWrapper {
+        @include flexCenter(column, center);
+        width: 260px;
+        height: 260px;
 
-      .productImage {
+        .productImage {
+          width: 90%;
+        }
+      }
+      .pdtInfo {
+        @include flexCenter(column, center);
         width: 240px;
-        height: 215px;
+        height: 130px;
+        .infoTag {
+          font-size: 14px;
+          color: $darkGrey;
+        }
+        .productName {
+          padding: 0 10px;
+          margin: 20px 0 10px 0;
+          font-size: 18px;
+          font-weight: bold;
+          color: $black;
+        }
+        .price {
+          padding: 0 30px;
+          margin: 5px 0 20px;
+          font-size: 15px;
+          font-weight: bold;
+          color: $black;
+        }
       }
     }
-
-    .productName {
-      max-height: 40 px;
-      padding: 0 10 px;
-      margin-top: 20px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 20px;
-      color: $black;
-    }
-
-    .productPrice {
-      max-height: 40px;
-      padding: 0 10px;
-      margin: 5px 0 70px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 20px;
-      color: $black;
-    }
-
     .productButtonContainer {
-      @include flexCenter(row, center);
-      align-items: flex-end;
-      height: 0;
-      margin-bottom: 30px;
+      @include flexCenter(row, space-between);
       opacity: 0;
-      transition: all 0.6s ease;
+      transition: all 1s ease-in-out;
 
-      .productBuyButton,
-      .productLikeButton,
-      .productCartButton {
-        padding: 10px;
+      .smallBtn {
+        height: 100%;
+        margin-left: 20px;
         border: 1px solid $black;
-        border-radius: 0%;
-        cursor: pointer;
-      }
 
-      .productBuyButton {
-        min-width: 114px;
-        height: 40px;
-        margin-right: 5px;
+        .productCartButton {
+          padding: 13px 15px;
+          border: none;
+          border-right: 1px solid $black;
+          cursor: pointer;
+        }
+        .productLikeButton {
+          padding: 13px 15px;
+          border: none;
+          cursor: pointer;
+        }
       }
-
-      .productLikeButton,
-      .productCartButton {
-        width: 40px;
-        height: 40px;
+      &:hover {
+        animation-name: slideIn;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
       }
     }
   }
@@ -89,9 +117,9 @@
     bottom: 0;
     width: 100%;
     height: 0%;
-    background-color: rgb(250, 250, 250);
+    background-color: rgb(248, 248, 248);
     content: '';
-    transition: all 0.7s ease;
+    transition: all 0.5s ease-in-out;
     z-index: -1;
   }
 
@@ -101,7 +129,9 @@
     }
 
     & > .productContainer > .productButtonContainer {
-      opacity: 1;
+      animation-name: slideIn;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
     }
   }
 }
