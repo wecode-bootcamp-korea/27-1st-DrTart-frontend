@@ -9,9 +9,11 @@ function ProductsMain() {
   const [isProductMainLoading, setIsProductMainLoading] = useState(false);
   const [productsList, setProductsList] = useState([]);
   const [isPopModal, setIsPopModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
 
-  const PopUpModalBuyNow = () => {
+  const PopUpModalBuyNow = product => {
     setIsPopModal(true);
+    setSelectedProduct(product);
   };
 
   const fetchData = async () => {
@@ -36,32 +38,21 @@ function ProductsMain() {
           <ModalBuyNow
             setIsPopModal={setIsPopModal}
             infoTag={productsList.description}
+            product={selectedProduct}
           />
         )}
         <div className={isPopModal ? 'mask' : 'maskOff'} />
         <ImageSlide />
-        <div className="productListHead">현재 판매하는 제품</div>
+        <div className="productListHead">베스트셀러 TOP 5</div>
         <div className="productListContainer">
-          {productsList.map(
-            ({
-              id,
-              vegan_or_not,
-              description,
-              korean_name,
-              thumbnail_image_url,
-              price,
-            }) => (
-              <Product
-                key={id}
-                vegan_or_not={vegan_or_not}
-                infoTag={description}
-                productName={korean_name}
-                productImg={thumbnail_image_url}
-                productPrice={price}
-                btnOnClick={PopUpModalBuyNow}
-              />
-            )
-          )}
+          {productsList.map(el => (
+            <Product
+              el={el}
+              key={el.id}
+              id={el.id}
+              btnOnClick={PopUpModalBuyNow}
+            />
+          ))}
         </div>
       </div>
     )

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SortSelectArea from '../../../components/SortSelectArea/SortSelectArea';
 import Product from '../Product/Product';
+import ModalBuyNow from '../ModalBuyNow/ModalBuyNow';
 import { TRANSELATE } from '../Transelate';
 // import { API_ADDRESS } from '../apiConfig';
 import './SortedProducts.scss';
@@ -10,6 +11,13 @@ const SortedProducts = () => {
   const [isProductLoading, setIsProductLoading] = useState(false);
   const [productsList, setProductsList] = useState([]);
   const { mainCategory, subCategory } = useParams();
+  const [isPopModal, setIsPopModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
+
+  const PopUpModalBuyNow = product => {
+    setIsPopModal(true);
+    setSelectedProduct(product);
+  };
 
   const fetchData = useCallback(async () => {
     // let address;
@@ -46,6 +54,14 @@ const SortedProducts = () => {
   return (
     !isProductLoading && (
       <div className="sortedProducts">
+        {isPopModal && (
+          <ModalBuyNow
+            setIsPopModal={setIsPopModal}
+            infoTag={adjustList.description}
+            product={selectedProduct}
+          />
+        )}
+        <div className={isPopModal ? 'mask' : 'maskOff'} />
         <div className="sortedProductsHead">
           <div className="sortedProductsTitle">
             {`${TRANSELATE[mainCategory]}`}
@@ -62,12 +78,12 @@ const SortedProducts = () => {
                   : product.category.name === mainCategory
               )
             : productsList
-          ).map(({ id, description, korean_name, price }) => (
+          ).map(el => (
             <Product
-              key={id}
-              description={description}
-              productName={korean_name}
-              productPrice={price}
+              el={el}
+              key={el.id}
+              id={el.id}
+              btnOnClick={PopUpModalBuyNow}
             />
           ))}
         </div>
