@@ -1,5 +1,6 @@
 import React from 'react';
 import NumBtn from '../../../components/ProductInfoBox/NumBtn/NumBtn';
+import { ReactComponent as Xbutton } from '../../../assets/X.svg';
 import './Goods.scss';
 
 const Goods = ({
@@ -56,7 +57,7 @@ const Goods = ({
               className="deleteButton"
               onClick={() => deleteGoods(cart_id)}
             >
-              <p>x</p>
+              <Xbutton />
             </button>
           )}
         </td>

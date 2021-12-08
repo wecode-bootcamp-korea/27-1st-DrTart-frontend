@@ -1,23 +1,5 @@
 @import '../../styles/variables.scss';
 
-@keyframes openSlide {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes closeSlide {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 .sideNav {
   .basicNav {
     @include flexCenter(column, space-between);
@@ -30,7 +12,13 @@
     background-color: #fff;
     border-right: 1px solid $veryLightGrey;
     z-index: 999;
-    transition: 0.7s;
+    transition: transform 0.7s ease-in;
+
+    .animationRight {
+      position: absolute;
+      transform: translateX(215px);
+      transition: transform 1.1s ease-out;
+    }
 
     &.toggledNav {
       border-color: transparent;
@@ -38,15 +26,29 @@
 
     .navButton {
       @include flexCenter;
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
+      margin: 20px 0 30px 0;
       border-color: transparent;
       font-size: 32px;
       color: $black;
       cursor: pointer;
 
-      &.signInOut {
-        color: $pointMint;
+      &.signOut {
+        position: relative;
+        left: -5px;
+        fill: $pointMint;
+        width: 45px;
+      }
+      &.signIn {
+        position: relative;
+        left: -5px;
+        fill: $black;
+        width: 45px;
+      }
+      &.hamburgerBar {
+        position: fixed;
+        top: 45%;
       }
     }
 
@@ -84,7 +86,8 @@
       margin-left: -56px;
 
       .tartLogo {
-        margin-bottom: 80px;
+        margin: 12px 0 80px 0;
+        width: 90px;
         color: $black;
         font-size: 38px;
         font-weight: 900;
@@ -108,18 +111,19 @@
     }
   }
   .maskOff {
-    display: none;
-    animation: closeSlide 0.7s ease-in-out;
-  }
-  &.maskOn {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(34, 34, 34, 0.7);
-    z-index: 99;
-    position: fixed;
-    top: 0;
-    left: 0;
-    left: -90px;
-    animation: openSlide 0.7s ease-in-out;
+    transition: all 1s ease-in-out;
+    opacity: 0;
+
+    &.maskOn {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(34, 34, 34, 0.7);
+      z-index: 99;
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 1;
+      transition: all 1s ease-in-out;
+    }
   }
 }

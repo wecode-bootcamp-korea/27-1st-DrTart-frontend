@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import NumBtn from '../ProductInfoBox/NumBtn/NumBtn';
 import Button from '../Button/Button';
-import { API_ADDRESS } from '../../pages/ProductList/apiConfig';
+import { API_ADDRESS } from '../../apiConfig';
 import '../ProductInfoBox/ProductInfoBox.scss';
 
 const ProductInfoBox = ({
