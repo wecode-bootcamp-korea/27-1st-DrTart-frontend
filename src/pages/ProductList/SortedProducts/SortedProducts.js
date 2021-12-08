@@ -22,16 +22,16 @@ const SortedProducts = () => {
   const fetchData = useCallback(async () => {
     // let address;
     // if (mainCategory === 'all') {
-    //   address = API_ADDRESS.product_main;
+    //   address = API_ADDRESS.product_all;
     // } else {
     //   address = !!subCategory
     //     ? `${API_ADDRESS.products_category}${subCategory}`
     //     : `${API_ADDRESS.products_menu}${mainCategory}`;
     // }
-
     // const data = await fetch(address);
     const data = await fetch('/data/product_data.json');
     const res = await data.json();
+
     setProductsList(
       res.product_list.sort(
         (a, b) => Date.parse(b.create_at) - Date.parse(a.create_at)

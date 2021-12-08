@@ -12,8 +12,9 @@
       "price": "7000.00",
       "thumbnail_image_url": "/images/oReo.jpg",
       "vegan_or_not": true,
+      "like": 20,
+      "description": "#당충전"
       "review_num": 30,
-      "like_num": 20,
       "description": "#생일축하해"
     },
     {
@@ -28,8 +29,8 @@
       "price": "6500.00",
       "thumbnail_image_url": "/images/choco.jpg",
       "vegan_or_not": false,
+      "like": 10,
       "review_num": 40,
-      "like_num": 10,
       "description": "#1시간순삭"
     },
     {
@@ -44,8 +45,8 @@
       "price": "7000.00",
       "thumbnail_image_url": "/images/blueBerry.jpg",
       "vegan_or_not": true,
+      "like": 22,
       "review_num": 35,
-      "like_num": 22,
       "description": "#친구와함께"
     },
     {
@@ -60,8 +61,8 @@
       "price": "5000.00",
       "thumbnail_image_url": "/images/x-Mas.jpg",
       "vegan_or_not": false,
+      "like": 10,
       "review_num": 10,
-      "like_num": 10,
       "description": "#아아를부르는맛"
     },
     {
@@ -75,10 +76,10 @@
       "order_quantity": 25,
       "price": "5500.00",
       "thumbnail_image_url": "/images/basic.jpg",
-      "vegan_or_not": true,
-      "review_num": 60,
-      "like_num": 70,
-      "description": "#당충전"
+      "vegan_or_not": false,
+      "like": 10,
+      "review_num": 10,
+      "description": "#아아를부르는맛"
     }
   ]
 }

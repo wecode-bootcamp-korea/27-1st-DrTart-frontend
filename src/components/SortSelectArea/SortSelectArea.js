@@ -7,8 +7,8 @@ const SortSelectArea = ({ adjustList, productsList }) => {
 
   const TYPES = {
     upDate: 'created_at',
-    order_quantity: 'order_quantity',
-    likeNum: 'like_num',
+    orderQuantity: 'order_quantity',
+    likeNum: 'like',
   };
 
   const sortList = e => {
@@ -27,7 +27,7 @@ const SortSelectArea = ({ adjustList, productsList }) => {
     <form className="sortSelectArea">
       <select className="selectBox" onChange={sortList}>
         <option value="upDate">신상품 순</option>
-        <option value="order_quantity">판매량 순</option>
+        <option value="orderQuantity">판매량 순</option>
         <option value="likeNum">좋아요 순</option>
       </select>
     </form>
