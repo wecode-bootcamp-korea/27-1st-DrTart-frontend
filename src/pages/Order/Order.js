@@ -228,7 +228,7 @@ const Order = () => {
                 <Button>장바구니 상품 주문</Button>
               </Link>
             ) : (
-              <Link to="/order/">
+              <Link to="/order/confirm">
                 <Button btnOnClick={onOrder}>결제하기</Button>
               </Link>
             )}
