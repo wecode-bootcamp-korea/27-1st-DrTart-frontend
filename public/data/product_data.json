@@ -10,10 +10,9 @@
       "korean_name": "당근케이크",
       "order_quantity": 10,
       "price": "7000.00",
-      "thumbnail_image_url": "/images/oReo.jpg",
+      "thumbnail_image_url": "/images/macaroon-fig.png",
       "vegan_or_not": true,
       "like": 20,
-      "description": "#당충전"
       "review_num": 30,
       "description": "#생일축하해"
     },
@@ -27,7 +26,7 @@
       "korean_name": "딸기케이크",
       "order_quantity": 5,
       "price": "6500.00",
-      "thumbnail_image_url": "/images/choco.jpg",
+      "thumbnail_image_url": "/images/choco.png",
       "vegan_or_not": false,
       "like": 10,
       "review_num": 40,
@@ -43,7 +42,7 @@
       "korean_name": "치즈케이크",
       "order_quantity": 150,
       "price": "7000.00",
-      "thumbnail_image_url": "/images/blueBerry.jpg",
+      "thumbnail_image_url": "/images/x-Mas.png",
       "vegan_or_not": true,
       "like": 22,
       "review_num": 35,
@@ -59,7 +58,7 @@
       "korean_name": "에그타르트",
       "order_quantity": 20,
       "price": "5000.00",
-      "thumbnail_image_url": "/images/x-Mas.jpg",
+      "thumbnail_image_url": "/images/tart04.png",
       "vegan_or_not": false,
       "like": 10,
       "review_num": 10,
@@ -75,11 +74,11 @@
       "korean_name": "딸기타르트",
       "order_quantity": 25,
       "price": "5500.00",
-      "thumbnail_image_url": "/images/basic.jpg",
+      "thumbnail_image_url": "/images/tart06.png",
       "vegan_or_not": false,
       "like": 10,
       "review_num": 10,
-      "description": "#아아를부르는맛"
+      "description": "#무료이벤트"
     }
   ]
 }
