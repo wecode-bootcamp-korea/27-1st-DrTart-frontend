@@ -7,17 +7,16 @@ const Goods = ({
   pageType,
   deleteGoods,
   adjustTotalPrice,
+  adjustCart,
 }) => {
-  const [currentQuantity, setCurrentQuantity] = useState(quantity);
-
   const adjustQuantity = operator => {
     if (operator === 'minus') {
-      if (currentQuantity > 1) {
-        setCurrentQuantity(prev => prev - 1);
+      if (quantity > 1) {
+        adjustCart(id, quantity - 1);
         adjustTotalPrice(operator, price);
       }
     } else if (operator === 'plus') {
-      setCurrentQuantity(prev => prev + 1);
+      adjustCart(id, quantity + 1);
       adjustTotalPrice(operator, price);
     }
   };
@@ -42,14 +41,14 @@ const Goods = ({
             <NumBtn
               minusOne={() => adjustQuantity('minus')}
               plusOne={() => adjustQuantity('plus')}
-              numValue={currentQuantity}
+              numValue={quantity}
             />
           ) : (
             quantity
           )}
         </td>
         <td className="tableBody price">
-          <p>{price * currentQuantity}원</p>
+          <p>{price * quantity}원</p>
         </td>
         <td className="tableBody goodsButton">
           {pageType === 'cart' && (

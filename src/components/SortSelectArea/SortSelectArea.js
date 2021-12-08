@@ -3,7 +3,7 @@ import { useState } from 'react/cjs/react.development';
 import './SortSelectArea.scss';
 
 const SortSelectArea = ({ adjustList, productsList }) => {
-  const [sortType, setSortType] = useState('upDate');
+  const [sortType, setSortType] = useState('order_quantity');
 
   const TYPES = {
     upDate: 'created_at',
@@ -26,8 +26,8 @@ const SortSelectArea = ({ adjustList, productsList }) => {
   return (
     <form className="sortSelectArea">
       <select className="selectBox" onChange={sortList}>
-        <option value="upDate">신상품 순</option>
         <option value="orderQuantity">판매량 순</option>
+        <option value="upDate">신상품 순</option>
         <option value="likeNum">좋아요 순</option>
       </select>
     </form>

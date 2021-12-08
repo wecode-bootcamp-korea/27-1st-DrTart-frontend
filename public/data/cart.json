@@ -1,16 +1,18 @@
-[
-  {
-    "id": 0,
-    "korean_name": "도넛1",
-    "thumbnail_image_url": "/images/choco.jpg",
-    "price": 1000,
-    "quantity": 3
-  },
-  {
-    "id": 1,
-    "korean_name": "도넛2",
-    "thumbnail_image_url": "/images/blueBerry.jpg",
-    "price": 2000,
-    "quantity": 2
-  }
-]
+{
+  "cart_info": [
+    {
+      "id": 0,
+      "korean_name": "도넛1",
+      "thumbnail_image_url": "/images/choco.jpg",
+      "price": 1000,
+      "quantity": 3
+    },
+    {
+      "id": 1,
+      "korean_name": "도넛2",
+      "thumbnail_image_url": "/images/blueBerry.jpg",
+      "price": 2000,
+      "quantity": 2
+    }
+  ]
+}

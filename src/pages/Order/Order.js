@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import { API_ADDRESS } from '../ProductList/apiConfig';
 import Goods from './Goods/Goods';
 // import { API_ADDRESS } from '../ProductList/apiConfig';
 import './Order.scss';
@@ -10,16 +11,16 @@ const Order = () => {
   const [isOrderLoading, setIsOrderLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const { pageType } = useParams();
+  let token = localStorage.getItem('TOKEN') || '';
 
   const fetchCartData = useCallback(async () => {
     // const data = await fetch(API_ADDRESS.order_cart, {
-    //   method: 'POST',
-    //   body: JSON.stringify({}),
+    //   headers: { token: token },
     // });
     const data = await fetch('/data/cart.json');
     const res = await data.json();
-    setCartList(res);
-    res.forEach(({ price, quantity }) => {
+    setCartList(res.cart_info);
+    res.cart_info.forEach(({ price, quantity }) => {
       setTotalPrice(prev => prev + price * quantity);
     });
   }, []);
@@ -32,16 +33,44 @@ const Order = () => {
     })();
   }, [fetchCartData]);
 
-  const deleteGoods = id => {
-    setCartList(cartList.filter(product => product.id !== id));
-  };
-
-  const deleteAllGoods = () => {
-    setCartList([]);
+  const adjustCart = (id, quantity) => {
+    setCartList(() =>
+      cartList.map(cart =>
+        cart.id === id ? { ...cart, quantity: quantity } : { ...cart }
+      )
+    );
   };
 
   const adjustTotalPrice = (type, price) => {
     setTotalPrice(prev => (type === 'minus' ? prev - price : prev + price));
+  };
+
+  const deleteGoods = async id => {
+    const [temp] = cartList.filter(product => product.id === id);
+    setCartList(cartList.filter(product => product.id !== id));
+    adjustTotalPrice('minus', temp.price * temp.quantity);
+    // await fetch(API_ADDRESS.order_cart, {
+    //   method: 'POST',
+    //   headers: {
+    //     token: token,
+    //   },
+    //   body: JSON.stringify({
+    //     cart_id: id,
+    //   }),
+    // });
+  };
+
+  const deleteAllGoods = async () => {
+    // const [temp] =
+    // for (let goods of cartList) {
+    //   const data = await fetch(API_ADDRESS.order_cart, {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //       token: token,
+    //     }),
+    //   });
+    // }
+    setCartList([]);
   };
 
   return (
@@ -93,6 +122,7 @@ const Order = () => {
                   pageType={pageType}
                   deleteGoods={deleteGoods}
                   adjustTotalPrice={adjustTotalPrice}
+                  adjustCart={adjustCart}
                 />
               ))}
           </table>
@@ -108,13 +138,13 @@ const Order = () => {
           <div className="orderInfoContainer">
             <dl className="pdtPrice">
               <dt>총 상품 금액</dt>
-              <dd>{totalPrice}</dd>
+              <dd>{totalPrice}원</dd>
             </dl>
           </div>
           <div className="orderInfoContainer">
             <dl className="payPrice">
               <dt>최종 결제 금액</dt>
-              <dd className="payPriceNum">{totalPrice}</dd>
+              <dd className="payPriceNum">{totalPrice}원</dd>
             </dl>
           </div>
           {pageType !== 'cart' && (
