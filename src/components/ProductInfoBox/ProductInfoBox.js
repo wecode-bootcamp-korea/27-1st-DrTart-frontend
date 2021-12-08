@@ -44,7 +44,7 @@ const ProductInfoBox = ({
       })
         .then(response => response.json())
         .then(result => result.message === 'SUCCESS')
-        .then(navigate('./'));
+        .then(navigate('/order/cart'));
     } else {
       alert('로그인이 필요합니다.');
     }
@@ -83,7 +83,7 @@ const ProductInfoBox = ({
       <div className="btnWrap">
         <div className="buyBtn">
           <Link
-            to="/login"
+            to="/order/check"
             state={{
               koreanName: koreanName,
               quantity: numValue,
