@@ -11,39 +11,53 @@
     position: relative;
 
     .progressNav {
-      @include flexCenter(row, center);
-      position: absolute;
-      top: 60px;
-      right: 60px;
+      @include flexCenter(row, flex-end);
       font-size: 14px;
       color: $grey;
-      border-bottom: 1px solid $lightGrey;
 
-      .stepOne {
-        margin-right: 20px;
-        padding-bottom: 7px;
-        position: absolute;
-        top: 0;
-        right: 60px;
-      }
-      
-      .stepTwo {
-        margin-right: 20px;
-        padding-bottom: 7px;
-        border-bottom: 1px solid $black;
-        position: absolute;
-        top: 0;
-        right: 30px;
-      }
-      
-      .stepThree {
-        padding-bottom: 7px;
-        position: absolute;
-        top: 0;
-        right: 0;
+      .progress {
+        @include flexCenter(row, flex-end);
+        border-bottom: 1px solid $lightGrey;
+
+        .stepOne {
+          position: relative;
+          margin-right: 20px;
+          padding-bottom: 7px;
+
+          .line {
+            position: absolute;
+            content: '';
+            width: 105%;
+            bottom: -1px;
+            height: 2px;
+            background-color: black;
+          }
+        }
+
+        .stepTwo {
+          position: relative;
+          margin-right: 20px;
+          padding-bottom: 7px;
+
+          .line {
+            position: absolute;
+            content: '';
+            width: 105%;
+            bottom: -1px;
+            height: 2px;
+            background-color: black;
+          }
+        }
+
+        .stepThree {
+          position: relative;
+          padding-bottom: 7px;
+        }
       }
     }
     .pageTitle {
+      @include flexCenter;
+
       .orderTitle {
         font-size: 48px;
         margin: 110px 0 0 0;
@@ -51,17 +65,66 @@
       }
     }
   }
-  
+
   .pageContent {
     display: flex;
     justify-content: center;
     align-items: flex-start;
 
-    .contentList {
+    .productSection {
       width: 660px;
       height: auto;
-      background-color: rgb(160, 200, 201);
+
+      .goodsTable {
+        width: 100%;
+        margin-bottom: 20px;
+        border-top: 1px solid $black;
+
+        .goodsTableHead {
+          border-bottom: 1px solid $lightGrey;
+
+          .tableHeadElement {
+            padding: 13px 20px 11px;
+            font-size: 13px;
+
+            &.tableHeadImage {
+              width: 120px;
+            }
+
+            &.tableHeadGoods {
+              width: 230px;
+            }
+
+            &.tableHeadQuantity {
+              width: 150px;
+            }
+
+            &.tableHeadPrice {
+              width: 110px;
+            }
+
+            &.tableHeadButton {
+              width: 45px;
+            }
+          }
+        }
+      }
+      .allDeleteButtonContainer {
+        width: 100%;
+
+        .allDeleteButtonWrapper {
+          width: 26%;
+
+          .allDeleteButton {
+            width: 100px;
+            padding: 5px 13px;
+            border: 1px solid $veryLightGrey;
+            font-size: 13px;
+          }
+        }
+      }
     }
+
     .orderTotal {
       width: 280px;
       height: auto;
@@ -69,7 +132,7 @@
       border: 1px solid $lightGrey;
       border-top: 1px solid $black;
 
-      .sec {
+      .orderInfoContainer {
         padding: 5px 28px;
         border-bottom: 1px solid $lightGrey;
 
@@ -78,6 +141,7 @@
           padding: 17px 0 16px;
           font-size: 14px;
         }
+
         .payPrice {
           @include flexCenter(row, space-between);
           padding: 17px 0 21px;
@@ -121,19 +185,9 @@
         }
       }
 
-      .secBtn {
+      .orderCheckButtonWrapper {
         padding: 20px 28px 30px;
         background-color: #f9f9f9;
-
-        .btn {
-          width: 222px;
-          height: 48px;
-          padding: 10px 20px;
-          border: none;
-          background-color: rgb(0, 0, 0);
-          color: $white;
-          cursor: pointer;
-        }
       }
     }
   }
