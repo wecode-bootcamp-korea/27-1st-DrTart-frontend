@@ -70,7 +70,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   function emailCheck() {
-    fetch('http://10.58.6.3:8000/users/idcheck', {
+    fetch('http://10.58.3.234:8000/users/idcheck', {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -86,7 +86,7 @@ export default function Signup() {
 
   function onSignup() {
     if (submitValid) {
-      fetch('http://10.58.1.116:8000/users/signup', {
+      fetch('http://10.58.3.234:8000/users/signup', {
         method: 'POST',
         body: JSON.stringify({
           name: name,

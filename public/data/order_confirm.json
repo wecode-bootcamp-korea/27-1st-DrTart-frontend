@@ -8,13 +8,13 @@
         {
           "product_id": 0,
           "quantity": 1,
-          "product": "치즈케이크",
+          "product_name": "치즈케이크",
           "price": 1000
         },
         {
           "product_id": 1,
           "quantity": 1,
-          "product": "딸기타르트",
+          "product_name": "딸기타르트",
           "price": 1000
         }
       ]

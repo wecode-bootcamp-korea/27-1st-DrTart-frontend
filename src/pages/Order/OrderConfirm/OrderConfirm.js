@@ -10,10 +10,10 @@ const OrderConfirm = () => {
   let token = localStorage.getItem('TOKEN') || '';
 
   const fetchOrderSheetData = async () => {
-    const data = await fetch(API_ADDRESS.order_checkout, {
-      headers: { Authorization: token },
-    });
-    // const data = await fetch('/data/order_confirm.json');
+    // const data = await fetch(API_ADDRESS.order_checkout, {
+    //   headers: { Authorization: token },
+    // });
+    const data = await fetch('/data/order_confirm.json');
     const res = await data.json();
     setOrderSheet(res.order_list[0]);
     res.order_list[0].order_items.forEach(({ quantity, price }) =>
@@ -79,7 +79,7 @@ const OrderConfirm = () => {
         </div>
         <div className="totalPrice">
           <h3 className="priceContents">
-            총<p className="price"> {totalPrice} </p> 원
+            총<p className="price"> {Math.round(totalPrice)} </p> 원
           </h3>
         </div>
       </div>

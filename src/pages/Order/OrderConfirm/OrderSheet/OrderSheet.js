@@ -1,7 +1,7 @@
 import React from 'react';
 import './OrderSheet.scss';
 
-const OrderSheet = ({ product: { quantity, product } }) => {
+const OrderSheet = ({ product: { quantity, product_name, product_image } }) => {
   return (
     <tbody className="orderSheet">
       <tr className="tableRow">
@@ -9,13 +9,13 @@ const OrderSheet = ({ product: { quantity, product } }) => {
           <div className="imageContainer">
             <img
               className="goodsImage"
-              alt="example_goods"
-              src="/images/choco.png"
+              alt={`${product_name}`}
+              src={product_image}
             />
           </div>
         </td>
         <td className="tableBody">
-          <p>{product}</p>
+          <p>{product_name}</p>
         </td>
         <td className="tableBody">
           <p>{quantity}개</p>

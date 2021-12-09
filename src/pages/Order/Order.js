@@ -14,10 +14,10 @@ const Order = () => {
   let token = localStorage.getItem('TOKEN') || '';
 
   const fetchCartData = useCallback(async () => {
-    // const data = await fetch(API_ADDRESS.order_cart, {
-    //   headers: { Authorization: token },
-    // });
-    const data = await fetch('/data/cart.json');
+    const data = await fetch(API_ADDRESS.order_cart, {
+      headers: { Authorization: token },
+    });
+    // const data = await fetch('/data/cart.json');
     const res = await data.json();
     if (res.cart_info) {
       setCartList(() => res.cart_info);
@@ -28,7 +28,7 @@ const Order = () => {
     } else {
       setCartList(() => []);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (pageType === 'cart') {
