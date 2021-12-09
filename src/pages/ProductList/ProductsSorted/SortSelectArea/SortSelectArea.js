@@ -8,7 +8,7 @@ const SortSelectArea = ({ adjustList, productsList }) => {
   const TYPES = {
     upDate: 'created_at',
     orderQuantity: 'order_quantity',
-    likeNum: 'like',
+    likeNum: 'like_num',
   };
 
   const sortList = e => {

@@ -43,11 +43,15 @@
 
       &.goodsButton {
         padding: 10px;
+        padding-right: 0;
         text-align: center;
 
         .deleteButton {
-          border: transparent;
-          color: #555555;
+          width: 25px;
+          height: 25px;
+          border: none;
+          color: $veryDarkGrey;
+          cursor: pointer;
         }
       }
     }

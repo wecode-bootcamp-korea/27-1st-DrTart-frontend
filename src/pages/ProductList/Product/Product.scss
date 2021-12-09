@@ -57,14 +57,17 @@
           width: 90%;
         }
       }
+
       .pdtInfo {
         @include flexCenter(column, center);
         width: 240px;
         height: 130px;
+
         .infoTag {
           font-size: 14px;
           color: $darkGrey;
         }
+
         .productName {
           padding: 0 10px;
           margin: 20px 0 10px 0;
@@ -72,6 +75,7 @@
           font-weight: bold;
           color: $black;
         }
+
         .price {
           padding: 0 30px;
           margin: 5px 0 20px;
@@ -81,6 +85,7 @@
         }
       }
     }
+
     .productButtonContainer {
       @include flexCenter(row, space-between);
       opacity: 0;
@@ -97,6 +102,7 @@
           border-right: 1px solid $black;
           cursor: pointer;
         }
+
         .productLikeButton {
           padding: 13px 15px;
           border: none;
@@ -125,6 +131,7 @@
             position: absolute;
             top: 15px;
             transform: rotate(45deg);
+            z-index: -1;
           }
 
           &:hover {
@@ -143,6 +150,7 @@
           }
         }
       }
+
       &:hover {
         animation-name: slideIn;
         animation-duration: 1s;

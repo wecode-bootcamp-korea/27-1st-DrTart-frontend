@@ -10,15 +10,32 @@ function ProductsMain() {
   const [productsList, setProductsList] = useState([]);
   const [isPopModal, setIsPopModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
-  const [isLike, setIsLike] = useState(false);
 
   const PopUpModalBuyNow = product => {
     setIsPopModal(true);
     setSelectedProduct(product);
   };
 
-  const onLikeButton = () => {
-    setIsLike(prev => !prev);
+  const updateLike = id => {
+    const updatedList = productsList.map(product => {
+      if (id === product.id) {
+        return product.is_like_True
+          ? {
+              ...product,
+              is_like_True: !product.is_like_True,
+              like_num: product.like_num - 1,
+            }
+          : {
+              ...product,
+              is_like_True: !product.is_like_True,
+              like_num: product.like_num + 1,
+            };
+      } else {
+        return { ...product };
+      }
+    });
+
+    setProductsList(updatedList);
   };
 
   const fetchData = async () => {
@@ -56,8 +73,7 @@ function ProductsMain() {
               key={el.id}
               id={el.id}
               btnOnClick={PopUpModalBuyNow}
-              onLikeButton={onLikeButton}
-              isLike={isLike}
+              updateLike={updateLike}
             />
           ))}
         </div>

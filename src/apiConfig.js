@@ -11,4 +11,5 @@ export const API_ADDRESS = {
   sign_up: `${BASE_URL}/users/signup`,
   id_check: `${BASE_URL}/users/idcheck`,
   order_checkout: `${BASE_URL}/orders/checkout`,
+  products_like: `${BASE_URL}/products/like`,
 };
