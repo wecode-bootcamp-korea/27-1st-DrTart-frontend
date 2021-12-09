@@ -50,7 +50,6 @@ const SortedProducts = () => {
         : `${API_ADDRESS.products_menu}${mainCategory}`;
     }
     const data = await fetch(address);
-    // const data = await fetch('/data/product_data.json');
     const res = await data.json();
 
     setProductsList(
