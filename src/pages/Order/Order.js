@@ -21,6 +21,7 @@ const Order = () => {
     const res = await data.json();
     if (res.cart_info) {
       setCartList(() => res.cart_info);
+      setTotalPrice(() => 0);
       res.cart_info.forEach(({ price, quantity }) => {
         setTotalPrice(prev => prev + price * quantity);
       });
@@ -142,17 +143,19 @@ const Order = () => {
             !isOrderLoading && (
               <table className="goodsTable">
                 <thead className="goodsTableHead">
-                  <th className="tableHeadElement tableHeadImage" />
-                  <th className="tableHeadElement tableHeadGoods">
-                    <p>상품</p>
-                  </th>
-                  <th className="tableHeadElement tableHeadQuantity">
-                    <p>수량</p>
-                  </th>
-                  <th className="tableHeadElement tableHeadPrice">
-                    <p>금액</p>
-                  </th>
-                  <th className="tableHeadElement tableHeadButton" />
+                  <tr>
+                    <th className="tableHeadElement tableHeadImage" />
+                    <th className="tableHeadElement tableHeadGoods">
+                      <p>상품</p>
+                    </th>
+                    <th className="tableHeadElement tableHeadQuantity">
+                      <p>수량</p>
+                    </th>
+                    <th className="tableHeadElement tableHeadPrice">
+                      <p>금액</p>
+                    </th>
+                    <th className="tableHeadElement tableHeadButton" />
+                  </tr>
                 </thead>
                 {cartList.map(product => (
                   <Goods
