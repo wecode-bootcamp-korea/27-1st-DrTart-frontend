@@ -73,16 +73,16 @@
 
       &.signOut {
         position: relative;
-        left: 0;
         fill: $pointMint;
         width: 45px;
       }
+
       &.signIn {
         position: relative;
-        left: -5px;
         fill: $black;
         width: 45px;
       }
+
       &.hamburgerBar {
         position: fixed;
         top: 45%;

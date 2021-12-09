@@ -1,11 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button/Button';
 import { API_ADDRESS } from '../../../apiConfig';
 import './Product.scss';
 
-const Product = ({ el, id, btnOnClick }) => {
+const Product = ({ el, id, btnOnClick, updateLike }) => {
   let token = localStorage.getItem('TOKEN');
+
+  const navigate = useNavigate();
+
+  function goToCart() {
+    if (window.confirm('장바구니로 이동하시겠습니까?')) navigate('/order/cart');
+    else return;
+  }
 
   const addCartElement = () => {
     fetch(API_ADDRESS.order_cart, {
@@ -17,7 +24,20 @@ const Product = ({ el, id, btnOnClick }) => {
         product_id: id,
         quantity: 1,
       }),
+    }).then(goToCart);
+  };
+
+  const onLikeButton = () => {
+    fetch(API_ADDRESS.products_like, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        product_id: id,
+      }),
     });
+    updateLike(id);
   };
 
   return (
@@ -31,7 +51,7 @@ const Product = ({ el, id, btnOnClick }) => {
           <div className="productImageWrapper">
             <img
               className="productImage"
-              alt="example"
+              alt={el.korean_name}
               src={el.thumbnail_image_url}
             />
           </div>
@@ -47,11 +67,22 @@ const Product = ({ el, id, btnOnClick }) => {
           <Button btnOnClick={event => btnOnClick(el)} point={true}>
             바로구매
           </Button>
-          <div className="smallBtn" onClick={addCartElement}>
-            <button className="productCartButton">
+          <div className="smallBtn">
+            <button className="productCartButton" onClick={addCartElement}>
               <i className="fas fa-shopping-cart" />
             </button>
-            <button className="productLikeButton">
+            <button
+              className={
+                el.is_like_True
+                  ? 'productLikeButton isLiked'
+                  : 'productLikeButton'
+              }
+              onClick={onLikeButton}
+            >
+              <p className="likeNum">
+                {el.like_num}
+                <div className="div" />
+              </p>
               <i className="far fa-heart" />
             </button>
           </div>

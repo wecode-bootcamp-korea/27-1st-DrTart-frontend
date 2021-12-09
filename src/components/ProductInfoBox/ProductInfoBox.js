@@ -12,8 +12,10 @@ const ProductInfoBox = ({
   price,
   infoTag,
   isVegan,
+  is_like_True,
   cartAndLikeBtn,
   thumbnailImg,
+  updateProductLiked,
 }) => {
   const [numValue, setNumValue] = useState(1);
   let token = localStorage.getItem('TOKEN');
@@ -58,6 +60,19 @@ const ProductInfoBox = ({
       alert('로그인이 필요합니다.');
       navigate('/login');
     }
+  };
+
+  const onLikeButton = () => {
+    fetch(API_ADDRESS.products_like, {
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      body: JSON.stringify({
+        product_id: productId,
+      }),
+    });
+    updateProductLiked(productId);
   };
 
   return (
@@ -116,9 +131,12 @@ const ProductInfoBox = ({
             <Button btnOnClick={addToCart}>
               <i className="fas fa-shopping-cart" />
             </Button>
-            <Button>
+            <button
+              className={is_like_True ? 'likeButton isLiked' : 'likeButton'}
+              onClick={onLikeButton}
+            >
               <i className="far fa-heart" />
-            </Button>
+            </button>
           </div>
         )}
       </div>

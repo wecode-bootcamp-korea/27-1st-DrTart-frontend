@@ -19,6 +19,27 @@ const SortedProducts = () => {
     setSelectedProduct(product);
   };
 
+  const updateLike = id => {
+    const updatedList = productsList.map(product => {
+      if (id === product.id) {
+        return product.is_like_True
+          ? {
+              ...product,
+              is_like_True: !product.is_like_True,
+              like_num: product.like_num - 1,
+            }
+          : {
+              ...product,
+              is_like_True: !product.is_like_True,
+              like_num: product.like_num + 1,
+            };
+      } else {
+        return { ...product };
+      }
+    });
+    setProductsList(updatedList);
+  };
+
   const fetchData = useCallback(async () => {
     let address;
     if (mainCategory === 'all') {
@@ -86,6 +107,7 @@ const SortedProducts = () => {
               key={el.id}
               id={el.id}
               btnOnClick={PopUpModalBuyNow}
+              updateLike={updateLike}
             />
           ))}
         </div>

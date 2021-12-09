@@ -8,10 +8,19 @@ import { API_ADDRESS } from '../../apiConfig';
 import './ProductDetail.scss';
 
 export default function ProductDetail() {
-  window.scrollTo(0, 0);
   const params = useParams();
   const [data, setData] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const updateProductLiked = () => {
+    const updatedProduct = { ...data, is_like_True: !data.is_like_True };
+
+    setData(updatedProduct);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     fetch(API_ADDRESS.products + params.id)
@@ -73,6 +82,8 @@ export default function ProductDetail() {
             isVegan={data.vegan_or_not}
             thumbnailImg={data.thumbnail_image_url}
             cartAndLikeBtn={true}
+            is_like_True={data.is_like_True}
+            updateProductLiked={updateProductLiked}
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import NumBtn from '../../../components/ProductInfoBox/NumBtn/NumBtn';
-import { ReactComponent as Xbutton } from '../../../assets/X.svg';
+import { ReactComponent as Xbutton } from '../../../assets/Xbutton.svg';
 import './Goods.scss';
 
 const Goods = ({

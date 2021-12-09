@@ -16,6 +16,28 @@ function ProductsMain() {
     setSelectedProduct(product);
   };
 
+  const updateLike = id => {
+    const updatedList = productsList.map(product => {
+      if (id === product.id) {
+        return product.is_like_True
+          ? {
+              ...product,
+              is_like_True: !product.is_like_True,
+              like_num: product.like_num - 1,
+            }
+          : {
+              ...product,
+              is_like_True: !product.is_like_True,
+              like_num: product.like_num + 1,
+            };
+      } else {
+        return { ...product };
+      }
+    });
+
+    setProductsList(updatedList);
+  };
+
   const fetchData = async () => {
     const data = await fetch(API_ADDRESS.product_main);
     // const data = await fetch('/data/product_data.json');
@@ -51,6 +73,7 @@ function ProductsMain() {
               key={el.id}
               id={el.id}
               btnOnClick={PopUpModalBuyNow}
+              updateLike={updateLike}
             />
           ))}
         </div>

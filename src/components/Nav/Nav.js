@@ -7,6 +7,7 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as HamburgerBar } from '../../assets/HamburgerBar.svg';
 import { ReactComponent as Titlelogo } from '../../assets/Titlelogo.svg';
 import './Nav.scss';
+import { ReactComponent as Xbutton } from '../../assets/Xbutton.svg';
 import { useEffect } from 'react/cjs/react.development';
 
 const Nav = () => {
@@ -63,7 +64,7 @@ const Nav = () => {
           type="checkbox"
           onClick={onNavToggled}
         >
-          <HamburgerBar />
+          {isExtended ? <Xbutton /> : <HamburgerBar />}
         </button>
         <div className="dummyElement" />
         <div className="navButtonContainer">
