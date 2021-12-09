@@ -29,7 +29,7 @@ const SortedProducts = () => {
     if (mainCategory === 'all') {
       address = API_ADDRESS.product_all;
     } else {
-      address = !!subCategory
+      address = subCategory
         ? `${API_ADDRESS.products_category}${subCategory}`
         : `${API_ADDRESS.products_menu}${mainCategory}`;
     }
@@ -42,7 +42,7 @@ const SortedProducts = () => {
         (a, b) => Date.parse(b.create_at) - Date.parse(a.create_at)
       )
     );
-  }, []);
+  }, [mainCategory, subCategory]);
 
   useEffect(() => {
     (async () => {
@@ -55,6 +55,11 @@ const SortedProducts = () => {
   const adjustList = products => {
     setProductsList(products);
   };
+
+  const checkCategory = (name, category) =>
+    !!subCategory
+      ? name === mainCategory && category === subCategory
+      : name === mainCategory;
 
   return (
     !isProductLoading && (
@@ -70,19 +75,16 @@ const SortedProducts = () => {
         <div className="sortedProductsHead">
           <div className="sortedProductsTitle">
             {`${TRANSELATE[mainCategory]}`}
-            {!!subCategory && ` > ${TRANSELATE[subCategory]}`}
+            {subCategory && ` > ${TRANSELATE[subCategory]}`}
           </div>
           <SortSelectArea adjustList={adjustList} productsList={productsList} />
         </div>
         <div className="sortedProductsContainer">
-          {(mainCategory !== 'all'
-            ? productsList.filter(product =>
-                !!subCategory
-                  ? product.category.name === mainCategory &&
-                    product.category.category === subCategory
-                  : product.category.name === mainCategory
+          {(mainCategory === 'all'
+            ? productsList
+            : productsList.filter(({ category: { name, category } }) =>
+                checkCategory(name, category)
               )
-            : productsList
           ).map(el => (
             <Product
               el={el}

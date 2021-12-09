@@ -6,11 +6,12 @@ import './imageSlide.scss';
 
 const ImageSlide = () => {
   const [currentSlideId, setCurrentSlideId] = useState(0);
+  const slideLength = 4;
 
   useEffect(() => {
     const slideInterval = setInterval(() => {
-      if (currentSlideId === 4) setCurrentSlideId(prev => 0);
-      else setCurrentSlideId(prev => prev + 1);
+      const newSlideId = currentSlideId === slideLength ? 0 : prev => prev + 1;
+      setCurrentSlideId(newSlideId);
     }, 5000);
     return () => {
       clearInterval(slideInterval);
