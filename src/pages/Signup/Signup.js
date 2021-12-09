@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import TERMS_DATA from './SignupData';
 import './Signup.scss';
 import Button from '../../components/Button/Button';
+import { API_ADDRESS } from '../../apiConfig';
 
 export default function Signup() {
   const [memberInput, setMemberInput] = useState({
@@ -70,7 +71,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   function emailCheck() {
-    fetch('http://10.58.3.234:8000/users/idcheck', {
+    fetch(API_ADDRESS.id_check, {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -86,7 +87,7 @@ export default function Signup() {
 
   function onSignup() {
     if (submitValid) {
-      fetch('http://10.58.3.234:8000/users/signup', {
+      fetch(API_ADDRESS.sign_up, {
         method: 'POST',
         body: JSON.stringify({
           name: name,

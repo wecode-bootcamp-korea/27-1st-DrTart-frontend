@@ -42,13 +42,13 @@ const Nav = () => {
   return (
     <nav className="sideNav">
       <div className={`basicNav ${isExtended && 'toggledNav'}`}>
-        <div className={isExtended && 'animationRight'}>
-          <Link to="/">
-            <button className="navButton home">
+        <Link to="/">
+          <div className={isExtended && 'animationRight'}>
+            <button className="navButton home ">
               <Logo />
             </button>
-          </Link>
-        </div>
+          </div>
+        </Link>
         <button
           className="navButton hamburgerBar"
           type="checkbox"
@@ -59,7 +59,11 @@ const Nav = () => {
         <div className="dummyElement" />
         <div className="navButtonContainer">
           <Link to="/order/cart">
-            <button className="navButton cart">
+            <button className="navButton">
+              <p className="description">
+                장바구니
+                <div className="div" />
+              </p>
               <Cart />
             </button>
           </Link>
@@ -68,6 +72,10 @@ const Nav = () => {
             className={isButtonValid ? 'navButton signIn' : 'navButton signOut'}
             onClick={onLoginButton}
           >
+            <p className="description">
+              로그인
+              <div className="div" />
+            </p>
             {isButtonValid ? <Logout /> : <Login />}
           </button>
         </div>
