@@ -30,10 +30,3 @@ export default function InputBox({
     </>
   );
 }
-
-<div>
-  <div>
-    <inputbox />
-  </div>
-  <button />
-</div>;

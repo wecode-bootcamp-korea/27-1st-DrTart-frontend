@@ -15,11 +15,6 @@ export default function Signup() {
     isVegan: false,
   });
   const { name, email, password, passwordRe, address, isVegan } = memberInput;
-  // const [nameValid, setNameValid] = useState(true);
-  // const [emailValid, setEmailValid] = useState(true);
-  // const [passwordValid, setPasswordValid] = useState(true);
-  // const [passwordReValid, setPasswordReValid] = useState(true);
-  // const [addressValid, setAddressValid] = useState(true);
   const [checkedList, setCheckedList] = useState([]);
   const [emailExistCheck, setEmailExistCheck] = useState(false);
 
@@ -53,13 +48,6 @@ export default function Signup() {
       : setMemberInput({ ...memberInput, [name]: value });
   }
 
-  // function validatePasswordRe(e) {
-  //   const value = e.target.value;
-  //   value !== memberInput.password
-  //     ? setPasswordReValid(false)
-  //     : setPasswordReValid(true);
-  // }
-
   const isSameLength = checkedList.length === TERMS_DATA.length;
 
   const submitValid =
@@ -69,6 +57,16 @@ export default function Signup() {
     isPasswordRegexValid &&
     passwordReValid &&
     addressValid;
+
+  console.log(
+    termsValid,
+    nameValid,
+    emailExistCheck,
+    isPasswordRegexValid,
+    passwordReValid,
+    addressValid
+  );
+  console.log(submitValid);
 
   const navigate = useNavigate();
 
@@ -83,7 +81,7 @@ export default function Signup() {
       .then(result => {
         if (result.message === 'EMAIL_EXISTS') {
           alert('이미 존재하는 이메일입니다.');
-          email = '';
+          setMemberInput({ ...memberInput, email: '' });
         } else {
           alert('사용가능한 이메일입니다.');
           setEmailExistCheck(true);
@@ -184,26 +182,23 @@ export default function Signup() {
               value={name}
               validFalseContent="성함을 입력해주세요"
             />
-            <li className="emailWrap">
+            <div className="emailWrap">
               <div className="email">
-                <input
-                  type="email"
-                  className={`formInput email ${!emailValid && 'validBorder'}`}
+                <InputBox
+                  type="text"
                   name="email"
+                  valid={isEmailRegexValid}
                   placeholder="이메일"
                   value={email}
-                  onBlur={() => setEmailValid(isEmailRegexValid)}
+                  validFalseContent="이메일 형식을 확인 해주세요."
                 />
               </div>
               <div className="btnWrap">
-                <Button btnOnClick={emailCheck}>중복확인</Button>
+                <button onClick={emailCheck} className="emailCheckBtn">
+                  중복확인
+                </button>
               </div>
-            </li>
-            {!emailValid && (
-              <li>
-                <span className="validText">이메일 형식을 확인 해주세요.</span>
-              </li>
-            )}
+            </div>
             <InputBox
               type="password"
               name="password"
