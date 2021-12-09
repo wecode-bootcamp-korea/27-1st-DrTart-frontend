@@ -39,7 +39,10 @@ const Order = () => {
         setIsOrderLoading(false);
       })();
     } else {
-      setCartList(location.state.cartList);
+      setCartList(() => location.state.cartList);
+      location.state.cartList.forEach(({ price, quantity }) => {
+        setTotalPrice(prev => prev + price * quantity);
+      });
     }
   }, [fetchCartData, pageType, location]);
 
