@@ -26,13 +26,23 @@ const ProductInfoBox = ({
     setNumValue(numValue + 1);
   };
 
+  const tokenValid = () => {
+    return token ? '' : alert('로그인이 필요합니다.');
+  };
+  const goCheckValid = token ? '/order/check' : '/login';
+
   const totalPrice = price * numValue;
 
   const navigate = useNavigate();
 
+  function goToCart() {
+    if (window.confirm('장바구니로 이동하시겠습니까?')) navigate('/order/cart');
+    else return;
+  }
+
   const addToCart = () => {
     if (token) {
-      fetch(`${API_ADDRESS.order_cart}`, {
+      fetch(API_ADDRESS.order_cart, {
         method: 'POST',
         headers: {
           Authorization: token,
@@ -43,10 +53,10 @@ const ProductInfoBox = ({
         }),
       })
         .then(response => response.json())
-        .then(result => result.message === 'SUCCESS')
-        .then(navigate('/order/cart'));
+        .then(result => result.message === 'SUCCESS' && goToCart());
     } else {
       alert('로그인이 필요합니다.');
+      navigate('/login');
     }
   };
 
@@ -83,15 +93,22 @@ const ProductInfoBox = ({
       <div className="btnWrap">
         <div className="buyBtn">
           <Link
-            to="/order/check"
+            to={goCheckValid}
             state={{
-              koreanName: koreanName,
-              quantity: numValue,
-              price: price,
-              thumbnailImg: thumbnailImg,
+              cartList: [
+                {
+                  product_id: productId,
+                  korean_name: koreanName,
+                  quantity: numValue,
+                  price: price,
+                  thumbnail_image_url: thumbnailImg,
+                },
+              ],
             }}
           >
-            <Button point={true}>바로구매</Button>
+            <Button point={true} btnOnClick={tokenValid}>
+              바로구매
+            </Button>
           </Link>
         </div>
         {cartAndLikeBtn && (

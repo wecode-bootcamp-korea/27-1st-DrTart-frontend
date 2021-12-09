@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams, useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Goods from './Goods/Goods';
 import { API_ADDRESS } from '../../apiConfig';
@@ -9,8 +9,10 @@ const Order = () => {
   const [cartList, setCartList] = useState([]);
   const [isOrderLoading, setIsOrderLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
   const { pageType } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   let token = localStorage.getItem('TOKEN') || '';
 
   const fetchCartData = useCallback(async () => {
@@ -21,6 +23,7 @@ const Order = () => {
     const res = await data.json();
     if (res.cart_info) {
       setCartList(() => res.cart_info);
+      setTotalPrice(() => 0);
       res.cart_info.forEach(({ price, quantity }) => {
         setTotalPrice(prev => prev + price * quantity);
       });
@@ -97,18 +100,24 @@ const Order = () => {
   };
 
   const onOrder = () => {
-    const orderTable = cartList.map(product => ({
-      product_id: product.product_id,
-      quantity: product.quantity,
-    }));
+    if (isTermsChecked) {
+      const orderTable = cartList.map(product => ({
+        product_id: product.product_id,
+        quantity: product.quantity,
+      }));
 
-    fetch(API_ADDRESS.order_checkout, {
-      method: 'POST',
-      headers: {
-        Authorization: token,
-      },
-      body: JSON.stringify(orderTable),
-    });
+      fetch(API_ADDRESS.order_checkout, {
+        method: 'POST',
+        headers: {
+          Authorization: token,
+        },
+        body: JSON.stringify(orderTable),
+      });
+
+      navigate('/order/confirm');
+    } else {
+      window.alert('약관에 동의해주셔야 결제가 가능합니다.');
+    }
   };
 
   return (
@@ -142,17 +151,19 @@ const Order = () => {
             !isOrderLoading && (
               <table className="goodsTable">
                 <thead className="goodsTableHead">
-                  <th className="tableHeadElement tableHeadImage" />
-                  <th className="tableHeadElement tableHeadGoods">
-                    <p>상품</p>
-                  </th>
-                  <th className="tableHeadElement tableHeadQuantity">
-                    <p>수량</p>
-                  </th>
-                  <th className="tableHeadElement tableHeadPrice">
-                    <p>금액</p>
-                  </th>
-                  <th className="tableHeadElement tableHeadButton" />
+                  <tr>
+                    <th className="tableHeadElement tableHeadImage" />
+                    <th className="tableHeadElement tableHeadGoods">
+                      <p>상품</p>
+                    </th>
+                    <th className="tableHeadElement tableHeadQuantity">
+                      <p>수량</p>
+                    </th>
+                    <th className="tableHeadElement tableHeadPrice">
+                      <p>금액</p>
+                    </th>
+                    <th className="tableHeadElement tableHeadButton" />
+                  </tr>
                 </thead>
                 {cartList.map(product => (
                   <Goods
@@ -211,7 +222,12 @@ const Order = () => {
                 </ul>
               </div>
               <div className="mustCheck">
-                <input className="checkBox" type="checkbox" />
+                <input
+                  className="checkBox"
+                  type="checkbox"
+                  value={isTermsChecked}
+                  onChange={() => setIsTermsChecked(prev => !prev)}
+                />
                 <label className="label" htmlFor="agree">
                   구매하실 상품의 판매조건을 명확히 확인하였으며, 이에
                   동의합니다.
@@ -228,9 +244,7 @@ const Order = () => {
                 <Button>장바구니 상품 주문</Button>
               </Link>
             ) : (
-              <Link to="/order/confirm">
-                <Button btnOnClick={onOrder}>결제하기</Button>
-              </Link>
+              <Button btnOnClick={onOrder}>결제하기</Button>
             )}
           </div>
         </div>

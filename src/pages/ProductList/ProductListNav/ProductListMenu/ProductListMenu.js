@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './ProductListMenu.scss';
 import { TRANSELATE } from '../../Transelate';
+import './ProductListMenu.scss';
 
 const ProductListMenu = ({ mainCategory, subCategory }) => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const ProductListMenu = ({ mainCategory, subCategory }) => {
   return (
     <li className="productListMenu">
       <button
-        className={`menuButton ${!!subCategory && 'menuDropDown'}`}
+        className={`menuButton ${subCategory && 'menuDropDown'}`}
         onClick={goToAllProduct}
       >
         {TRANSELATE[mainCategory]}
