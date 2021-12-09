@@ -16,10 +16,9 @@ const Order = () => {
   let token = localStorage.getItem('TOKEN') || '';
 
   const fetchCartData = useCallback(async () => {
-    // const data = await fetch(API_ADDRESS.order_cart, {
-    //   headers: { Authorization: token },
-    // });
-    const data = await fetch('/data/cart.json');
+    const data = await fetch(API_ADDRESS.order_cart, {
+      headers: { Authorization: token },
+    });
     const res = await data.json();
     if (res.cart_info) {
       setCartList(() => res.cart_info);
@@ -30,7 +29,7 @@ const Order = () => {
     } else {
       setCartList(() => []);
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     if (pageType === 'cart') {
@@ -99,14 +98,14 @@ const Order = () => {
     setCartList([]);
   };
 
-  const onOrder = () => {
+  const onOrder = async () => {
     if (isTermsChecked) {
       const orderTable = cartList.map(product => ({
         product_id: product.product_id,
         quantity: product.quantity,
       }));
 
-      fetch(API_ADDRESS.order_checkout, {
+      const data = await fetch(API_ADDRESS.order_checkout, {
         method: 'POST',
         headers: {
           Authorization: token,
@@ -114,7 +113,9 @@ const Order = () => {
         body: JSON.stringify(orderTable),
       });
 
-      navigate('/order/confirm');
+      const res = await data.json();
+
+      navigate(`/order/confirm?order=${res.message}`);
     } else {
       window.alert('약관에 동의해주셔야 결제가 가능합니다.');
     }
