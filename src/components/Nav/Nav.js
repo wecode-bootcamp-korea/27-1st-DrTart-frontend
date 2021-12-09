@@ -58,7 +58,7 @@ const Nav = () => {
       },
     })
       .then(res => res.json())
-      .then(result => seCartProductNum(result.cart_info.length));
+      .then(result => seCartProductNum(result.cart_info?.length || 0));
   }, [cartProductNum, token]);
 
   return (
@@ -81,9 +81,12 @@ const Nav = () => {
         <div className="dummyElement" />
         <div className="navButtonContainer">
           <button className="navButton" onClick={goToCart}>
-            <div className="circleCart">
-              <p className="cartNum">{cartProductNum}</p>
-            </div>
+            {cartProductNum !== 0 && (
+              <div className="circleCart">
+                <p className="cartNum">{cartProductNum}</p>
+              </div>
+            )}
+
             <p className="description">
               장바구니
               <div className="div" />
