@@ -22,7 +22,7 @@ export default function InputBox({
           onBlur={() => setIsBlurOnce(true)}
         />
       </li>
-      {valid && isBlurOnce && (
+      {!valid && isBlurOnce && (
         <li>
           <span className="validText">{validFalseContent}</span>
         </li>
@@ -30,3 +30,10 @@ export default function InputBox({
     </>
   );
 }
+
+<div>
+  <div>
+    <inputbox />
+  </div>
+  <button />
+</div>;
