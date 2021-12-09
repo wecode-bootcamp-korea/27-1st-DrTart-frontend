@@ -4,7 +4,7 @@ import Button from '../../../components/Button/Button';
 import { API_ADDRESS } from '../../../apiConfig';
 import './Product.scss';
 
-const Product = ({ el, id, btnOnClick }) => {
+const Product = ({ el, id, btnOnClick, onLikeButton, isLike }) => {
   let token = localStorage.getItem('TOKEN');
 
   const addCartElement = () => {
@@ -31,7 +31,7 @@ const Product = ({ el, id, btnOnClick }) => {
           <div className="productImageWrapper">
             <img
               className="productImage"
-              alt="example"
+              alt={el.korean_name}
               src={el.thumbnail_image_url}
             />
           </div>
@@ -51,7 +51,16 @@ const Product = ({ el, id, btnOnClick }) => {
             <button className="productCartButton">
               <i className="fas fa-shopping-cart" />
             </button>
-            <button className="productLikeButton">
+            <button
+              className={
+                isLike ? 'productLikeButton isLiked' : 'productLikeButton'
+              }
+              onClick={onLikeButton}
+            >
+              <p className="likeNum">
+                좋아요 수
+                <div className="div" />
+              </p>
               <i className="far fa-heart" />
             </button>
           </div>

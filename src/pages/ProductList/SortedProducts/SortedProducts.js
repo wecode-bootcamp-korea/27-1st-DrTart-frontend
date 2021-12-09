@@ -13,10 +13,15 @@ const SortedProducts = () => {
   const { mainCategory, subCategory } = useParams();
   const [isPopModal, setIsPopModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState({});
+  const [isLike, setIsLike] = useState(false);
 
   const PopUpModalBuyNow = product => {
     setIsPopModal(true);
     setSelectedProduct(product);
+  };
+
+  const onLikeButton = () => {
+    setIsLike(prev => !prev);
   };
 
   const fetchData = useCallback(async () => {
@@ -84,6 +89,8 @@ const SortedProducts = () => {
               key={el.id}
               id={el.id}
               btnOnClick={PopUpModalBuyNow}
+              onLikeButton={onLikeButton}
+              isLike={isLike}
             />
           ))}
         </div>

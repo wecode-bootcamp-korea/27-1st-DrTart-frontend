@@ -101,6 +101,46 @@
           padding: 13px 15px;
           border: none;
           cursor: pointer;
+          position: relative;
+          transition: all 0.3s ease-in-out;
+
+          &.isLiked {
+            background-color: $pointPink;
+            color: $white;
+          }
+
+          .likeNum {
+            visibility: hidden;
+            @include flexCenter;
+            width: 50px;
+            height: 20px;
+            position: absolute;
+            z-index: 9;
+          }
+
+          .div {
+            width: 10px;
+            height: 10px;
+            background-color: $lightGrey;
+            position: absolute;
+            top: 15px;
+            transform: rotate(45deg);
+          }
+
+          &:hover {
+            .likeNum {
+              visibility: visible;
+              @include flexCenter;
+              width: 50px;
+              height: 20px;
+              background-color: $lightGrey;
+              font-size: 11px;
+              color: $black;
+              position: absolute;
+              left: -3px;
+              top: -15px;
+            }
+          }
         }
       }
       &:hover {
