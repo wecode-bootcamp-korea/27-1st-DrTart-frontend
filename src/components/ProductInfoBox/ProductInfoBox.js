@@ -35,6 +35,11 @@ const ProductInfoBox = ({
 
   const navigate = useNavigate();
 
+  function goToCart() {
+    if (window.confirm('장바구니로 이동하시겠습니까?')) navigate('/order/cart');
+    else return;
+  }
+
   const addToCart = () => {
     if (token) {
       fetch(API_ADDRESS.order_cart, {
@@ -48,8 +53,7 @@ const ProductInfoBox = ({
         }),
       })
         .then(response => response.json())
-        .then(result => result.message === 'SUCCESS')
-        .then(navigate('/order/cart'));
+        .then(result => result.message === 'SUCCESS' && goToCart());
     } else {
       alert('로그인이 필요합니다.');
       navigate('/login');

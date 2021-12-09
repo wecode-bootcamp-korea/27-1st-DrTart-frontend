@@ -20,6 +20,15 @@ const Nav = () => {
   let token = localStorage.getItem('TOKEN') || '';
   const navigate = useNavigate();
 
+  const goToCart = () => {
+    if (token) {
+      navigate('/order/cart');
+    } else {
+      alert('로그인이 필요합니다.');
+      navigate('/login');
+    }
+  };
+
   const onLoginButton = () => {
     if (token) {
       localStorage.clear();
@@ -58,15 +67,13 @@ const Nav = () => {
         </button>
         <div className="dummyElement" />
         <div className="navButtonContainer">
-          <Link to="/order/cart">
-            <button className="navButton">
-              <p className="description">
-                장바구니
-                <div className="div" />
-              </p>
-              <Cart />
-            </button>
-          </Link>
+          <button className="navButton" onClick={goToCart}>
+            <p className="description">
+              장바구니
+              <div className="div" />
+            </p>
+            <Cart />
+          </button>
 
           <button
             className={isButtonValid ? 'navButton signIn' : 'navButton signOut'}
