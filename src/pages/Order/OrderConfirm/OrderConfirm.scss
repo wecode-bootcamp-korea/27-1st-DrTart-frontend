@@ -1,0 +1,54 @@
+@import '../../../styles/variables.scss';
+
+.order {
+  @include flexCenter(column, flex-start);
+  height: 100%;
+  padding: 0 60px;
+
+  .pageTitleArea {
+    width: 100%;
+    padding: 55px 0 57px 0;
+    position: relative;
+
+    .progressNav {
+      @include flexCenter(row, flex-end);
+      font-size: 14px;
+      color: $grey;
+
+      .progress {
+        @include flexCenter(row, flex-end);
+        border-bottom: 1px solid $lightGrey;
+
+        .step {
+          position: relative;
+          margin-left: 20px;
+          padding-bottom: 7px;
+
+          .line {
+            position: absolute;
+            content: '';
+            width: 105%;
+            bottom: -1px;
+            height: 2px;
+            background-color: black;
+          }
+        }
+      }
+    }
+
+    .pageTitle {
+      @include flexCenter;
+
+      .orderTitle {
+        font-size: 48px;
+        margin: 110px 0 0 0;
+        text-align: center;
+      }
+    }
+  }
+
+  .pageContent {
+    @include flexCenter;
+    margin-top: 50px;
+  }
+}

@@ -10,6 +10,7 @@ import Order from './pages/Order/Order';
 import Footer from './components/Footer/Footer';
 import './styles/router.scss';
 import SignupDone from './pages/Signup/SignupDone';
+import OrderConfirm from './pages/Order/OrderConfirm/OrderConfirm';
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/order/:pageType" element={<Order />} />
           <Route path="/signupdone" element={<SignupDone />} />
+          <Route path="/order/confirm" element={<OrderConfirm />} />
         </Routes>
         <Footer />
       </div>

@@ -4,7 +4,7 @@ import SlickThumbnail from './SlickThumbnail';
 import ProductListNav from '../ProductList/ProductListNav/ProductListNav';
 import ProductReview from './ProductReview/ProductReview';
 import ProductInfoBox from '../../components/ProductInfoBox/ProductInfoBox';
-import { API_ADDRESS } from '../ProductList/apiConfig';
+import { API_ADDRESS } from '../../apiConfig';
 import './ProductDetail.scss';
 
 export default function ProductDetail() {
