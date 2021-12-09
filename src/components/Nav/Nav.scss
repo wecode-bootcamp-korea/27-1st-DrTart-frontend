@@ -87,6 +87,21 @@
         position: fixed;
         top: 45%;
       }
+      .circleCart {
+        background-color: $black;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        position: absolute;
+        top: 35px;
+        right: 2px;
+
+        .cartNum {
+          font-size: 8px;
+          font-weight: bold;
+          color: $white;
+        }
+      }
     }
 
     .dummyElement {

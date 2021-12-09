@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_ADDRESS } from '../../apiConfig';
 import { ReactComponent as Cart } from '../../assets/cart.svg';
 import { ReactComponent as Login } from '../../assets/login.svg';
 import { ReactComponent as Logout } from '../../assets/logout.svg';
@@ -13,6 +14,7 @@ import { useEffect } from 'react/cjs/react.development';
 const Nav = () => {
   const [isExtended, setIsExtended] = useState(false);
   const [isButtonValid, setIsButtonValid] = useState(false);
+  const [cartProductNum, seCartProductNum] = useState(0);
 
   const onNavToggled = () => {
     setIsExtended(!isExtended);
@@ -49,6 +51,16 @@ const Nav = () => {
     setIsExtended(false);
   };
 
+  useEffect(() => {
+    fetch(API_ADDRESS.order_cart, {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then(res => res.json())
+      .then(result => seCartProductNum(result.cart_info.length));
+  }, [cartProductNum, token]);
+
   return (
     <nav className="sideNav">
       <div className={`basicNav ${isExtended && 'toggledNav'}`}>
@@ -69,6 +81,9 @@ const Nav = () => {
         <div className="dummyElement" />
         <div className="navButtonContainer">
           <button className="navButton" onClick={goToCart}>
+            <div className="circleCart">
+              <p className="cartNum">{cartProductNum}</p>
+            </div>
             <p className="description">
               장바구니
               <div className="div" />
