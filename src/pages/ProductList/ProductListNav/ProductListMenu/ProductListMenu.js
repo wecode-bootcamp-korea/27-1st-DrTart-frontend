@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './ProductListMenu.scss';
 import { TRANSELATE } from '../../Transelate';
+import './ProductListMenu.scss';
 
 const ProductListMenu = ({ mainCategory, subCategory }) => {
   const navigate = useNavigate();
