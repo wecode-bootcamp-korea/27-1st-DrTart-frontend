@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import TERMS_DATA from './SignupData';
-import './Signup.scss';
 import Button from '../../components/Button/Button';
+import InputBox from './InputBox/InputBox';
+import TERMS_DATA from './SignupData';
 import { API_ADDRESS } from '../../apiConfig';
+import './Signup.scss';
 
 export default function Signup() {
   const [memberInput, setMemberInput] = useState({
@@ -15,21 +16,18 @@ export default function Signup() {
     isVegan: false,
   });
   const { name, email, password, passwordRe, address, isVegan } = memberInput;
-  const [nameValid, setNameValid] = useState(true);
-  const [emailValid, setEmailValid] = useState(true);
-  const [passwordValid, setPasswordValid] = useState(true);
-  const [passwordReValid, setPasswordReValid] = useState(true);
-  const [addressValid, setAddressValid] = useState(true);
   const [checkedList, setCheckedList] = useState([]);
+  const [emailExistCheck, setEmailExistCheck] = useState(false);
 
   const emailRegex =
     /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/g;
   const passwordRegex =
     /(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,}/g;
-
   const isEmailRegexValid = !!email.match(emailRegex);
   const isPasswordRegexValid = !!password.match(passwordRegex);
-
+  const nameValid = name.length > 0;
+  const passwordReValid = password === passwordRe;
+  const addressValid = address.length > 0;
   const termsValid = checkedList.includes(1) && checkedList.includes(2);
 
   const onCheckedAll = checked => {
@@ -51,20 +49,13 @@ export default function Signup() {
       : setMemberInput({ ...memberInput, [name]: value });
   }
 
-  function validatePasswordRe(e) {
-    const value = e.target.value;
-    value !== memberInput.password
-      ? setPasswordReValid(false)
-      : setPasswordReValid(true);
-  }
-
   const isSameLength = checkedList.length === TERMS_DATA.length;
 
   const submitValid =
     termsValid &&
     nameValid &&
-    emailValid &&
-    passwordValid &&
+    emailExistCheck &&
+    isPasswordRegexValid &&
     passwordReValid &&
     addressValid;
 
@@ -79,9 +70,14 @@ export default function Signup() {
     })
       .then(response => response.json())
       .then(result => {
-        result.message === 'EMAIL_EXISTS'
-          ? alert('이미 존재하는 이메일입니다.')
-          : alert('사용가능한 이메일입니다.');
+        if (result.message === 'EMAIL_EXISTS') {
+          alert('이미 존재하는 이메일입니다.');
+          setEmailExistCheck(false);
+          setMemberInput({ ...memberInput, email: '' });
+        } else {
+          alert('사용가능한 이메일입니다.');
+          setEmailExistCheck(true);
+        }
       });
   }
 
@@ -103,6 +99,10 @@ export default function Signup() {
             ? navigate('/signupdone')
             : alert('가입실패')
         );
+    } else if (!termsValid) {
+      alert('필수 약관 동의를 확인해주세요.');
+    } else if (!emailExistCheck) {
+      alert('이메일 중복체크를 해주세요.');
     } else {
       alert('가입 형식을 확인해주세요.');
     }
@@ -168,96 +168,59 @@ export default function Signup() {
             <li>
               <h3 className="formTitle">회원정보 입력</h3>
             </li>
-            <li>
-              <input
-                type="text"
-                name="name"
-                className={`formInput name ${!nameValid && 'validBorder'}`}
-                placeholder="이름"
-                value={name}
-                onBlur={() => setNameValid(name)}
-              />
-            </li>
-            {!nameValid && (
-              <li>
-                <span className="validText">성함을 입력 해주세요.</span>
-              </li>
-            )}
-            <li className="emailWrap">
+            <InputBox
+              type="text"
+              name="name"
+              valid={nameValid}
+              placeholder="성함"
+              value={name}
+              validFalseContent="성함을 입력해주세요"
+            />
+            <div className="emailWrap">
               <div className="email">
-                <input
-                  type="email"
-                  className={`formInput email ${!emailValid && 'validBorder'}`}
+                <InputBox
+                  type="text"
                   name="email"
+                  valid={isEmailRegexValid}
                   placeholder="이메일"
                   value={email}
-                  onBlur={() => setEmailValid(isEmailRegexValid)}
+                  validFalseContent="이메일 형식을 확인 해주세요."
                 />
               </div>
               <div className="btnWrap">
-                <Button btnOnClick={emailCheck}>중복확인</Button>
+                <button
+                  type="button"
+                  onClick={emailCheck}
+                  className="emailCheckBtn"
+                >
+                  중복확인
+                </button>
               </div>
-            </li>
-            {!emailValid && (
-              <li>
-                <span className="validText">이메일 형식을 확인 해주세요.</span>
-              </li>
-            )}
-            <li>
-              <input
-                type="password"
-                name="password"
-                className={`formInput password ${
-                  !passwordValid && 'validBorder'
-                }`}
-                placeholder="패스워드 : 영문 대, 소문자, 특수문자 1개 포함 8자리 이상"
-                value={password}
-                onBlur={() => setPasswordValid(isPasswordRegexValid)}
-              />
-            </li>
-            {!passwordValid && (
-              <li>
-                <span className="validText">
-                  공백없이 10~20자로 입력해주세요.
-                </span>
-              </li>
-            )}
-            <li>
-              <input
-                type="password"
-                name="passwordRe"
-                className={`formInput passwordRe ${
-                  !passwordReValid && 'validBorder'
-                }`}
-                placeholder="패스워드를 다시 입력해주세요."
-                value={passwordRe}
-                onBlur={validatePasswordRe}
-              />
-            </li>
-            {!passwordReValid && (
-              <li>
-                <span className="validText">
-                  입력된 비밀번호와 일치하지 않습니다.
-                </span>
-              </li>
-            )}
-            <li>
-              <input
-                type="text"
-                name="address"
-                className={`formInput address ${
-                  !addressValid && 'validBorder'
-                }`}
-                placeholder="주소를 입력해주세요."
-                value={address}
-                onBlur={() => setAddressValid(address)}
-              />
-            </li>
-            {!addressValid && (
-              <li>
-                <span className="validText">배송주소를 입력해주세요.</span>
-              </li>
-            )}
+            </div>
+            <InputBox
+              type="password"
+              name="password"
+              valid={isPasswordRegexValid}
+              placeholder="패스워드 : 영문 대, 소문자, 특수문자 1개 포함 8자리 이상"
+              value={password}
+              validFalseContent="공백없이 10~20자로 입력해주세요."
+            />
+            <InputBox
+              type="password"
+              name="passwordRe"
+              valid={passwordReValid}
+              placeholder="패스워드를 다시 입력해주세요"
+              value={passwordRe}
+              validFalseContent="입력한 패스워드와 일치하지 않습니다."
+            />
+            <InputBox
+              type="address"
+              name="address"
+              valid={addressValid}
+              placeholder="주소"
+              value={address}
+              validFalseContent="배송주소를 입력해주세요."
+            />
             <li>
               <label className={`blockCheckBox ${isVegan && 'checkActive'}`}>
                 <input
