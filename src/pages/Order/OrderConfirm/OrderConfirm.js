@@ -19,7 +19,7 @@ const OrderConfirm = () => {
     });
     const res = await data.json();
     setOrderSheet(res.order_list[0]);
-    res.order_list[0].order_items.forEach(({ quantity, price }) =>
+    res.order_list[0].order_items.forEach(({ price }) =>
       setTotalPrice(prev => prev + price)
     );
   };
