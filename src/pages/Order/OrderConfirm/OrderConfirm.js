@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_ADDRESS } from '../../../apiConfig';
 import './OrderConfirm.scss';
 import OrderSheet from './OrderSheet/OrderSheet';
 
@@ -6,9 +7,13 @@ const OrderConfirm = () => {
   const [orderSheet, setOrderSheet] = useState([]);
   const { user, address, order_items } = orderSheet;
   const [totalPrice, setTotalPrice] = useState(0);
+  let token = localStorage.getItem('TOKEN') || '';
 
   const fetchOrderSheetData = async () => {
-    const data = await fetch('/data/order_confirm.json');
+    const data = await fetch(API_ADDRESS.order_checkout, {
+      headers: { Authorization: token },
+    });
+    // const data = await fetch('/data/order_confirm.json');
     const res = await data.json();
     setOrderSheet(res.order_list[0]);
     res.order_list[0].order_items.forEach(({ quantity, price }) =>
@@ -43,7 +48,15 @@ const OrderConfirm = () => {
       </div>
       <div className="pageContent">
         <div className="orderConfirmMessage">
-          <h3>{user}님에게 처방된 디저트가 배송될 예정입니다!</h3>
+          <h3>
+            <p className="userName">{user}</p>님에게 처방된 디저트가 배송될
+            예정입니다!
+          </h3>
+        </div>
+        <div className="orderAddressMessage">
+          <h3>
+            배송지 : <p className="address">{address}</p>
+          </h3>
         </div>
         <div className="sheetContainer">
           <table className="goodsTable">
@@ -66,7 +79,7 @@ const OrderConfirm = () => {
         </div>
         <div className="totalPrice">
           <h3 className="priceContents">
-            총 <p className="price">{totalPrice}</p> 원
+            총<p className="price"> {totalPrice} </p> 원
           </h3>
         </div>
       </div>
