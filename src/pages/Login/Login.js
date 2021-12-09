@@ -35,7 +35,12 @@ function Login() {
   const navigate = useNavigate();
 
   const onValidation = () => {
-    validateId() && validatePw() ? navigate('/product_list') : alertEachValid();
+    if (validateId() && validatePw()) {
+      navigate('/');
+      alert('로그인 되었습니다! 환영합니다 :)');
+    } else {
+      alertEachValid();
+    }
   };
 
   const onSignIn = () => {
@@ -88,14 +93,7 @@ function Login() {
           <span className="findPw">비밀번호 찾기</span>
         </div>
         <div className="btnWrap">
-          {/* <button className="loginBtn" type="button" onClick={onSignIn}>
-            로그인
-          </button> */}
           <Button btnOnClick={onSignIn}>로그인</Button>
-
-          {/* <button className="joinBtn" type="button" onClick={onSignUp}>
-            회원가입
-          </button> */}
           <Button btnOnClick={onSignUp}>회원가입</Button>
         </div>
       </div>
