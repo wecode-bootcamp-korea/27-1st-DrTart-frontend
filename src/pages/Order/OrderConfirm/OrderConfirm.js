@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API_ADDRESS } from '../../../apiConfig';
+// import { API_ADDRESS } from '../../../apiConfig';
 import './OrderConfirm.scss';
 import OrderSheet from './OrderSheet/OrderSheet';
 
@@ -7,7 +7,7 @@ const OrderConfirm = () => {
   const [orderSheet, setOrderSheet] = useState([]);
   const { user, address, order_items } = orderSheet;
   const [totalPrice, setTotalPrice] = useState(0);
-  let token = localStorage.getItem('TOKEN') || '';
+  // let token = localStorage.getItem('TOKEN') || '';
 
   const fetchOrderSheetData = async () => {
     // const data = await fetch(API_ADDRESS.order_checkout, {
