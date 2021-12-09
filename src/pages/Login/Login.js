@@ -94,14 +94,7 @@ function Login() {
           <span className="findPw">비밀번호 찾기</span>
         </div>
         <div className="btnWrap">
-          {/* <button className="loginBtn" type="button" onClick={onSignIn}>
-            로그인
-          </button> */}
           <Button btnOnClick={onSignIn}>로그인</Button>
-
-          {/* <button className="joinBtn" type="button" onClick={onSignUp}>
-            회원가입
-          </button> */}
           <Button btnOnClick={onSignUp}>회원가입</Button>
         </div>
       </div>

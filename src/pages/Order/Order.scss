@@ -55,6 +55,7 @@
         }
       }
     }
+
     .pageTitle {
       @include flexCenter;
 
@@ -109,25 +110,29 @@
           }
         }
       }
-      .allDeleteButtonContainer {
+
+      .nullContentTable {
+        @include flexCenter;
+        padding: 170px 0 100px;
+        margin-bottom: 50px;
+        border-top: 1px solid $black;
+        border-bottom: 1px solid $lightGrey;
+        font-size: 16px;
+        color: #555555;
+      }
+
+      .cartButtonContainer {
+        @include flexCenter(row, center);
         width: 100%;
 
-        .allDeleteButtonWrapper {
+        .cartButtonWrapper {
           width: 26%;
-
-          .allDeleteButton {
-            width: 100px;
-            padding: 5px 13px;
-            border: 1px solid $veryLightGrey;
-            font-size: 13px;
-          }
         }
       }
     }
 
     .orderTotal {
       width: 280px;
-      height: auto;
       margin-left: 40px;
       border: 1px solid $lightGrey;
       border-top: 1px solid $black;
