@@ -2,7 +2,7 @@
 
 .sortedProducts {
   @include flexCenter(column, center);
-  padding: 0 60px;
+  padding: 0 60px 50px 60px;
 
   .maskOff {
     display: none;

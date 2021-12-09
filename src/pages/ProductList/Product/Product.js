@@ -49,17 +49,19 @@ const Product = ({ el, id, btnOnClick, updateLike }) => {
       <div className="productContainer">
         <Link to={`/product/${id}`} className="goToProductDetail">
           <div className="productImageWrapper">
-            <img
-              className="productImage"
-              alt={el.korean_name}
-              src={el.thumbnail_image_url}
-            />
+            <div className="imgBox">
+              <img
+                className="productImage"
+                alt={el.korean_name}
+                src={el.thumbnail_image_url}
+              />
+            </div>
           </div>
           <div className="pdtInfo">
             <p className="infoTag">{el.description}</p>
             <h3 className="productName">{el.korean_name}</h3>
             <div className="price">
-              <p className="productPrice">{Math.round(el.price)}</p>
+              <p className="productPrice">{Math.round(el.price)} 원</p>
             </div>
           </div>
         </Link>
