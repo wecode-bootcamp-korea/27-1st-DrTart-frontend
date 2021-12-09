@@ -59,16 +59,6 @@ export default function Signup() {
     passwordReValid &&
     addressValid;
 
-  console.log(
-    termsValid,
-    nameValid,
-    emailExistCheck,
-    isPasswordRegexValid,
-    passwordReValid,
-    addressValid
-  );
-  console.log(submitValid);
-
   const navigate = useNavigate();
 
   function emailCheck() {
@@ -82,6 +72,7 @@ export default function Signup() {
       .then(result => {
         if (result.message === 'EMAIL_EXISTS') {
           alert('이미 존재하는 이메일입니다.');
+          setEmailExistCheck(false);
           setMemberInput({ ...memberInput, email: '' });
         } else {
           alert('사용가능한 이메일입니다.');
@@ -108,10 +99,12 @@ export default function Signup() {
             ? navigate('/signupdone')
             : alert('가입실패')
         );
+    } else if (!termsValid) {
+      alert('필수 약관 동의를 확인해주세요.');
     } else if (!emailExistCheck) {
-      alert('이메일 중복체크를 해주세요');
+      alert('이메일 중복체크를 해주세요.');
     } else {
-      alert('가입 형식을 확인해주세요');
+      alert('가입 형식을 확인해주세요.');
     }
   }
 
@@ -195,7 +188,11 @@ export default function Signup() {
                 />
               </div>
               <div className="btnWrap">
-                <button onClick={emailCheck} className="emailCheckBtn">
+                <button
+                  type="button"
+                  onClick={emailCheck}
+                  className="emailCheckBtn"
+                >
                   중복확인
                 </button>
               </div>
