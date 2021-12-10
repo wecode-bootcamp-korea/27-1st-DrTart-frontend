@@ -52,6 +52,7 @@
       @include flexCenter(column, center);
 
       .productImageWrapper {
+        @include flexCenter(column, center);
         width: 230px;
         height: 230px;
 
