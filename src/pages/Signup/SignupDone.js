@@ -18,7 +18,7 @@ export default function SignupDone() {
           <Link to="/login">
             <Button>로그인하기</Button>
           </Link>
-          <Link to="/main">
+          <Link to="/">
             <Button>메인으로</Button>
           </Link>
         </div>

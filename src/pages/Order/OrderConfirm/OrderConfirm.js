@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 import { API_ADDRESS } from '../../../apiConfig';
 import OrderSheet from './OrderSheet/OrderSheet';
-import queryString from 'query-string';
+import Button from '../../../components/Button/Button';
 import './OrderConfirm.scss';
 
 const OrderConfirm = () => {
@@ -10,6 +11,7 @@ const OrderConfirm = () => {
   const { user, address, order_items } = orderSheet;
   const [totalPrice, setTotalPrice] = useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
   let token = localStorage.getItem('TOKEN') || '';
   const { order } = queryString.parse(location.search);
 
@@ -84,6 +86,11 @@ const OrderConfirm = () => {
           <h3 className="priceContents">
             총<p className="price"> {Math.round(totalPrice)} </p> 원
           </h3>
+        </div>
+        <div className="continueButtonContainer">
+          <Button btnOnClick={() => navigate('/product-list')}>
+            쇼핑 계속하기
+          </Button>
         </div>
       </div>
     </div>

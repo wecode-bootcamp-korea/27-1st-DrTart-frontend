@@ -5,8 +5,16 @@
     "category": [
       { "id": 0, "name": "tart" },
       { "id": 1, "name": "cake" },
-      { "id": 2, "name": "makaron" },
-      { "id": 3, "name": "cookie" }
+      { "id": 2, "name": "macaron" },
+      { "id": 3, "name": "doughnut" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "drink",
+    "category": [
+      { "id": 0, "name": "coffee" },
+      { "id": 1, "name": "tea" }
     ]
   }
 ]
