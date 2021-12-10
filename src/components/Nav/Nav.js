@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as Cart } from '../../assets/cart.svg';
 import { ReactComponent as Login } from '../../assets/login.svg';
@@ -8,7 +8,6 @@ import { ReactComponent as HamburgerBar } from '../../assets/HamburgerBar.svg';
 import { ReactComponent as Titlelogo } from '../../assets/Titlelogo.svg';
 import './Nav.scss';
 import { ReactComponent as Xbutton } from '../../assets/Xbutton.svg';
-import { useEffect } from 'react/cjs/react.development';
 
 const Nav = () => {
   const [isExtended, setIsExtended] = useState(false);
