@@ -12,14 +12,14 @@ const SortSelectArea = ({ adjustList, productsList }) => {
   };
 
   const sortList = e => {
-    setSortType(e.target.value);
+    setSortType(() => e.target.value);
     const sortProperty = TYPES[sortType];
     const sortedList =
       sortProperty === 'created_at'
         ? [...productsList].sort(
-            (a, b) => Date.parse(b[sortProperty]) - Date.parse(a[sortProperty])
+            (a, b) => Date.parse(a[sortProperty]) - Date.parse(b[sortProperty])
           )
-        : [...productsList].sort((a, b) => b[sortProperty] - a[sortProperty]);
+        : [...productsList].sort((a, b) => a[sortProperty] - b[sortProperty]);
     adjustList(sortedList);
   };
 
