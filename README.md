@@ -28,6 +28,7 @@
 - 메뉴 버튼 클릭시 확장 애니메이션 구현 및 스타일링
 - 장바구니에 담기, 로그인, 로그아웃 버튼 구현
 ![nav](https://drive.google.com/uc?id=1tsY0X7t5k2UZuCz4tp9xXWuUgKnSStEO)
+<img src="https://drive.google.com/uc?id=1tsY0X7t5k2UZuCz4tp9xXWuUgKnSStEO"  width="400" height="400"/>
 
 #### 제품 리스트 페이지 
 - 제품 카테고리별, 제품 정렬, 비건여부, 
