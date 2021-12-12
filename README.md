@@ -34,13 +34,17 @@
 - 바로구매 버튼 클릭시 모달창 팝업, 장바구니 담기, 수량체크, 좋아요 기능
 ![list](https://drive.google.com/uc?id=1mxV6GlFQtoi3OIaDjPHU6QlO-InMlUJz)
 
-#### 제품 상세 페이지 : 제품 리스트 페이지 내 기능 all + 댓글 기능 구현
-![detail](https://drive.google.com/uc?id=1X5I6zcOWwp5T9QOUCPRjY74sdZm4nsii)
+#### 제품 상세 페이지 
+- 상품별 동적 라우팅을 통해 useParams()로 상품에 대한 아이디 값을 받아와 백엔드 데이터 요청
+- 이미지 슬라이드 썸네일 클릭시 다른 이미지 출력
+- 토큰 여부에 따른 구매, 장바구니 버튼 클릭 시 다른 로직
+- 리뷰 추가 기능
 
 #### 회원가입 페이지
-- 이메일, 비밀번호 유효성검사
-- 일치하지 않을시 UI 변경
-![join](https://drive.google.com/uc?id=1dovBOrLyRspn5_hKJt1SIlBvtnh8fd6n)
+- 정규식을 적용한 이메일, 패스워드 유효성 검사
+- 일치하지 않을시 onBlur UI 조건부 렌더링
+- 데이터 통신하여 이메일 중복 검사
+- 필수 체크, 전체 체크박스 기능
 
 #### 로그인
 - 이메일, 비밀번호 유효성검사
@@ -51,6 +55,12 @@
 - url에 기반한 서브라우팅을 통해 같은 페이지 내에서 장바구니와 결제 페이지를 조건부 렌더링으로 뷰를 보여줄 수 있도록 함
 ![cart](https://drive.google.com/uc?id=1-5F99NHvB7cJmE7_Dee1U-Ps8C3irJ6c)
 ![order](https://drive.google.com/uc?id=1ORGRPMhw4Oa8JhciqOFenX8oiNkFcF8E)
+
+---
+
+## DEMO
+
+[![Dr.Tart](http://img.youtube.com/vi/ofcgg-3-B28/0.jpg)](https://youtu.be/ofcgg-3-B28)
 
 ---
 
