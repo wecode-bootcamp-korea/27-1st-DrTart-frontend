@@ -27,12 +27,10 @@
 #### Navbar
 - 메뉴 버튼 클릭시 확장 애니메이션 구현 및 스타일링
 - 장바구니에 담기, 로그인, 로그아웃 버튼 구현
-![nav](https://drive.google.com/uc?id=1tsY0X7t5k2UZuCz4tp9xXWuUgKnSStEO)
 
 #### 제품 리스트 페이지 
 - 제품 카테고리별, 제품 정렬, 비건여부, 
 - 바로구매 버튼 클릭시 모달창 팝업, 장바구니 담기, 수량체크, 좋아요 기능
-![list](https://drive.google.com/uc?id=1mxV6GlFQtoi3OIaDjPHU6QlO-InMlUJz)
 
 #### 제품 상세 페이지 
 - 상품별 동적 라우팅을 통해 useParams()로 상품에 대한 아이디 값을 받아와 백엔드 데이터 요청
@@ -49,12 +47,9 @@
 #### 로그인
 - 이메일, 비밀번호 유효성검사
 - 일치하지 않을시 UI 변경
-![login](https://drive.google.com/uc?id=1YdpCVyuV5_GhQZgMT68qYO0g30gO8Lbn)
 
 #### 장바구니/결제 페이지
 - url에 기반한 서브라우팅을 통해 같은 페이지 내에서 장바구니와 결제 페이지를 조건부 렌더링으로 뷰를 보여줄 수 있도록 함
-![cart](https://drive.google.com/uc?id=1-5F99NHvB7cJmE7_Dee1U-Ps8C3irJ6c)
-![order](https://drive.google.com/uc?id=1ORGRPMhw4Oa8JhciqOFenX8oiNkFcF8E)
 
 ---
 
