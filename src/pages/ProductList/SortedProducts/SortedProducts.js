@@ -19,6 +19,8 @@ const SortedProducts = () => {
     setSelectedProduct(product);
   };
 
+  console.log(productsList);
+
   const updateLike = id => {
     const updatedList = productsList.map(product => {
       if (id === product.id) {
@@ -37,7 +39,7 @@ const SortedProducts = () => {
         return { ...product };
       }
     });
-    setProductsList(updatedList);
+    setProductsList(() => updatedList);
   };
 
   const fetchData = useCallback(async () => {
